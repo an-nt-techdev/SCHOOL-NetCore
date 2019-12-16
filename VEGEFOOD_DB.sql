@@ -4,7 +4,7 @@ use VEGEFOOD_DB
 go
 --KhachHang
 create table KHACHHANG
-(
+(get
 Email int IDENTITY(1,1) primary key,
 Ten nvarchar(50),
 Sdt int,
@@ -30,7 +30,9 @@ create table SANPHAM
 Id int Identity(1,1) primary key,
 IdLoaiSanPham nvarchar(50),
 Ten nvarchar(50),
-IdNhaCungCap nvarchar(50)
+IdNhaCungCap nvarchar(50),
+TrangThai nvarchar(50),
+HinhAnh nvarchar(50)
 )
 --Chi Tiet San Pham
 create table CHITIETSANPHAM
@@ -47,7 +49,8 @@ create table THONGKENGAY
 (
 Ngay date,
 IdSanPham int,
-SoLuongTieuThu int
+SoLuongTieuThu int,
+primary key(Ngay,IdSanPham)
 )
 --DonHang
 create table DONHANG
