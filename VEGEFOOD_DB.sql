@@ -69,7 +69,7 @@ Gia float
 )
 --Insert Loai San Pham
 insert into LOAISANPHAM(Ten) values
-('Rau'),('C?'),('Qu?'),('Tr�i C�y')
-insert into NHACUNGCAP(Ten) values('S?c S?ng Xanh'),('Ngu?n Vi?t'),('Vi?t New'),('N�ng S?n Cao L�m')
-insert into SANPHAM(IdLoaiSanPham,Ten,IdNhaCungCap) values(1,'M?ng T?i',1),(1,'??u B?p',1),(2,'Xu H�o',2),(2,'Khoai T�y',2),(3,'Xo�i',3),
-(3,'D?a H?u',3),(4,'Nh�n',4),(4,'D?a',4)
+(N'Rau'),(N'Củ'),('Quả'),(N'Trái Cây')
+insert into NHACUNGCAP(Ten) values(N'Sức Sống Xanh'),(N'Nguồn Việt'),(N'Việt New'),(N'Nông Sản Cao Lãm')
+insert into SANPHAM(IdLoaiSanPham,Ten,IdNhaCungCap) values(1,N'Mồng Tơi',1),(1,N'Đậu Bắp',1),(2,N'Xu Hào',2),(2,N'Khoai Tây',2),(3,N'Xoài',3),
+(3,N'Dưa Hấu',3),(4,N'Nhãn',4),(4,N'Dâu',4)
