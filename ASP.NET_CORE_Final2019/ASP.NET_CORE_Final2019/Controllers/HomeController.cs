@@ -5,14 +5,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ASP.NET_CORE_Final2019.Models;
+using ASP.NET_CORE_Final2019.Services;
 
 namespace ASP.NET_CORE_Final2019.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IFSanpham _ISanpham;
+        VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();
         public IActionResult Index()
         {
-            return View();
+            List<Sanpham> sanphams = db.Sanpham.ToList();
+            return View(sanphams);
         }
 
         public IActionResult Test()
