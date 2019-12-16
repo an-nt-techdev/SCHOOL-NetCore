@@ -5,6 +5,160 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Views\images\.DS_Store" />
+    <None Remove="Views\images\about.jpg" />
+    <None Remove="Views\images\bg_1.jpg" />
+    <None Remove="Views\images\bg_2.jpg" />
+    <None Remove="Views\images\bg_3.jpg" />
+    <None Remove="Views\images\category-1.jpg" />
+    <None Remove="Views\images\category-2.jpg" />
+    <None Remove="Views\images\category-3.jpg" />
+    <None Remove="Views\images\category-4.jpg" />
+    <None Remove="Views\images\category.jpg" />
+    <None Remove="Views\images\image_1.jpg" />
+    <None Remove="Views\images\image_2.jpg" />
+    <None Remove="Views\images\image_3.jpg" />
+    <None Remove="Views\images\image_4.jpg" />
+    <None Remove="Views\images\image_5.jpg" />
+    <None Remove="Views\images\image_6.jpg" />
+    <None Remove="Views\images\partner-1.png" />
+    <None Remove="Views\images\partner-2.png" />
+    <None Remove="Views\images\partner-3.png" />
+    <None Remove="Views\images\partner-4.png" />
+    <None Remove="Views\images\partner-5.png" />
+    <None Remove="Views\images\person_1.jpg" />
+    <None Remove="Views\images\person_2.jpg" />
+    <None Remove="Views\images\person_3.jpg" />
+    <None Remove="Views\images\person_4.jpg" />
+    <None Remove="Views\images\product-1.jpg" />
+    <None Remove="Views\images\product-10.jpg" />
+    <None Remove="Views\images\product-11.jpg" />
+    <None Remove="Views\images\product-12.jpg" />
+    <None Remove="Views\images\product-2.jpg" />
+    <None Remove="Views\images\product-3.jpg" />
+    <None Remove="Views\images\product-4.jpg" />
+    <None Remove="Views\images\product-5.jpg" />
+    <None Remove="Views\images\product-6.jpg" />
+    <None Remove="Views\images\product-7.jpg" />
+    <None Remove="Views\images\product-8.jpg" />
+    <None Remove="Views\images\product-9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\images\.DS_Store">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\about.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\bg_1.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\bg_2.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\bg_3.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\category-1.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\category-2.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\category-3.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\category-4.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\category.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\image_1.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\image_2.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\image_3.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\image_4.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\image_5.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\image_6.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\partner-1.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\partner-2.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\partner-3.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\partner-4.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\partner-5.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\person_1.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\person_2.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\person_3.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\person_4.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-1.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-10.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-11.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-12.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-2.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-3.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-4.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-5.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-6.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-7.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-8.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\images\product-9.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
