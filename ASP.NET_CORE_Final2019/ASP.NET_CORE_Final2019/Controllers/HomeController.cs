@@ -11,15 +11,18 @@ namespace ASP.NET_CORE_Final2019.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IFSanpham _ISanpham;
-        VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();
+        public readonly IFSanpham _Sanpham;
+        //VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();
+        public HomeController(IFSanpham _IFSanpham)
+        {
+            _Sanpham = _IFSanpham;
+        }
 
         [Route("")]
         [Route("Home")]
         public IActionResult Index()
         {
-            List<Sanpham> sanphams = db.Sanpham.ToList();
-            return View(sanphams);
+            return View(_Sanpham.GetSanPhams);
         }
 
         [Route("Home/Privacy")]

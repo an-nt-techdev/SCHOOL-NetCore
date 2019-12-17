@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NETCORE1920</title>
+
+    <environment include="Development">
+        @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/css/site.css" />*@
+        <link rel="apple-touch-icon" sizes="76x76" href="~/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="~/img/favicon.png">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+        <!-- CSS Files -->
+        <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="~/demo/demo.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />*@
+    </environment>
+</head>
+<body class="goto-here">
+
+    <div class="wrapper ">
+        <div class="sidebar" data-color="white" data-active-color="danger">
+            <div class="logo">
+                Manager
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a href="/Home/Index">
+                            <i class="nc-icon nc-tile-56"></i>
+                            <p>Danh Sách Sinh Viên</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Khoa/Index">
+                            <i class="nc-icon nc-tile-56"></i>
+                            <p>Danh Sách Khoa</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/MonHoc/Index">
+                            <i class="nc-icon nc-tile-56"></i>
+                            <p>Danh Sách Môn Học</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <partial name="_CookieConsentPartial" />
+
+        @*<div class="container body-content">*@
+        @RenderBody()
+        @*<hr />
+            <footer>
+                <p>&copy; 2019 - NETCORE1920</p>
+            </footer>*@
+        @*</div>*@
+    </div>
+    <environment include="Development">
+        @*<script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>*@
+        <script src="~/js/core/jquery.min.js"></script>
+        <script src="~/js/core/popper.min.js"></script>
+        <script src="~/js/core/bootstrap.min.js"></script>
+        <script src="~/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <!--  Google Maps Plugin    -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+        <!-- Chart JS -->
+        <script src="~/js/plugins/chartjs.min.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="~/js/plugins/bootstrap-notify.js"></script>
+        <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="~/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
+        <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+        <script src="~/demo/demo.js"></script>
+    </environment>
+    <environment exclude="Development">
+        @*<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>*@
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
