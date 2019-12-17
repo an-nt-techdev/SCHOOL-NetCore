@@ -4,7 +4,7 @@ use VEGEFOOD_DB
 go
 --KhachHang
 create table KHACHHANG
-(get
+(
 Email int IDENTITY(1,1) primary key,
 Ten nvarchar(50),
 Sdt int,
