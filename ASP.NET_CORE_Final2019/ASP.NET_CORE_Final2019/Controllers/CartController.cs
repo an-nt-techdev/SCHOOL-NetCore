@@ -8,6 +8,7 @@ namespace ASP.NET_CORE_Final2019.Controllers
 {
     public class CartController : Controller
     {
+        [Route("Cart")]
         public IActionResult Index()
         {
             return View();

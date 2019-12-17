@@ -3,10 +3,6 @@
 }
 
 <section id="home-section" class="hero">
-    @foreach(var item in Model)
-    {
-        <td>@item.Id</td>
-    }
     <div class="home-slider owl-carousel">
         <div class="slider-item" style="background-image: url('/images/bg_1.jpg');">
             <div class="overlay"></div>
@@ -14,9 +10,9 @@
                 <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
                     <div class="col-md-12 ftco-animate text-center">
-                        <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-                        <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-                        <p><a href="#" class="btn btn-primary">View Details</a></p>
+                        <h1 class="mb-2">Chúng tôi phục vụ rau củ quả trái cây tươi sạch</h1>
+                        <h2 class="subheading mb-4">Chúng tôi cung cấp rau củ quả hữu cơ</h2>
+                        <p><a href="/Shop" class="btn btn-primary">Xem chi tiết</a></p>
                     </div>
 
                 </div>
@@ -29,9 +25,9 @@
                 <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
                     <div class="col-sm-12 ftco-animate text-center">
-                        <h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
-                        <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-                        <p><a href="#" class="btn btn-primary">View Details</a></p>
+                        <h1 class="mb-2">100% tươi và sạch</h1>
+                        <h2 class="subheading mb-4">Chúng tôi cung cấp rau củ quả hữu cơ</h2>
+                        <p><a href="#" class="btn btn-primary">Xem chi tiết</a></p>
                     </div>
 
                 </div>
@@ -49,8 +45,8 @@
                         <span class="flaticon-shipped"></span>
                     </div>
                     <div class="media-body">
-                        <h3 class="heading">Free Shipping</h3>
-                        <span>On order over $100</span>
+                        <h3 class="heading">Giao hàng miễn phí</h3>
+                        <span>Đơn hàng trên 100.000 VNĐ</span>
                     </div>
                 </div>
             </div>
@@ -60,8 +56,8 @@
                         <span class="flaticon-diet"></span>
                     </div>
                     <div class="media-body">
-                        <h3 class="heading">Always Fresh</h3>
-                        <span>Product well package</span>
+                        <h3 class="heading">Luôn luôn tươi sạch</h3>
+                        <span>Sản phẩm tươi sạch trong ngày</span>
                     </div>
                 </div>
             </div>
@@ -71,8 +67,8 @@
                         <span class="flaticon-award"></span>
                     </div>
                     <div class="media-body">
-                        <h3 class="heading">Superior Quality</h3>
-                        <span>Quality Products</span>
+                        <h3 class="heading">Chất lượng cao</h3>
+                        <span>Sản phẩm chất lượng đã qua kiểm định</span>
                     </div>
                 </div>
             </div>
@@ -82,8 +78,8 @@
                         <span class="flaticon-customer-service"></span>
                     </div>
                     <div class="media-body">
-                        <h3 class="heading">Support</h3>
-                        <span>24/7 Support</span>
+                        <h3 class="heading">Hỗ trợ tốt</h3>
+                        <span>Hỗ trợ khách hàng 24/7</span>
                     </div>
                 </div>
             </div>
@@ -99,21 +95,21 @@
                     <div class="col-md-6 order-md-last align-items-stretch d-flex">
                         <div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url('/images/category.jpg');">
                             <div class="text text-center">
-                                <h2>Vegetables</h2>
-                                <p>Protect the health of every home</p>
-                                <p><a href="#" class="btn btn-primary">Shop now</a></p>
+                                <h2>Rau củ quả</h2>
+                                <p>Bảo vệ sức khỏe của bạn mỗi ngày</p>
+                                <p><a href="/Shop" class="btn btn-primary">Ghé cửa hàng ngay</a></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('/images/category-1.jpg');">
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a href="#">Fruits</a></h2>
+                                <h2 class="mb-0"><a href="#">Rau củ</a></h2>
                             </div>
                         </div>
                         <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('/images/category-2.jpg');">
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a href="#">Vegetables</a></h2>
+                                <h2 class="mb-0"><a href="#">Trái cây</a></h2>
                             </div>
                         </div>
                     </div>
@@ -123,12 +119,12 @@
             <div class="col-md-4">
                 <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('/images/category-3.jpg');">
                     <div class="text px-3 py-1">
-                        <h2 class="mb-0"><a href="#">Juices</a></h2>
+                        <h2 class="mb-0"><a href="#">Nước ép</a></h2>
                     </div>
                 </div>
                 <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('/images/category-4.jpg');">
                     <div class="text px-3 py-1">
-                        <h2 class="mb-0"><a href="#">Dried</a></h2>
+                        <h2 class="mb-0"><a href="#">Các loại đậu</a></h2>
                     </div>
                 </div>
             </div>
@@ -140,9 +136,9 @@
     <div class="container">
         <div class="row justify-content-center mb-3 pb-3">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <span class="subheading">Featured Products</span>
-                <h2 class="mb-4">Our Products</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                <span class="subheading">Sản phẩm đặc trưng</span>
+                <h2 class="mb-4">Sản phẩm của chúng tôi</h2>
+                <p>Xa xa, đằng sau ngọn núi kia, là vương quốc rau củ quả của Bá Khoa Idol</p>
             </div>
         </div>
     </div>

@@ -14,10 +14,14 @@ namespace ASP.NET_CORE_Final2019.Controllers
         {
             _Sanpham = _IFSanpham;
         }
+
+        [Route("Shop")]
         public IActionResult Index()
         {
             return View(_Sanpham.GetSanPhams);
         }
+
+        [Route("Shop/Product")]
         public IActionResult SingleProduct(int Id)
         {
             return View(_Sanpham.GetChitietsanpham(Id));

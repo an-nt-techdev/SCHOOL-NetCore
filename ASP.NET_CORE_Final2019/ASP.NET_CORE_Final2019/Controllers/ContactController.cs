@@ -10,6 +10,7 @@ namespace ASP.NET_CORE_Final2019.Controllers
 {
     public class ContactController : Controller
     {
+        [Route("Contact")]
         public IActionResult Index()
         {
             return View();

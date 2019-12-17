@@ -22,12 +22,6 @@ namespace ASP.NET_CORE_Final2019.Controllers
             return View(sanphams);
         }
 
-        [Route("Home/Test")]
-        public IActionResult Test()
-        {
-            return View();
-        }
-
         [Route("Home/Privacy")]
         public IActionResult Privacy()
         {
