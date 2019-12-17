@@ -22,26 +22,26 @@ create table NHACUNGCAP
 Id int IDENTITY(1,1) primary key,
 Ten nvarchar(50),
 Diachi nvarchar(50),
-Sdt int
+Sdt nvarchar(20)
 )
 --SanPham
 create table SANPHAM
 (
 Id int Identity(1,1) primary key,
-IdLoaiSanPham nvarchar(50),
+IdLoaiSanPham int,
 Ten nvarchar(50),
-IdNhaCungCap nvarchar(50),
+IdNhaCungCap int,
 TrangThai nvarchar(50),
 HinhAnh nvarchar(50)
 )
 --Chi Tiet San Pham
 create table CHITIETSANPHAM
 (
-IdSanPham int Identity(1,1) primary key,
+IdSanPham int primary key,
 Gia float,
+GiaKhuyenMai float,
 SoLuongNhap int,
-SoLuongTieuThu int,
-GiaKhuyenMai float
+SoLuongTieuThu int
 )
 
 --thongkeNgay
@@ -67,9 +67,9 @@ IdSanPham int,
 SoLuong int,
 Gia float
 )
---Insert Loai San Pham
-insert into LOAISANPHAM(Ten) values
-(N'Rau'),(N'Củ'),('Quả'),(N'Trái Cây')
-insert into NHACUNGCAP(Ten) values(N'Sức Sống Xanh'),(N'Nguồn Việt'),(N'Việt New'),(N'Nông Sản Cao Lãm')
-insert into SANPHAM(IdLoaiSanPham,Ten,IdNhaCungCap) values(1,N'Mồng Tơi',1),(1,N'Đậu Bắp',1),(2,N'Xu Hào',2),(2,N'Khoai Tây',2),(3,N'Xoài',3),
-(3,N'Dưa Hấu',3),(4,N'Nhãn',4),(4,N'Dâu',4)
+-- --Insert Loai San Pham
+-- insert into LOAISANPHAM(Ten) values
+-- (N'Rau'),(N'Củ'),('Quả'),(N'Trái Cây')
+-- insert into NHACUNGCAP(Ten) values(N'Sức Sống Xanh'),(N'Nguồn Việt'),(N'Việt New'),(N'Nông Sản Cao Lãm')
+-- insert into SANPHAM(IdLoaiSanPham,Ten,IdNhaCungCap) values(1,N'Mồng Tơi',1),(1,N'Đậu Bắp',1),(2,N'Xu Hào',2),(2,N'Khoai Tây',2),(3,N'Xoài',3),
+-- (3,N'Dưa Hấu',3),(4,N'Nhãn',4),(4,N'Dâu',4)
