@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.AspNetCore.Session;
 namespace ASP.NET_CORE_Final2019
 {
     public class Startup
@@ -40,7 +40,8 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
             services.AddScoped<DbContext, VEGEFOOD_DBContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IFSanpham, SanphamRepository>();
-
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +49,7 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
         {
             if (env.IsDevelopment())
             {
+
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -60,15 +62,17 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSession();
             app.UseMvc();
 
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("areaRoute", "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
