@@ -18,5 +18,9 @@ namespace ASP.NET_CORE_Final2019.Controllers
         {
             return View(_Sanpham.GetSanPhams);
         }
+        public IActionResult SingleProduct(int Id)
+        {
+            return View(_Sanpham.GetChitietsanpham(Id));
+        }
     }
 }
