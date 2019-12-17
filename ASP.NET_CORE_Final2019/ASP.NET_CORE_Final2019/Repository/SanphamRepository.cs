@@ -18,6 +18,8 @@ namespace ASP.NET_CORE_Final2019.Repository
 
         public IEnumerable<Sanpham> GetSanPhams => db.Sanpham;
 
+        public IEnumerable<Loaisanpham> GetLoaisanphams => db.Loaisanpham;
+
         public Chitietsanpham GetChitietsanpham(int Id)
         {
             Chitietsanpham res = db.Chitietsanpham.Find(Id);
@@ -41,6 +43,12 @@ namespace ASP.NET_CORE_Final2019.Repository
             Sanpham res = db.Sanpham.Find(Id);
             db.Sanpham.Remove(res);
             db.SaveChanges();
+        }
+        public Loaisanpham GetLoaisanpham(int Id)
+        {
+            Sanpham a = GetSanpham(Id);
+            Loaisanpham res = db.Loaisanpham.Find(Int32.Parse(a.IdLoaiSanPham));
+            return res;
         }
     }
 }

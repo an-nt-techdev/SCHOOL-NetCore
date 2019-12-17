@@ -23,27 +23,15 @@
                 <a href="images/product-1.jpg" class="image-popup"><img src="~/images/product-2.jpg" class="img-fluid" alt="Colorlib Template"></a>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
-                <h3>Bell Pepper</h3>
-                <div class="rating d-flex">
-                    <p class="text-left mr-4">
-                        <a href="#" class="mr-2">5.0</a>
-                        <a href="#"><span class="ion-ios-star-outline"></span></a>
-                        <a href="#"><span class="ion-ios-star-outline"></span></a>
-                        <a href="#"><span class="ion-ios-star-outline"></span></a>
-                        <a href="#"><span class="ion-ios-star-outline"></span></a>
-                        <a href="#"><span class="ion-ios-star-outline"></span></a>
-                    </p>
-                    <p class="text-left mr-4">
-                        <a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
-                    </p>
-                    <p class="text-left">
-                        <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
-                    </p>
+                <h3>@ViewBag.Sanpham.Ten</h3>
+                <div class="d-flex">
+                    <div class="pricing">
+                        <p>Loại:    @ViewBag.Loai.Ten </p>
+                    </div>
                 </div>
-                <p class="price"><span> @Html.DisplayFor(model => model.Gia)</span></p>
-                <p class="price"><span> @Html.DisplayFor(model => model.GiaKhuyenMai)</span></p>
+                <p class="price">Giá <span> @ViewBag.Chitietsanpham.Gia VND</span>  Khuyến Mãi Còn : <span> @ViewBag.Chitietsanpham.GiaKhuyenMai VND</span></p>
                 <p>
-                    A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until.
+                    Sản Phẩm Đạt Chuẩn Chất Lượng. Được Công Nhận Bởi Hội Sao Vàng Thực Phẩm Việt Nam
                 </p>
                 <div class="row mt-4">
                     <div class="col-md-6">

@@ -8,9 +8,11 @@ namespace ASP.NET_CORE_Final2019.Services
 {
     public interface IFSanpham
     {
+        IEnumerable<Loaisanpham> GetLoaisanphams { get; }
         IEnumerable<Sanpham> GetSanPhams { get; }
         Sanpham GetSanpham(int Id);
         Chitietsanpham GetChitietsanpham(int Id);
+        Loaisanpham GetLoaisanpham(int Id);
         void add(Sanpham _Sanpham);
         void remove(int Id);
     }
