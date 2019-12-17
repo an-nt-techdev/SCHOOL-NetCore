@@ -21,30 +21,25 @@
         <div class="row justify-content-center">
             <div class="col-md-10 mb-5 text-center">
                 <ul class="product-category">
-                    <li><a href="#" class="active">All</a></li>
-                    <li><a href="#">Vegetables</a></li>
-                    <li><a href="#">Fruits</a></li>
-                    <li><a href="#">Juice</a></li>
-                    <li><a href="#">Dried</a></li>
+                    @foreach (var item in ViewBag.ListLoaiSanPham)
+                    {
+                        <li><a href="#">@item.Ten</a></li>
+                    }
                 </ul>
             </div>
         </div>
-        @foreach(var item in Model)
-        {
-
-        }
         <div class="row">
             @foreach (var item in Model)
             {
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a href="#" class="img-prod">
-                            <img class="img-fluid" src="images/product-1.jpg" alt="Colorlib Template">
+                        <a asp-controller="Shop" asp-action="SingleProduct" asp-route-Id="@item.Id" asp-route-Ten="@item.Ten" class="img-prod">
+                            <img class="img-fluid" src="~/images/product-1.jpg" alt="Colorlib Template">
                             <span class="status">30%</span>
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a asp-controller="Shop" asp-action="SingleProduct" asp-route-Id="@item.Id">@item.Ten</a></h3>
+                            <h3><a asp-controller="Shop" asp-action="SingleProduct" asp-route-Id="@item.Id" asp-route-Ten="@item.Ten">@item.Ten</a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
                                     <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
@@ -67,7 +62,23 @@
                     </div>
                 </div>
             }
+
         </div>
-     </div>
+        <div class="row mt-5">
+            <div class="col text-center">
+                <div class="block-27">
+                    <ul>
+                        <li><a href="#">&lt;</a></li>
+                        <li class="active"><span>1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&gt;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
  </section>
 
