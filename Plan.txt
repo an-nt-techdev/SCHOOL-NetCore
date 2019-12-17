@@ -1,0 +1,28 @@
+* Nhà cung cấp *
+
+1. ID: 1
+    - Quốc Tuấn Company 
+    - 8 Trần Văn Quang, Phường 10, Tân Bình, TP.HCM
+    - 0903787904
+2. ID: 2
+    - Tấn Tài Food
+    - 165 Nguyễn Thái Bình, Phường Cầu Kho, Quận 1, TP.HCM
+    - 02862724496
+3. ID: 3
+    - CS Food
+    - 34Q Đường 43B, Phường 10, Quận 6, TP.HCM
+    - 0903624449
+4. ID: 4
+    - Thiên Ân Drink
+    - 240 Dương Quảng Hàm, Phường 5, Gò Vấp, TP.HCM
+    - 0974384921
+
+* Loại SP *
+
+- Rau củ
+- Trái cây
+- Đậu
+- Nước ép
+
+* Sản phẩm *
+
