@@ -13,17 +13,22 @@ namespace ASP.NET_CORE_Final2019.Controllers
     {
         private readonly IFSanpham _ISanpham;
         VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();
+
+        [Route("")]
+        [Route("Home")]
         public IActionResult Index()
         {
             List<Sanpham> sanphams = db.Sanpham.ToList();
             return View(sanphams);
         }
 
+        [Route("Home/Test")]
         public IActionResult Test()
         {
             return View();
         }
 
+        [Route("Home/Privacy")]
         public IActionResult Privacy()
         {
             return View();
