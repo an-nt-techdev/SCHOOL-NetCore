@@ -20,16 +20,16 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [Route("Shop")]
         public IActionResult Index()
         {
-            ViewBag.ListLoaiSanPham = _Sanpham.GetLoaisanphams;
+            ViewBag.ListLoaiSanPham = _Sanpham.GetLoaiSanPhams;
             return View(_Sanpham.GetSanPhams);
         }
 
         [Route("Shop/Product")]
         public IActionResult SingleProduct(int Id)
         {
-            ViewBag.Sanpham = _Sanpham.GetSanpham(Id);
-            ViewBag.Chitietsanpham = _Sanpham.GetChitietsanpham(Id);
-            ViewBag.Loai = _Sanpham.GetLoaisanpham(Id);
+            ViewBag.Sanpham = _Sanpham.GetSanPham(Id);
+            ViewBag.Chitietsanpham = _Sanpham.GetChiTietSanPham(Id);
+            ViewBag.Loai = _Sanpham.GetLoaiSanPham(Id);
             return View();
         }
     }

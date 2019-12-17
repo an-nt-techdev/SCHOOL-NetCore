@@ -8,12 +8,30 @@ namespace ASP.NET_CORE_Final_2019.Services
 {
     public interface IFSanpham
     {
-        IEnumerable<Loaisanpham> GetLoaisanphams { get; }
+        // Get List
+        IEnumerable<Loaisanpham> GetLoaiSanPhams { get; }
         IEnumerable<Sanpham> GetSanPhams { get; }
-        Sanpham GetSanpham(int Id);
-        Chitietsanpham GetChitietsanpham(int Id);
-        Loaisanpham GetLoaisanpham(int Id);
-        void add(Sanpham _Sanpham);
-        void remove(int Id);
+        IEnumerable<Sanpham> Get8SanPhams();
+        IEnumerable<Chitietsanpham> GetChiTietSanPhams { get; }
+
+        // Get One
+        Sanpham GetSanPham(int Id);
+        Chitietsanpham GetChiTietSanPham(int Id);
+        Loaisanpham GetLoaiSanPham(int Id);
+        
+        // Add One
+        void addSanPham(Sanpham _Sanpham);
+        void addLoaiSanPham(Loaisanpham _Loaisanpham);
+        void addChiTietSanPham(Chitietsanpham _Chitietsanpham);
+
+        // Update One
+        void updateSanPham(Sanpham _Sanpham);
+        void updateLoaiSanPham(Loaisanpham _Loaisanpham);
+        void updateChiTietSanPham(Chitietsanpham _Chitietsanpham);
+
+        // Remove One
+        void removeSanPham(int Id);
+        void removeLoaiSanPham(int Id);
+        void removeChiTietSanPham(int Id);
     }
 }
