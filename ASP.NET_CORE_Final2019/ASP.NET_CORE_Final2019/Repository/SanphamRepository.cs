@@ -18,6 +18,12 @@ namespace ASP.NET_CORE_Final2019.Repository
 
         public IEnumerable<Sanpham> GetSanPhams => db.Sanpham;
 
+        public Chitietsanpham GetChitietsanpham(int Id)
+        {
+            Chitietsanpham res = db.Chitietsanpham.Find(Id);
+            return res;
+        }
+
         public void add(Sanpham _Sanpham)
         {
             db.Sanpham.Add(_Sanpham);
