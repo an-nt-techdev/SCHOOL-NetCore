@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ASP.NET_CORE_Final_2019.Models.Nhacungcap>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" style="background-image:url('')">Nhà Cung Cấp</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    Id Nhà Cung Cấp
+                                </th>
+                                <th>
+                                    Tên Nhà Cung Cấp
+                                </th>
+                                <th>
+                                    Địa Chỉ
+                                </th>
+                                <th>
+                                    Số Điện Thoại Liên Lạc
+                                </th>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Id</td>
+                                            <td>@item.Ten</td>
+                                            <td>@item.Diachi</td>
+                                            <td>@item.Sdt</td>
+                                            <td></td>
+                                            <td>
+                                                <button class="btn btn-info"><a asp-action="Edit" asp-route-id="@item.Id">Sửa</a></button>
+                                                <button class="btn btn-danger"><a asp-action="Delete" asp-route-id="@item.Id">Xóa</a></button>
+                                            </td>
+                                        </tr>
+                                        <tr></tr>
+                                    }
+                                        <tr>
+                                            <td>
+                                                <button>
+                                                    <a asp-action="Create">
+                                                        Thêm Nhà Cung Cấp
+                                                    </a>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

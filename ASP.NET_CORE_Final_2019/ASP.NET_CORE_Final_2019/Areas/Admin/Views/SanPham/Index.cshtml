@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ASP.NET_CORE_Final_2019.Models.Sanpham>
+@using ASP.NET_CORE_Final_2019.Models
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" style="background-image:url('/images/p9.jpg')">Sản Phẩm</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    Id Sản Phẩm
+                                </th>
+                                <th>
+                                    Tên Sản Phẩm
+                                </th>
+                                <th>
+                                    Loại Sản Phẩm
+                                </th>
+                                <th>
+                                    Nhà Cung Cấp
+                                </th>
+                                <th>
+                                    Trạng Thái
+                                </th>
+                                <th>
+                                    Hình Ảnh
+                                </th>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        Loaisanpham loaisanpham = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
+                                        Nhacungcap nhacungcap = ViewBag.ListNhaCungCap.Find(item.IdNhaCungCap);
+                                        <tr>
+                                            <td>@item.Id</td>
+                                            <td>@item.Ten</td>
+                                            <td>@loaisanpham.Ten</td>
+                                            <td>@nhacungcap.Ten</td>
+                                            <td>@item.TrangThai</td>
+                                            <td><img src="@item.HinhAnh" style="width:auto;height:20%"></td>
+                                            <td></td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
