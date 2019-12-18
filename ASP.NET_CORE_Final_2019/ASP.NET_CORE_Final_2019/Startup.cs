@@ -42,7 +42,9 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
             services.AddScoped<DbContext, VEGEFOOD_DBContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IFSanpham, SanphamRepository>();
-            services.AddTransient<ISanPham, SanPhamRepository>();
+            services.AddTransient<INhaCungCap, NhaCungCapRepository>();
+            services.AddTransient<IKhachHang, KhachHangRepository>();
+            services.AddTransient<IDonHang, DonHangRepository>();
             services.AddDistributedMemoryCache();
             services.AddSession();
         }
