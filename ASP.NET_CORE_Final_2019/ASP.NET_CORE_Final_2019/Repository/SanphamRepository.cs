@@ -51,6 +51,55 @@ namespace ASP.NET_CORE_Final_2019.Repository
             return res;
         }
         public IEnumerable<Sanpham> GetSanPhams => db.Sanpham;
+        public IEnumerable<Sanpham> GetSanPhamsByIdLoaiSanPham(int Id)
+        {
+            IEnumerable<Sanpham> list = GetSanPhams;
+            foreach (Sanpham item in list)
+            {
+                if (item.IdLoaiSanPham == Id) yield return item;
+            }
+        }
+        public IEnumerable<Sanpham> GetSanPhamMoiNhat()
+        {
+            IEnumerable<Sanpham> list = GetSanPhams;
+            int cnt = list.Count();
+            foreach (Sanpham item in list)
+            {
+                if (item.Id >= cnt-3) yield return item;
+            }
+        }
+        public IEnumerable<Sanpham> GetSanPhamBanChayNhat()
+        {
+            IEnumerable<Sanpham> list = GetSanPhams;
+            int? Max1 = 1000000000;
+            int? Max2 = 0;
+            for (int i=1; i<=4; i++)
+            {
+                Sanpham sp = new Sanpham();
+                foreach (Sanpham item in list)
+                {
+                    if (item.IdLoaiSanPham == 4)
+                    {
+                        if (item.IdLoaiSanPham * 1000 > Max2 && item.IdLoaiSanPham * 1000 < Max1)
+                        {
+                            Max2 = item.IdLoaiSanPham * 1000;
+                            sp = item;
+                        }
+                    }
+                    else
+                    {
+                        if (item.IdLoaiSanPham > Max2 && item.IdLoaiSanPham < Max1)
+                        {
+                            Max2 = item.IdLoaiSanPham;
+                            sp = item;
+                        }
+                    }
+                }
+                Max1 = Max2;
+                Max2 = 0;
+                yield return sp;
+            }
+        }
         public IEnumerable<Sanpham> Get8SanPhams()
         {
             IEnumerable<Sanpham> list = GetSanPhams;

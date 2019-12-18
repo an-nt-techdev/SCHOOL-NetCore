@@ -23,8 +23,9 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         public IActionResult Index()
         {
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
+            ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();
+            ViewBag.ListSanPhamBanChayNhat = _Sanpham.GetSanPhamBanChayNhat();
             return View(_Sanpham.Get8SanPhams());
-            //yield return View(_Sanpham.GetChiTietSanPhams);
         }
 
         [Route("Home/Privacy")]

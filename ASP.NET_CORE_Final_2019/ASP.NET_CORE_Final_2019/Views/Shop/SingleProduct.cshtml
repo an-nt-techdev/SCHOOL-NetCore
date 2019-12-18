@@ -9,8 +9,8 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a href="index.html">Product</a></span> <span>Product Single</span></p>
-                <h1 class="mb-0 bread">Product Single</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="/Home">Trang chủ</a></span> <span>Sản phẩm</span></p>
+                <h1 class="mb-0 bread">Chi tiết sản phẩm</h1>
             </div>
         </div>
     </div>
@@ -20,21 +20,29 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-5 ftco-animate">
-                <a href="images/product-1.jpg" class="image-popup"><img src="@ViewBag.Sanpham.HinhAnh" class="img-fluid" alt="Colorlib Template"></a>
+                <a href="images/product-1.jpg" class="image-popup"><img src="@ViewBag.SanPham.HinhAnh" class="img-fluid" alt="Colorlib Template"></a>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
-                <h3>@ViewBag.Sanpham.Ten</h3>
+                <h3>@ViewBag.SanPham.Ten</h3>
                 <div class="d-flex">
                     <div class="pricing">
                         <p>Loại:    @ViewBag.Loai.Ten </p>
                     </div>
                 </div>
-                <p class="price">Giá <span> @ViewBag.Chitietsanpham.Gia VND</span>  Khuyến Mãi Còn : <span> @ViewBag.Chitietsanpham.GiaKhuyenMai VND</span></p>
+                @if (ViewBag.Chitietsanpham.GiaKhuyenMai == 100)
+                {
+                    <p class="price">Giá <span> @ViewBag.Chitietsanpham.Gia VNĐ</span></p>
+                }
+                else
+                {
+                    double? gkm = ViewBag.ChiTietSanPham.Gia * ViewBag.Chitietsanpham.GiaKhuyenMai / 100;
+                    <p class="price">Giá <span> @ViewBag.Chitietsanpham.Gia VNĐ</span>  Khuyến Mãi Còn: <span> @gkm VND</span></p>
+                }
                 <p>
                     Sản Phẩm Đạt Chuẩn Chất Lượng. Được Công Nhận Bởi Hội Sao Vàng Thực Phẩm Việt Nam
                 </p>
                 <div class="row mt-4">
-                    <div class="col-md-6">
+                    @*<div class="col-md-6">
                         <div class="form-group d-flex">
                             <div class="select-wrap">
                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
@@ -46,27 +54,50 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="w-100"></div>
                     <div class="input-group col-md-6 d-flex mb-3">
-                        <span class="input-group-btn mr-2">
-                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-                                <i class="ion-ios-remove"></i>
-                            </button>
-                        </span>
-                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn ml-2">
-                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                                <i class="ion-ios-add"></i>
-                            </button>
-                        </span>
+                        @if (ViewBag.Loai.Id != 4)
+                        {
+                            <span class="input-group-btn mr-2">
+                                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" onclick="dec()">
+                                    <i class="ion-ios-remove"></i>
+                                </button>
+                            </span>
+                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value=100 min=100 max=100000 disabled>
+                            <span class="input-group-btn ml-2">
+                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" onclick="inc()">
+                                    <i class="ion-ios-add"></i>
+                                </button>
+                            </span>
+                            <p style="margin: 7px; margin-left: 62px;">(Đơn vị: gram)</p>
+                        }
+                        else
+                        {
+                            <span class="input-group-btn mr-2">
+                                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" onclick="decc()">
+                                    <i class="ion-ios-remove"></i>
+                                </button>
+                            </span>
+                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100" disabled>
+                            <span class="input-group-btn ml-2">
+                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" onclick="incc()">
+                                    <i class="ion-ios-add"></i>
+                                </button>
+                            </span>
+                            <p style="margin: 7px; margin-left: 75px;">(Đơn vị: ly)</p>
+                        }
                     </div>
                     <div class="w-100"></div>
-                    <div class="col-md-12">
-                        <p style="color: #000;">600 kg available</p>
+                    <div class="input-group col-md-12 d-flex mb-3">
+                        @if (ViewBag.Loai.Id != 4)
+                        {
+                            double? tonkho = (double)(ViewBag.ChiTietSanPham.SoLuongNhap - ViewBag.ChiTietSanPham.SoLuongTieuThu) / 1000;
+                            <p style="color: #000;">Còn @tonkho kilogram</p>
+                        }
                     </div>
                 </div>
-                <p><a href="cart.html" class="btn btn-black py-3 px-5">Add to Cart</a></p>
+                <p><a href="#" class="btn btn-black py-3 px-5">Add to Cart</a></p>
             </div>
         </div>
     </div>
@@ -76,135 +107,172 @@
     <div class="container">
         <div class="row justify-content-center mb-3 pb-3">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <span class="subheading">Products</span>
-                <h2 class="mb-4">Related Products</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                <span class="subheading">Sản phẩm</span>
+                <h2 class="mb-4">Sản phẩm cùng loại</h2>
+                @*<p>Những sản phẩm cùng loại</p>*@
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="product">
-                    <a href="#" class="img-prod">
-                        <img class="img-fluid" src="~/images/product-1.jpg" alt="Colorlib Template">
-                        <span class="status">30%</span>
-                        <div class="overlay"></div>
-                    </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Bell Pepper</a></h3>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                <p class="price"><span class="mr-2 price-dc"> @Html.DisplayFor(model => model.Gia)</span><span class="price-sale"> @Html.DisplayFor(model => model.GiaKhuyenMai)</span></p>
+            @{int cnt = 0; }
+            @{
+                foreach (var item in ViewBag.SanPhamCungLoai)
+                {
+                    if (item.Id != ViewBag.SanPham.Id)
+                    {
+                        cnt++;
+
+                        Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
+                        <div class="col-md-6 col-lg-3 ftco-animate">
+                            <div class="product">
+                                <a href="/Shop/Product/@item.Id" class="img-prod">
+                                    <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
+                                    @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
+                                    <span class="status">Khuyến mãi @km%</span>
+                                    <div class="overlay"></div>
+                                </a>
+                                <div class="text py-3 pb-4 px-3 text-center">
+                                    <h3><a href="/Shop/Product/@item.Id">@item.Ten</a></h3>
+                                    <div class="d-flex">
+                                        <div class="pricing">
+                                            @{
+                                                if (itemDetail.GiaKhuyenMai == 100)
+                                                {
+                                                    <p class="price">@*<span class="mr-2 price-dc"></span>*@<span class="price-sale">@itemDetail.Gia</span> VNĐ</p>
+                                                }
+                                                else
+                                                {
+                                                    double? gkm = itemDetail.Gia * itemDetail.GiaKhuyenMai / 100;
+                                                    <p class="price"><span class="mr-2 price-dc">@itemDetail.Gia VNĐ</span><span class="price-sale">@gkm</span> VNĐ</p>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div class="bottom-area d-flex px-3">
+                                        <div class="m-auto d-flex">
+                                            <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                                <span><i class="ion-ios-menu"></i></span>
+                                            </a>
+                                            <a href="" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                <span><i class="ion-ios-cart"></i></span>
+                                            </a>
+                                            @*<a href="" class="heart d-flex justify-content-center align-items-center ">
+                                            <span><i class="ion-ios-heart"></i></span>
+                                        </a>*@
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="product">
-                    <a href="#" class="img-prod">
-                        <img class="img-fluid" src="~/images/product-2.jpg" alt="Colorlib Template">
-                        <div class="overlay"></div>
-                    </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Strawberry</a></h3>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                <p class="price"><span>$120.00</span></p>
-                            </div>
-                        </div>
-                        <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="product">
-                    <a href="#" class="img-prod">
-                        <img class="img-fluid" src="~/images/product-3.jpg" alt="Colorlib Template">
-                        <div class="overlay"></div>
-                    </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Green Beans</a></h3>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                <p class="price"><span>$120.00</span></p>
-                            </div>
-                        </div>
-                        <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="product">
-                    <a href="#" class="img-prod">
-                        <img class="img-fluid" src="~/images/product-4.jpg" alt="Colorlib Template">
-                        <div class="overlay"></div>
-                    </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Purple Cabbage</a></h3>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                <p class="price"><span>$120.00</span></p>
-                            </div>
-                        </div>
-                        <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                        if (cnt == 4) { break; }
+                    }
+                }
+            }
+
+
+        </div>
+    </div>
+@*</section>
+
+<section class="ftco-section">*@
+    @*<div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <span class="subheading">Sản phẩm</span>
+                <h2 class="mb-4">Sản phẩm mới nhất</h2>
+                <p>Những sản phẩm cùng loại</p>
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            @{cnt = Enumerable.Count(ViewBag.ListSanPham); }
+            @{
+                foreach (var item in ViewBag.ListSanPham)
+                {
+                    if (item.Id != ViewBag.SanPham.Id && item.Id >= cnt-3)
+                    {
+                        //cnt++;
+
+                        Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
+                        <div class="col-md-6 col-lg-3 ftco-animate">
+                            <div class="product">
+                                <a href="/Shop/Product/@item.Id" class="img-prod">
+                                    <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
+                                    @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
+                                    <span class="status">Khuyến mãi @km%</span>
+                                    <div class="overlay"></div>
+                                </a>
+                                <div class="text py-3 pb-4 px-3 text-center">
+                                    <h3><a href="/Shop/Product/@item.Id">@item.Ten</a></h3>
+                                    <div class="d-flex">
+                                        <div class="pricing">
+                                            @{
+                                                if (itemDetail.GiaKhuyenMai == 100)
+                                                {
+                                                    <p class="price">@*<span class="mr-2 price-dc"></span>*@@*<span class="price-sale">@itemDetail.Gia</span> VNĐ</p>
+                                                }
+                                                else
+                                                {
+                                                    double? gkm = itemDetail.Gia * itemDetail.GiaKhuyenMai / 100;
+                                                    <p class="price"><span class="mr-2 price-dc">@itemDetail.Gia VNĐ</span><span class="price-sale">@gkm</span> VNĐ</p>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div class="bottom-area d-flex px-3">
+                                        <div class="m-auto d-flex">
+                                            <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                                <span><i class="ion-ios-menu"></i></span>
+                                            </a>
+                                            <a href="" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                <span><i class="ion-ios-cart"></i></span>
+                                            </a>
+                                            @*<a href="" class="heart d-flex justify-content-center align-items-center ">
+                                                    <span><i class="ion-ios-heart"></i></span>
+                                                </a>*@@*
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        //if (cnt == 4) { break; }
+                    }
+                }
+            }
+
+
+        </div>
+    </div>*@
 </section>
+
 <div>
     @*<a asp-action="Edit" asp-route-id="@Model.IdSanPham">Edit</a> |*@
-    <a asp-action="Index">Back to List</a>
 </div>
+<script>
+    function inc()
+    {
+        if (parseInt(document.getElementById("quantity").value) < 100000)
+        document.getElementById("quantity").setAttribute('value', (parseInt(document.getElementById("quantity").value) + 100).toString());
+        //document.getElementById("quantity").setAttribute('name', 'vl');
+    }
+    function incc()
+    {
+        if (parseInt(document.getElementById("quantity").value) < 100)
+        document.getElementById("quantity").setAttribute('value', (parseInt(document.getElementById("quantity").value) + 1).toString());
+    }
+    function dec()
+    {
+        if (parseInt(document.getElementById("quantity").value) > 100)
+        document.getElementById("quantity").setAttribute('value', (parseInt(document.getElementById("quantity").value) - 100).toString());    }
+    function decc()
+    {
+        if (parseInt(document.getElementById("quantity").value) > 1)
+        document.getElementById("quantity").setAttribute('value', (parseInt(document.getElementById("quantity").value) - 1).toString());
+    }
+</script>

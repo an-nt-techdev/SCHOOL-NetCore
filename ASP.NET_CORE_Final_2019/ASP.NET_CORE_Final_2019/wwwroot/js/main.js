@@ -1,4 +1,4 @@
- AOS.init({
+﻿ AOS.init({
  	duration: 800,
  	easing: 'slide'
  });
@@ -314,7 +314,7 @@
 
 	function makeTimer() {
 
-		var endTime = new Date("21 December 2019 9:56:00 GMT+01:00");			
+		var endTime = new Date("25 December 2019 10:00:00 GMT+07:00");			
 		endTime = (Date.parse(endTime) / 1000);
 
 		var now = new Date();
@@ -331,10 +331,10 @@
 		if (minutes < "10") { minutes = "0" + minutes; }
 		if (seconds < "10") { seconds = "0" + seconds; }
 
-		$("#days").html(days + "<span>Days</span>");
-		$("#hours").html(hours + "<span>Hours</span>");
-		$("#minutes").html(minutes + "<span>Minutes</span>");
-		$("#seconds").html(seconds + "<span>Seconds</span>");		
+		$("#days").html(days + "<span>Ngày</span>");
+		$("#hours").html(hours + "<span>Giờ</span>");
+		$("#minutes").html(minutes + "<span>Phút</span>");
+		$("#seconds").html(seconds + "<span>Giây</span>");		
 
 }
 
