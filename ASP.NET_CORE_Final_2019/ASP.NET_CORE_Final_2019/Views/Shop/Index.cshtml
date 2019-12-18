@@ -9,8 +9,8 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
-                <h1 class="mb-0 bread">Products</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="/Home">Trang chủ</a></span> <span>Cửa hàng</span></p>
+                <h1 class="mb-0 bread">Cửa hàng</h1>
             </div>
         </div>
     </div>
@@ -23,58 +23,245 @@
                 <ul class="product-category">
                     @foreach (var item in ViewBag.ListLoaiSanPham)
                     {
-                        <li><a href="#">@item.Ten</a></li>
+                        <li><a href="/Shop/Cate/@item.Id">@item.Ten</a></li>
                     }
                 </ul>
             </div>
         </div>
         <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a asp-controller="Shop" asp-action="SingleProduct" asp-route-Id="@item.Id" asp-route-Ten="@item.Ten" class="img-prod">
-                            <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height:246px;width:197px">
-                            <span class="status">30%</span>
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a asp-controller="Shop" asp-action="SingleProduct" asp-route-Id="@item.Id" asp-route-Ten="@item.Ten">@item.Ten</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="ion-ios-menu"></i></span>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="ion-ios-cart"></i></span>
-                                    </a>
-                                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                        <span><i class="ion-ios-heart"></i></span>
-                                    </a>
+            @{ 
+                        int num = 0;
+                        foreach (var item in Model)
+                        {
+                            num++;
+                            if (ViewBag.CurrentPage * 8 - 7 <= num && num <= ViewBag.CurrentPage * 8)
+                            {
+                                Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
+                        <div class="col-md-6 col-lg-3 ftco-animate">
+                            <div class="product">
+                                <a href="/Shop/Product/@item.Id" class="img-prod">
+                                    <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
+                                    @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
+                                    <span class="status">Khuyến mãi @km%</span>
+                                    <div class="overlay"></div>
+                                </a>
+                                <div class="text py-3 pb-4 px-3 text-center">
+                                    <h3><a href="/Shop/Product/@item.Id">@item.Ten</a></h3>
+                                    <div class="d-flex">
+                                        <div class="pricing">
+                                            @{
+                                                if (itemDetail.GiaKhuyenMai == 100)
+                                                {
+                                                    <p class="price">@*<span class="mr-2 price-dc"></span>*@<span class="price-sale">@itemDetail.Gia</span> VNĐ</p>
+                                                }
+                                                else
+                                                {
+                                                    double? gkm = itemDetail.Gia * itemDetail.GiaKhuyenMai / 100;
+                                                    <p class="price"><span class="mr-2 price-dc">@itemDetail.Gia VNĐ</span><span class="price-sale">@gkm</span> VNĐ</p>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div class="bottom-area d-flex px-3">
+                                        <div class="m-auto d-flex">
+                                            <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                                <span><i class="ion-ios-menu"></i></span>
+                                            </a>
+                                            <a href="" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                <span><i class="ion-ios-cart"></i></span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            }
-
+                                                        }
+                                                    }
+                                                }
         </div>
         <div class="row mt-5">
             <div class="col text-center">
                 <div class="block-27">
                     <ul>
-                        <li><a href="#">&lt;</a></li>
-                        <li class="active"><span>1</span></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&gt;</a></li>
+                        @{
+                            if (ViewBag.Cate == false)
+                            {
+                                if (ViewBag.CurrentPage <= 1)
+                                {
+                                    <li><span>&lt;</span></li>
+                                    for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i == 1)
+                                        {
+                                            <li class="active"><span>1</span></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/Shop/@i">@i</a></li>
+                                        }
+                                    }
+                                    <li><a href="/Shop/2">&gt;</a></li>
+                                }
+                                else if (ViewBag.CurrentPage >= ViewBag.AllPage)
+                                {
+                                    dynamic tmp = ViewBag.AllPage;
+                                    tmp--;
+                                    <li><a href="/Shop/@tmp">&lt;</a></li>
+                                    for (int i = ViewBag.AllPage - 4; i <= ViewBag.AllPage; i++)
+                                    {
+                                        if (i == ViewBag.AllPage)
+                                        {
+                                            <li class="active"><span>@ViewBag.AllPage</span></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/Shop/@i">@i</a></li>
+                                        }
+                                    }
+                                    <li><span>&gt;</span></li>
+                                }
+                                else
+                                {
+                                    if (ViewBag.CurrentPage == 2)
+                                    {
+                                        dynamic tmp1 = ViewBag.CurrentPage;
+                                        dynamic tmp2 = ViewBag.CurrentPage;
+                                        tmp1--;
+                                        tmp2++;
+                                        <li><a href="/Shop/@tmp1">&lt;</a></li>
+                                        for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i == 2)
+                                            {
+                                                <li class="active"><span>2</span></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/Shop/@i">@i</a></li>
+                                            }
+                                        }
+                                        <li><a href="/Shop/@tmp2">&gt;</a></li>
+                                    }
+                                    else if (ViewBag.CurrentPage == ViewBag.AllPage - 1)
+                                    {
+                                        dynamic tmp1 = ViewBag.CurrentPage;
+                                        dynamic tmp2 = ViewBag.CurrentPage;
+                                        tmp1--;
+                                        tmp2++;
+                                        <li><a href="/Shop/@tmp1">&lt;</a></li>
+                                        for (int i = ViewBag.AllPage - 4; i <= ViewBag.AllPage; i++)
+                                        {
+                                            if (i == ViewBag.CurrentPage)
+                                            {
+                                                <li class="active"><span>@i</span></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/Shop/@i">@i</a></li>
+                                            }
+                                        }
+                                        <li><a href="/Shop/@tmp2">&gt;</a></li>
+                                    }
+                                    else
+                                    {
+                                        dynamic tmp1 = ViewBag.CurrentPage;
+                                        dynamic tmp2 = ViewBag.CurrentPage;
+                                        tmp1--;
+                                        tmp2++;
+                                        <li><a href="/Shop/@tmp1">&lt;</a></li>
+                                        for (int i = ViewBag.CurrentPage - 2; i <= ViewBag.CurrentPage + 2; i++)
+                                        {
+                                            if (i == ViewBag.CurrentPage)
+                                            {
+                                                <li class="active"><span>@i</span></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/Shop/@i">@i</a></li>
+                                            }
+                                        }
+                                        <li><a href="/Shop/@tmp2">&gt;</a></li>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (ViewBag.CurrentPage <= 1)
+                                {
+                                    <li><span>&lt;</span></li>
+                                    for (int i = 1; i <= ViewBag.AllPage; i++)
+                                    {
+                                        if (i == 1)
+                                        {
+                                            <li class="active"><span>1</span></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/Shop/Cate/@ViewBag.IdCate/@i">@i</a></li>
+                                        }
+                                    }
+                                    if (ViewBag.AllPage == 1)
+                                    {
+                                        <li><span>&gt;</span></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/Shop/Cate/@ViewBag.IdCate/2">&gt;</a></li>
+                                    }
+                                }
+                                else if (ViewBag.CurrentPage >= ViewBag.AllPage)
+                                {
+
+                                    if (ViewBag.AllPage == 1)
+                                    {
+                                        <li><span>&lt;</span></li>
+                                        <li class="active"><span>@ViewBag.AllPage</span></li>
+                                        <li><span>&gt;</span></li>
+                                    }
+                                    else if (ViewBag.AllPage == 2)
+                                    {
+                                        dynamic tmp = ViewBag.AllPage;
+                                        tmp--;
+                                        <li><a href="/Shop/Cate/@ViewBag.IdCate/@tmp">&lt;</a></li>
+                                        <li><a href="/Shop/Cate/@ViewBag.IdCate/1">1</a></li>
+                                        <li class="active"><span>@ViewBag.AllPage</span></li>
+                                        <li><span>&gt;</span></li>
+                                    }
+                                    else
+                                    {
+                                        dynamic tmp = ViewBag.AllPage;
+                                        tmp--;
+                                        <li><a href="/Shop/Cate/@ViewBag.IdCate/@tmp">&lt;</a></li>
+                                        <li><a href="/Shop/Cate/@ViewBag.IdCate/1">1</a></li>
+                                        <li><a href="/Shop/Cate/@ViewBag.IdCate/2">2</a></li>
+                                        <li class="active"><span>@ViewBag.AllPage</span></li>
+                                        <li><span>&gt;</span></li>
+                                    }
+                                }
+                                else
+                                {
+                                    dynamic tmp1 = ViewBag.CurrentPage;
+                                    dynamic tmp2 = ViewBag.CurrentPage;
+                                    tmp1--;
+                                    tmp2++;
+                                    <li><a href="/Shop/Cate/@ViewBag.IdCate/@tmp1">&lt;</a></li>
+                                    for (int i = ViewBag.CurrentPage - 1; i <= ViewBag.CurrentPage + 1; i++)
+                                    {
+                                        if (i == ViewBag.CurrentPage)
+                                        {
+                                            <li class="active"><span>@i</span></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/Shop/Cate/@ViewBag.IdCate/@i">@i</a></li>
+                                        }
+                                    }
+                                    <li><a href="/Shop/Cate/@ViewBag.IdCate/@tmp2">&gt;</a></li>
+                                }
+                            }
+                        }
+
                     </ul>
                 </div>
             </div>

@@ -11,6 +11,9 @@ namespace ASP.NET_CORE_Final_2019.Services
         // Get List
         IEnumerable<Loaisanpham> GetLoaiSanPhams { get; }
         IEnumerable<Sanpham> GetSanPhams { get; }
+        IEnumerable<Sanpham> GetSanPhamMoiNhat();
+        IEnumerable<Sanpham> GetSanPhamBanChayNhat();
+        IEnumerable<Sanpham> GetSanPhamsByIdLoaiSanPham(int Id);
         IEnumerable<Sanpham> Get8SanPhams();
         IEnumerable<Chitietsanpham> GetChiTietSanPhams { get; }
 

@@ -5,7 +5,7 @@ go
 --KhachHang
 create table KHACHHANG
 (
-Email int IDENTITY(1,1) primary key,
+Email nvarchar(200) primary key,
 Ten nvarchar(50),
 Sdt int,
 DiaChi nvarchar(200)
