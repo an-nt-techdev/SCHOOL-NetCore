@@ -42,6 +42,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                _SanPham.HinhAnh = "/Images/" + _SanPham.HinhAnh;
                 IFSanpham.addSanPham(_SanPham);
                 return RedirectToAction("Index");
             }
