@@ -25,16 +25,23 @@
             <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />*@
     </environment>
 </head>
-<body class="goto-here">
-    @{
-        var sessionName = new Byte[20];
-        bool nameOK = Context.Session.TryGetValue("pass", out sessionName);
-        if (nameOK)
+@{
+    var sessionName = new Byte[20];
+    bool nameOK = Context.Session.TryGetValue("Pass", out sessionName);
+    if (nameOK)
+    {
+        string result = System.Text.Encoding.UTF8.GetString(sessionName);
+        if (result != "admin")
         {
-            string result = System.Text.Encoding.UTF8.GetString(sessionName);
-            <p>@result</p>
+            Context.Response.Redirect("/Admin");
         }
     }
+    else
+    {
+        Context.Response.Redirect("/Admin");
+    }
+}
+<body class="goto-here">
     <div class="wrapper ">
         <div class="sidebar" data-color="white" data-active-color="danger">
             <div class="logo">

@@ -17,11 +17,11 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(string pass)
+        public IActionResult Index(String pass)
         {
             if (pass == "admin")
             {
-               // HttpContext.Session.SetString("Pass", pass);
+               HttpContext.Session.SetString("Pass", pass);
                 return RedirectToAction("Index", "LoaiSanPham", new { area = "Admin" });
             }
             return View();

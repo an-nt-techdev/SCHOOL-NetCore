@@ -66,7 +66,7 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute("areaRoute", "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
