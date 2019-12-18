@@ -31,7 +31,10 @@
                                             <td>@item.Ten</td>
                                             <td>
                                                 <button class="btn btn-success"><a asp-action="Edit" asp-route-Id="@item.Id">Sửa</a></button>
+                                                @if(item.Id !=1 && item.Id!=2&&item.Id!=3&&item.Id!=4)
+                                                {
                                                 <button class="btn btn-dark"><a asp-action="Delete" asp-route-Id="@item.Id">Xóa</a></button>
+                                                }
                                             </td>
                                         </tr>
                                     }

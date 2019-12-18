@@ -51,7 +51,7 @@
                                             <td><img src="@item.HinhAnh" style="width:auto;height:20%"></td>
                                             <td></td>
                                             <td>
-                                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                                <button class="btn btn-dark"><a asp-action="Edit" asp-route-Id="@item.Id">Sửa</a></button>
                                                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                                                 <button class="btn btn-dark"><a asp-action="Delete">Xóa</a></button>
                                             </td>

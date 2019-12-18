@@ -49,6 +49,23 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
             return View(_SanPham);
         }
 
+        [HttpGet]
+        public IActionResult Edit(int Id)
+        {
+            ViewBag.ListLoaiSanPham = ILoaiSanPham.GetLoaisanphams;
+            ViewBag.ListNhaCungCap = INhaCungCap.GetNhacungcaps;
+            Sanpham res = IFSanpham.GetSanPham(Id);
+            ViewBag.HinhAnh = res.HinhAnh;
+            return View(res);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Sanpham _SanPham)
+        {
+            _SanPham.HinhAnh = "/Images/" + _SanPham.HinhAnh;
+            IFSanpham.updateSanPham(_SanPham);
+            return RedirectToAction("Index");
+        }
         public IActionResult Detail(int? Id)
         {
             return View();

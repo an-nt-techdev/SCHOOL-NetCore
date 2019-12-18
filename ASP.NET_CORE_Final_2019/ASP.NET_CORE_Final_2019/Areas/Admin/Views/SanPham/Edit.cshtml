@@ -1,22 +1,24 @@
 ﻿@model ASP.NET_CORE_Final_2019.Models.Sanpham
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <div class="main-panel">
+
     <div class="content">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"> Thêm Sản Phẩm</h4>
+                        <h4 class="card-title"> Sửa Nhà Cung Cấp</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <form asp-action="Create">
+                                <form asp-action="Edit">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="Id" />
                                     <div class="form-group">
                                         <label asp-for="IdLoaiSanPham" class="control-label"></label>
                                         <select asp-for="IdLoaiSanPham" class="form-control" asp-items="@(new SelectList(ViewBag.ListLoaiSanPham,"Id","Ten"))"></select>
@@ -34,29 +36,27 @@
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="TrangThai" class="control-label"></label>
-                                        <select asp-for="TrangThai" class="form-control">
-                                            <option>Đang bán</option>
-                                            <option>Ngưng bán</option>
-                                        </select>
+                                        <input asp-for="TrangThai" class="form-control" />
                                         <span asp-validation-for="TrangThai" class="text-danger"></span>
                                     </div>
                                     <div class="container mt-3">
                                         <label asp-for="HinhAnh" class="control-label"></label>
                                         <div class="custom-file mb-3">
-                                            <input asp-for="HinhAnh" type="file" class="custom-file-input" id="customFile">
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                            <input asp-for="HinhAnh" value="@ViewBag.HinhAnh" type ="file" class="custom-file-input" id="customFile">
+                                            <label asp-for="HinhAnh" class="custom-file-label" for="customFile">Choose file</label>
                                             <span asp-validation-for="HinhAnh" class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="submit" value="Create" class="btn btn-primary" />
+                                        <input type="submit" value="Save" class="btn btn-primary" />
                                     </div>
                                 </form>
                             </div>
                             <div class="col-sm-5">
-                                <img id="ShowAnh" src="" alt="Anh" />
+                                <img id ="ShowAnh"src="@ViewBag.HinhAnh" alt="Anh" />
                             </div>
                         </div>
+
                         <div>
                             <a asp-action="Index">Back to List</a>
                         </div>
@@ -66,12 +66,11 @@
         </div>
     </div>
 </div>
-
 <script>
     // Add the following code if you want the name of the file appear on select
     $(".custom-file-input").on("change", function () {
         var HinhAnh = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(HinhAnh);
-          $("#ShowAnh").attr("src", "/Images/" + HinhAnh);
+        $("#ShowAnh").attr("src", "/Images/" + HinhAnh);
     });
 </script>
