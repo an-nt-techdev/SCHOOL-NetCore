@@ -12,7 +12,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
     public class HomeController : Controller
     {
         public readonly IFSanpham _Sanpham;
-        //VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();
+        
         public HomeController(IFSanpham _IFSanpham)
         {
             _Sanpham = _IFSanpham;
@@ -22,7 +22,9 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [Route("Home")]
         public IActionResult Index()
         {
-            return View(_Sanpham.GetSanPhams);
+            ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
+            return View(_Sanpham.Get8SanPhams());
+            //yield return View(_Sanpham.GetChiTietSanPhams);
         }
 
         [Route("Home/Privacy")]
