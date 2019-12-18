@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using ASP.NET_CORE_Final_2019.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Session;
-using ASP.NET_CORE_Final_2019.Models;
 using ASP.NET_CORE_Final_2019.Services;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
@@ -27,21 +26,21 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         }
 
         [Route("Cart/Create")]
-        public void Create()
+        public IActionResult Create()
         {
-            
+            return View();
         }
 
         [Route("Cart/Update")]
-        public void Create()
+        public IActionResult Update()
         {
-
+            return View();
         }
 
         [Route("Cart/Remove")]
-        public void Create()
+        public IActionResult Remove()
         {
-
+            return View();
         }
     }
 }
