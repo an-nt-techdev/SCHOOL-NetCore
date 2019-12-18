@@ -31,19 +31,19 @@
                                             <td>@item.Ten</td>
                                             <td>
                                                 <button class="btn btn-success"><a asp-action="Edit" asp-route-Id="@item.Id">Sửa</a></button>
-                                                <button class="btn btn-danger"><a asp-action="Delete" asp-route-Id="@item.Id">Xóa</a></button>
+                                                <button class="btn btn-dark"><a asp-action="Delete" asp-route-Id="@item.Id">Xóa</a></button>
                                             </td>
                                         </tr>
                                     }
-                                    <tr>
-                                        <td>
-                                            <button>
-                                                <a asp-action="Create">
-                                                    Thêm Loại Sản Phẩm
-                                                </a>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>
+                                                <button>
+                                                    <a asp-action="Create">
+                                                        Thêm Loại Sản Phẩm
+                                                    </a>
+                                                </button>
+                                            </td>
+                                        </tr>
                                 </tbody>
                             </table>
                         </div>

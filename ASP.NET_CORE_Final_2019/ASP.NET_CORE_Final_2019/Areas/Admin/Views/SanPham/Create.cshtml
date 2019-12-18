@@ -1,0 +1,79 @@
+﻿@model ASP.NET_CORE_Final_2019.Models.Sanpham
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Thêm Sản Phẩm</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <form asp-action="Create">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="IdLoaiSanPham" class="control-label"></label>
+                                        <select asp-for="IdLoaiSanPham" class="form-control" asp-items="@(new SelectList(ViewBag.ListLoaiSanPham,"Id","Ten"))"></select>
+                                        <span asp-validation-for="IdLoaiSanPham" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Ten" class="control-label"></label>
+                                        <input asp-for="Ten" class="form-control" />
+                                        <span asp-validation-for="Ten" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="IdNhaCungCap" class="control-label"></label>
+                                        <select asp-for="IdNhaCungCap" class="form-control" asp-items="@(new SelectList(ViewBag.ListNhaCungCap,"Id","Ten"))"></select>
+                                        <span asp-validation-for="IdNhaCungCap" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="TrangThai" class="control-label"></label>
+                                        <select asp-for="TrangThai" class="form-control">
+                                            <option>Đang bán</option>
+                                            <option>Ngưng bán</option>
+                                        </select>
+                                        <span asp-validation-for="TrangThai" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="HinhAnh" class="control-label"></label>
+                                        <div class="custom-file mb-3">
+                                            <input asp-for="HinhAnh" class="custom-file-input" id="customFile" name="filename" />
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                        </div>
+                                        <span asp-validation-for="HinhAnh" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Create" class="btn btn-primary" />
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <div>
+                            <a asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}
+
