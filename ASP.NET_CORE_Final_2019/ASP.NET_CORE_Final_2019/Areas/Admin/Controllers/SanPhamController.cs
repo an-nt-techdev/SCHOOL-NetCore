@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASP.NET_CORE_Final_2019.Areas.Services;
 using ASP.NET_CORE_Final_2019.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,18 +10,17 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("admin/[controller]")]
-    public class LoaiSanPhamController : Controller
+    public class SanPhamController : Controller
     {
-        private VEGEFOOD_DBContext db;
-
-        public LoaiSanPhamController(VEGEFOOD_DBContext _db)
+        public readonly ISanPham ISanPham;
+        
+        public SanPhamController(ISanPham _ISanPham)
         {
-            db = _db;
+            ISanPham = _ISanPham;
         }
         public IActionResult Index()
         {
-            List<Loaisanpham> loaisanphams = db.Loaisanpham.ToList();
-            return View(loaisanphams);
+            return View(ISanPham.GetSanphams);
         }
     }
 }

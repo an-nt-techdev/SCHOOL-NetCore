@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASP.NET_CORE_Final_2019.Areas.Repository;
+using ASP.NET_CORE_Final_2019.Areas.Services;
 using ASP.NET_CORE_Final_2019.Models;
 using ASP.NET_CORE_Final_2019.Repository;
 using ASP.NET_CORE_Final_2019.Services;
@@ -40,6 +42,7 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
             services.AddScoped<DbContext, VEGEFOOD_DBContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IFSanpham, SanphamRepository>();
+            services.AddTransient<ISanPham, SanPhamRepository>();
             services.AddDistributedMemoryCache();
             services.AddSession();
         }
