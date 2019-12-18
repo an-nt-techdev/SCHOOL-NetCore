@@ -16,6 +16,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         public HomeController(IFSanpham _IFSanpham)
         {
             _Sanpham = _IFSanpham;
+
         }
 
         [Route("")]
