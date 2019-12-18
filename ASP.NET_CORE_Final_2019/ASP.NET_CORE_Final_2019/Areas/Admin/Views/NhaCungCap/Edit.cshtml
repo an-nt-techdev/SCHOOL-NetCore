@@ -1,0 +1,89 @@
+﻿@model ASP.NET_CORE_Final_2019.Models.Nhacungcap
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@*<h1>Edit</h1>
+
+    <h4>Nhacungcap</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Ten" class="control-label"></label>
+                    <input asp-for="Ten" class="form-control" />
+                    <span asp-validation-for="Ten" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Diachi" class="control-label"></label>
+                    <input asp-for="Diachi" class="form-control" />
+                    <span asp-validation-for="Diachi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Sdt" class="control-label"></label>
+                    <input asp-for="Sdt" class="form-control" />
+                    <span asp-validation-for="Sdt" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+<div class="main-panel">
+
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Thêm Nhà Cung Cấp</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <form asp-action="Edit">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="Id" />
+                                    <div class="form-group">
+                                        <label asp-for="Ten" class="control-label"></label>
+                                        <input asp-for="Ten" class="form-control" />
+                                        <span asp-validation-for="Ten" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Diachi" class="control-label"></label>
+                                        <input asp-for="Diachi" class="form-control" />
+                                        <span asp-validation-for="Diachi" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Sdt" class="control-label"></label>
+                                        <input asp-for="Sdt" class="form-control" />
+                                        <span asp-validation-for="Sdt" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div>
+                            <a asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

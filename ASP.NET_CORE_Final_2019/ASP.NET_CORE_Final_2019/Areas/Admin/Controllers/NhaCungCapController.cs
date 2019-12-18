@@ -59,5 +59,19 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
                 INhaCungCap.Remove(id);
                 return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Edit(int? Id)
+        {
+            Nhacungcap res = INhaCungCap.GetNhacungcap(Id);
+            return View(res);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Nhacungcap _NhaCungCap)
+        {
+            INhaCungCap.Update(_NhaCungCap);
+            return RedirectToAction("Index");
+        }
     }
 }

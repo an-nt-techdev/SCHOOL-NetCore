@@ -45,6 +45,7 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
             services.AddTransient<INhaCungCap, NhaCungCapRepository>();
             services.AddTransient<IKhachHang, KhachHangRepository>();
             services.AddTransient<IDonHang, DonHangRepository>();
+            services.AddTransient<ILoaiSanPham, LoaiSanPhamRepository>();
             services.AddDistributedMemoryCache();
             services.AddSession();
         }

@@ -12,5 +12,6 @@ namespace ASP.NET_CORE_Final_2019.Areas.Services
         Nhacungcap GetNhacungcap(int? Id);
         void Add(Nhacungcap _NhaCungCap);
         void Remove(int? Id);
+        void Update(Nhacungcap _NhaCungCap);
     }
 }

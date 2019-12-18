@@ -24,17 +24,26 @@
                                 </th>
                                 </thead>
                                 <tbody>
-                                    @foreach(var item in Model)
-                                        {
-                                         <tr>
-                                             <td>@item.Id</td>
-                                             <td>@item.Ten</td>
-                                             <td>
-                                                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                             </td>
-                                         </tr>
-                                        }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Id</td>
+                                            <td>@item.Ten</td>
+                                            <td>
+                                                <button class="btn btn-success"><a asp-action="Edit" asp-route-Id="@item.Id">Sửa</a></button>
+                                                <button class="btn btn-danger"><a asp-action="Delete" asp-route-Id="@item.Id">Xóa</a></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td>
+                                            <button>
+                                                <a asp-action="Create">
+                                                    Thêm Loại Sản Phẩm
+                                                </a>
+                                            </button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

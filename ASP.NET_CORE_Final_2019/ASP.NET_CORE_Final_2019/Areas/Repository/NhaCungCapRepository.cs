@@ -35,5 +35,14 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
             db.Nhacungcap.Remove(res);
             db.SaveChanges();
         }
+
+        public void Update(Nhacungcap _NhaCungCap)
+        {
+            Nhacungcap res = db.Nhacungcap.Find(_NhaCungCap.Id);
+            res.Sdt = _NhaCungCap.Sdt;
+            res.Ten = _NhaCungCap.Ten;
+            res.Diachi = _NhaCungCap.Diachi;
+            db.SaveChanges();
+        }
     }
 }
