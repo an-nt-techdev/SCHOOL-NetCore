@@ -16,5 +16,24 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
             db = _db;
         }
         public IEnumerable<Nhacungcap> GetNhacungcaps => db.Nhacungcap;
+
+        public void Add(Nhacungcap _NhaCungCap)
+        {
+            db.Nhacungcap.Add(_NhaCungCap);
+            db.SaveChanges();
+        }
+
+        public Nhacungcap GetNhacungcap(int? Id)
+        {
+            Nhacungcap res = db.Nhacungcap.Find(Id);
+            return res;
+        }
+
+        public void Remove(int? Id)
+        {
+            Nhacungcap res = db.Nhacungcap.Find(Id);
+            db.Nhacungcap.Remove(res);
+            db.SaveChanges();
+        }
     }
 }

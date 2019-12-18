@@ -29,8 +29,8 @@
                                 <th>
                                     Số Điện Thoại Liên Lạc
                                 </th>
-
                                 </thead>
+
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
@@ -41,11 +41,20 @@
                                             <td>@item.Sdt</td>
                                             <td></td>
                                             <td>
-                                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                                <button class="btn btn-danger"><a asp-action="Delete" asp-route-id="@item.Id">Xóa</a></button>
                                             </td>
                                         </tr>
+                                        <tr></tr>
                                     }
+                                        <tr>
+                                            <td>
+                                                <button>
+                                                    <a asp-action="Create">
+                                                        Thêm Nhà Cung Cấp
+                                                    </a>
+                                                </button>
+                                            </td>
+                                        </tr>
                                 </tbody>
                             </table>
                         </div>
