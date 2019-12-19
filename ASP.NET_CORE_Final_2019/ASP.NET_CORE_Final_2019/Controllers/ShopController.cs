@@ -4,22 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASP.NET_CORE_Final_2019.Models;
 using ASP.NET_CORE_Final_2019.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
 {
-    public class ShopController : Controller
+    public class ShopController : ChaController
     {
         public readonly IFSanpham _Sanpham;
-      
-        public ShopController(IFSanpham _IFSanpham)
+        public readonly IFDonHang _Donhang;
+
+        public ShopController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
         {
             _Sanpham = _IFSanpham;
+            _Donhang = _IFDonhang;
         }
 
         [Route("Shop/{Page=1}")]
         public IActionResult Index(int Page)
         {
+            ViewBag.MySession = HttpContext.Session.GetInt32("Id");
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             ViewBag.ListLoaiSanPham = _Sanpham.GetLoaiSanPhams;
             ViewBag.Cate = false;

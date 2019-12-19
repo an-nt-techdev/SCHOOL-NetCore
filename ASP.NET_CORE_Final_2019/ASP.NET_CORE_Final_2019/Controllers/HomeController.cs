@@ -6,23 +6,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ASP.NET_CORE_Final_2019.Models;
 using ASP.NET_CORE_Final_2019.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ChaController
     {
         public readonly IFSanpham _Sanpham;
-        
-        public HomeController(IFSanpham _IFSanpham)
+        public readonly IFDonHang _Donhang;
+
+        public HomeController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
         {
             _Sanpham = _IFSanpham;
-
+            _Donhang = _IFDonhang;
         }
 
-        [Route("")]
         [Route("Home")]
         public IActionResult Index()
         {
+            DateTime now = DateTime.Now;
+            ViewBag.date = now;
+            ViewBag.MySession = HttpContext.Session.GetInt32("Id");
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();
             ViewBag.ListSanPhamBanChayNhat = _Sanpham.GetSanPhamBanChayNhat();
