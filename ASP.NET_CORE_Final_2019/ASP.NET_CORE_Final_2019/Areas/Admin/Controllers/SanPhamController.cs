@@ -48,6 +48,18 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
             }
             return View(_SanPham);
         }
+        [HttpGet]
+        public IActionResult Detail(int Id)
+        {   
+            ViewBag.SanPham = IFSanpham.GetSanPham(Id);
+            Chitietsanpham res = IFSanpham.GetChiTietSanPham(Id);
+            return View(res);
+        }
+        [HttpPost]
+        public IActionResult Detail(Chitietsanpham _ChiTietSanPham)
+        {
+            return View();
+        }
 
         [HttpGet]
         public IActionResult Edit(int Id)

@@ -1,0 +1,97 @@
+﻿@model ASP.NET_CORE_Final_2019.Models.Chitietsanpham
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@*<h1>Detail</h1>
+
+<h4>Chitietsanpham</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Detail">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdSanPham" />
+            <div class="form-group">
+                <label asp-for="Gia" class="control-label"></label>
+                <input asp-for="Gia" class="form-control" />
+                <span asp-validation-for="Gia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaKhuyenMai" class="control-label"></label>
+                <input asp-for="GiaKhuyenMai" class="form-control" />
+                <span asp-validation-for="GiaKhuyenMai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoLuongNhap" class="control-label"></label>
+                <input asp-for="SoLuongNhap" class="form-control" />
+                <span asp-validation-for="SoLuongNhap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoLuongTieuThu" class="control-label"></label>
+                <input asp-for="SoLuongTieuThu" class="form-control" />
+                <span asp-validation-for="SoLuongTieuThu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Chi Tiết Sản Phẩm</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h1><i><b>@ViewBag.SanPham.Ten</b></i></h1>
+                                <form asp-action="Detail">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="IdSanPham" />
+                                    <div class="form-group">
+                                        <label asp-for="Gia" class="control-label">Giá</label>
+                                        <input asp-for="Gia" class="form-control" />
+                                        <span asp-validation-for="Gia" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="GiaKhuyenMai" class="control-label">% Khuyến Mãi</label>
+                                        <input asp-for="GiaKhuyenMai" class="form-control" />
+                                        <span asp-validation-for="GiaKhuyenMai" class="text-danger">(* % khuyến mãi  = 100- số nhập vào )</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="SoLuongNhap" class="control-label"> Số Lượng Nhập</label>
+                                        <input asp-for="SoLuongNhap" class="form-control" />
+                                        <span asp-validation-for="SoLuongNhap" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="SoLuongTieuThu" class="control-label"> Số Lượng Tiêu Thụ</label>
+                                        <input asp-for="SoLuongTieuThu" class="form-control" />
+                                        <span asp-validation-for="SoLuongTieuThu" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div>
+                            <a asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
