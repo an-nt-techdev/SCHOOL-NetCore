@@ -50,6 +50,11 @@
     <link rel="stylesheet" href="~/css/flaticon.css">
     <link rel="stylesheet" href="~/css/icomoon.css">
     <link rel="stylesheet" href="~/css/style.css">
+    <style>
+        .active{
+            background-color:red;
+        }
+    </style>
 </head>
 @{
     var sessionName = new Byte[20];
@@ -93,39 +98,39 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li>
-                        <a asp-controller="DonHang" asp-action="Index">
+                    <li id="1">
+                        <a asp-controller="DonHang" asp-action="Index" >
                             <i class="nc-icon nc-tile-56"></i>
                             <p>Quản Lý Đơn Hàng</p>
                         </a>
                     </li>
-                    <li>
-                        <a asp-controller="KhachHang" asp-action="Index">
-                            <i class="nc-icon nc-tile-56"></i>
+                    <li id="2">
+                        <a asp-controller="KhachHang" asp-action="Index" >
+                            <i class="fa fa-users"></i>
                             <p>Danh Sách Khách Hàng</p>
                         </a>
                     </li>
-                    <li>
+                    <li id="3">
                         <a asp-controller="LoaiSanPham" asp-action="Index">
-                            <i class="nc-icon nc-tile-56"></i>
+                            <i class="fa fa-newspaper-o"></i>
                             <p> Loại Sản Phẩm</p>
                         </a>
                     </li>
-                    <li>
-                        <a asp-controller="SanPham" asp-action="Index">
-                            <i class="nc-icon nc-tile-56"></i>
+                    <li id="4">
+                        <a asp-controller="SanPham" asp-action="Index" >
+                            <i class="fa fa-lemon-o"></i>
                             <p>Danh Sách Sản Phẩm</p>
                         </a>
                     </li>
-                    <li>
+                    <li id="5">
                         <a asp-controller="NhaCungCap" asp-action="Index">
-                            <i class="nc-icon nc-tile-56"></i>
+                            <i class="fa fa-truck"></i>
                             <p> Nhà Cung Cấp</p>
                         </a>
                     </li>
-                    <li>
+                    <li id="6">
                         <a href="#">
-                            <i class="nc-icon nc-tile-56"></i>
+                            <i class="fa fa-area-chart"></i>
                             <p>Thống Kê</p>
                         </a>
                     </li>
