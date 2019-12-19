@@ -71,12 +71,24 @@
     <div class="wrapper ">
         <div class="sidebar" data-color="white" data-active-color="danger">
             <div class="logo">
-                Thông Báo
                 <span>
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <a asp-controller="DonHang" asp-action="Index">
                         <i class="fa fa-bell"></i>
-                        <span class="badge badge-important">2</span>
-                    </button>
+                        <span class="badge badge-important">Số Đơn Hàng Chưa Xử Lý :</span>
+                        @{ 
+                            int num = 0;
+                            VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();
+                            IEnumerable<Donhang> list = db.Donhang;
+                            foreach(Donhang item in list)
+                            {
+                                if (item.TrangThai == 0)
+                                {
+                                    num++;
+                                }
+                            }
+                            @num;
+                        }
+                    </a>
                 </span>
             </div>
             <div class="sidebar-wrapper">

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ASP.NET_CORE_Final_2019.Models.Chitietdonhang>
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" style="background-image:url('/images/p9.jpg')">Sản Phẩm</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <tr>
+                                        <th>
+                                            Sản Phẩm
+                                        </th>
+                                        <th>
+                                            Số Lượng
+                                        </th>
+                                        <th>
+                                            Giá / 1
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ double? sum = 0;}
+                                    @foreach (var item in Model)
+                                    {
+                                        Sanpham ti = ViewBag.SanPham.Find(item.IdSanPham);
+                                        sum = sum + item.Gia * item.SoLuong;
+                                        <tr>
+                                            <td>
+                                                @ti.Ten
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.SoLuong)
+                                            </td>
+                                            <td>
+                                                @string.Format("{0:#,0.####}", item.Gia) VND
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div style="display:flex;justify-content:space-around">
+                                Tổng Cộng :  @string.Format("{0:#,0.####}",@sum) VND
+                                <span>
+                                    <a asp-action="GiaoHang" asp-route-id="@ViewBag.DonHang.Id" title="Giao Hàng">Giao Hàng <span class="fa fa-shopping-cart"></span></a>  |
+
+                                    <a asp-action="HoanThanh" asp-route-id="@ViewBag.DonHang.Id" title="Hoàn Thành">Hoàn Thành <span class="fa fa-check-square-o"></span></a>
+                                </span>
+
+                            </div>
+                            <
+                            <br />
+                            <div>
+                                <a asp-action="Index">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

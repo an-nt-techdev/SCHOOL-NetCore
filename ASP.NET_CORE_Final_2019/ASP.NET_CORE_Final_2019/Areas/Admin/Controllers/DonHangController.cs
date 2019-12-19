@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ASP.NET_CORE_Final_2019.Areas.Services;
+using ASP.NET_CORE_Final_2019.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
@@ -11,10 +12,12 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
     public class DonHangController : Controller
     {
         public readonly IDonHang IDonHang;
+        public readonly IFSanpham IFSanPham;
 
-        public DonHangController(IDonHang _IDonHang)
+        public DonHangController(IDonHang _IDonHang,IFSanpham _IFSanPham)
         {
             IDonHang = _IDonHang;
+            IFSanPham = _IFSanPham;
         }
         [Route("admin/[controller]")]
         public IActionResult Index()
@@ -46,7 +49,9 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Detail(int Id)
         {
-            return View(IDonHang.GetDonhang(Id));
+            ViewBag.SanPham = IFSanPham.GetSanPhams;
+            ViewBag.DonHang = IDonHang.GetDonhang(Id);
+            return View(IDonHang.GetChitietdonhang(Id));
         }
     }
 }

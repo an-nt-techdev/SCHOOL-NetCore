@@ -25,9 +25,13 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
             db.SaveChanges();
         }
 
-        public IEnumerable<Chitietsanpham> GetChitietsanphams(int Id)
+        public IEnumerable<Chitietdonhang> GetChitietdonhang(int Id)
         {
-            throw new NotImplementedException();
+            IEnumerable<Chitietdonhang> list = db.Chitietdonhang;
+            foreach(Chitietdonhang item in list)
+            {
+                if (item.Id == Id) yield return item;
+            }
         }
 
         public Donhang GetDonhang(int Id)

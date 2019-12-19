@@ -13,6 +13,6 @@ namespace ASP.NET_CORE_Final_2019.Areas.Services
         void GiaoHang(int Id);
         void HoanThanh(int Id);
         void ChuaXuLy(int Id);
-        IEnumerable<Chitietsanpham> GetChitietsanphams(int Id);
+        IEnumerable<Chitietdonhang> GetChitietdonhang(int id);
     }
 }
