@@ -17,5 +17,37 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
         }
 
         public IEnumerable<Donhang> GetDonhangs => db.Donhang;
+
+        public void ChuaXuLy(int Id)
+        {
+            Donhang res = db.Donhang.Find(Id);
+            res.TrangThai = 0;
+            db.SaveChanges();
+        }
+
+        public IEnumerable<Chitietsanpham> GetChitietsanphams(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Donhang GetDonhang(int Id)
+        {
+            Donhang res = db.Donhang.Find(Id);
+            return res;
+        }
+
+        public void GiaoHang(int Id)
+        {
+            Donhang res = db.Donhang.Find(Id);
+            res.TrangThai = 1;
+            db.SaveChanges();
+        }
+
+        public void HoanThanh(int Id)
+        {
+            Donhang res = db.Donhang.Find(Id);
+            res.TrangThai = 2;
+            db.SaveChanges();
+        }
     }
 }

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("admin/[controller]")]
     public class DonHangController : Controller
     {
         public readonly IDonHang IDonHang;
@@ -17,9 +16,37 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         {
             IDonHang = _IDonHang;
         }
+        [Route("admin/[controller]")]
         public IActionResult Index()
         {
             return View(IDonHang.GetDonhangs);
+        }
+
+        [HttpGet]
+        public IActionResult GiaoHang(int Id)
+        {
+            IDonHang.GiaoHang(Id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult HoanThanh(int Id)
+        {
+            IDonHang.HoanThanh(Id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult ChuaXuLy(int Id)
+        {
+            IDonHang.ChuaXuLy(Id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Detail(int Id)
+        {
+            return View(IDonHang.GetDonhang(Id));
         }
     }
 }

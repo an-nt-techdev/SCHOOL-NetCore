@@ -24,7 +24,7 @@
                                             Trạng Thái
                                         </th>
                                         <th>
-                                            Ngày
+                                            Thời Gian Đặt
                                         </th>
                                         <th></th>
                                     </tr>
@@ -36,16 +36,29 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.EmailKhachHang)
                                         </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TrangThai)
-                                        </td>
+                                        @if (item.TrangThai == 0)
+                                        {
+                                            <td>Chưa Xử Lý</td>
+                                        }
+                                        else if (item.TrangThai == 1)
+                                        {
+                                            <td>Đang Giao</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Đã Hoàn Thành</td>
+                                        }
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Ngay)
                                         </td>
                                         <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                            <a asp-action="ChuaXuLy" asp-route-id="@item.Id">Chưa Xử Lý</a> |
+                                            <a asp-action="GiaoHang" asp-route-id="@item.Id" title="Giao Hàng">Giao Hàng <span class="fa fa-shopping-cart"></span></a>  |
+                                            
+                                            <a asp-action="HoanThanh" asp-route-id="@item.Id" title="Hoàn Thành">Hoàn Thành <span class="fa fa-check-square-o"></span></a>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-black"><a asp-action="Details" asp-route-id="@item.Id">Xem <span class="fa fa-eye"></span></a></button>
                                         </td>
                                     </tr>
                                     }
