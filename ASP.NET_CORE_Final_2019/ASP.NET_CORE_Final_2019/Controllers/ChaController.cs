@@ -24,10 +24,42 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             Random rand = new Random();
             int sess = rand.Next(1, 9) * 100000 + rand.Next(0, 9) * 10000 + rand.Next(0, 9) * 1000 + rand.Next(0, 9) * 100 + rand.Next(0, 9) * 10 + rand.Next(0, 9);
             HttpContext.Session.SetInt32("Id", sess);
+            
+            // ADD DON HANG
             Donhang dh = new Donhang();
             dh.Id = HttpContext.Session.GetInt32("Id");
-            //_Donhang.addDonHang(dh);
+            DateTime now = DateTime.Now;
+            dh.Ngay = now;
+            dh.TrangThai = 0;
+            dh.EmailKhachHang = "not";
+            _Donhang.addDonHang(dh);
+
+            // ADD CHI TIET DON HANG
+            Chitietdonhang ctdh = new Chitietdonhang();
+            IEnumerable<Sanpham> list = _Sanpham.GetSanPhams;
+            foreach (Sanpham l in list)
+            {
+                ctdh.Id = HttpContext.Session.GetInt32("Id");
+                ctdh.IdSanPham = l.Id;
+                ctdh.SoLuong = 0;
+                ctdh.Gia = 0;
+                _Donhang.addChiTietDonHang(ctdh);
+            }
+
+            getSession();
             return View();
+        }
+
+        public void getSession()
+        {
+            IEnumerable<Chitietdonhang> list = _Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id"));
+            int cnt = 0;
+            foreach (Chitietdonhang l in list)
+            {
+                if (l.SoLuong > 0) cnt++;
+            }
+            ViewData["Count"] = cnt;
+            ViewData["Session"] = HttpContext.Session.GetInt32("Id");
         }
     }
 }
