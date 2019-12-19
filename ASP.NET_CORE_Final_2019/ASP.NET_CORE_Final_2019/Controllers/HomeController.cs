@@ -24,9 +24,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [Route("Home")]
         public IActionResult Index()
         {
-            DateTime now = DateTime.Now;
-            ViewBag.date = now;
-            ViewBag.MySession = HttpContext.Session.GetInt32("Id");
+            getSession();
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();
             ViewBag.ListSanPhamBanChayNhat = _Sanpham.GetSanPhamBanChayNhat();

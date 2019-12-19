@@ -55,7 +55,7 @@ primary key(Ngay,IdSanPham)
 --DonHang
 create table DONHANG
 (
-Id int Identity(1,1) primary key,
+Id int primary key,
 EmailKhachHang nvarchar(200),
 TrangThai int,
 Ngay DateTime

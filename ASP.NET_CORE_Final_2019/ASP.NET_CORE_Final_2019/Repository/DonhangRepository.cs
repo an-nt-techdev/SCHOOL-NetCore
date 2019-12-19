@@ -47,7 +47,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
 
 
         // Get Many
-        public IEnumerable<Chitietdonhang> getChiTietDonHang(int Id)
+        public IEnumerable<Chitietdonhang> getChiTietDonHang(int? Id)
         {
             yield return db.Chitietdonhang.Find(Id);
             //throw new NotImplementedException();

@@ -13,7 +13,7 @@ namespace ASP.NET_CORE_Final_2019.Services
         Chitietdonhang getChiTietDonHang(int Id, int IdSanPham);
 
         // Get List
-        IEnumerable<Chitietdonhang> getChiTietDonHang(int Id);
+        IEnumerable<Chitietdonhang> getChiTietDonHang(int? Id);
 
         // Add One
         void addDonHang(Donhang _DonHang);

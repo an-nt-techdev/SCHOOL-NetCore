@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
 {
-    public class CartController : Controller
+    public class CartController : ChaController
     {
         public readonly IFSanpham _Sanpham;
         public readonly IFDonHang _Donhang;
 
-        public CartController(IFSanpham _IFSanpham, IFDonHang _IFDonhang)
+        public CartController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
         {
             _Sanpham = _IFSanpham;
             _Donhang = _IFDonhang;
@@ -24,19 +24,21 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [Route("Cart")]
         public IActionResult Index()
         {
+            getSession();
             return View();
         }
 
         [Route("Cart/Create")]
         public void Create()
         {
-            
+            getSession();
         }
 
         [Route("Cart/Update")]
-        public IActionResult Update()
+        public void Update()
         {
-            return View();
+            getSession();
+            
         }
 
         [Route("Cart/Remove")]

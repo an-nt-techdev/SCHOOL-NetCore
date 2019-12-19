@@ -23,6 +23,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [Route("Shop/{Page=1}")]
         public IActionResult Index(int Page)
         {
+            getSession();
             ViewBag.MySession = HttpContext.Session.GetInt32("Id");
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             ViewBag.ListLoaiSanPham = _Sanpham.GetLoaiSanPhams;
@@ -41,6 +42,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [Route("Shop/Cate/{Id=1}/{Page=1}")]
         public IActionResult Index(int Id, int Page)
         {
+            getSession();
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             ViewBag.ListLoaiSanPham = _Sanpham.GetLoaiSanPhams;
             ViewBag.Cate = true;
@@ -59,6 +61,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [Route("Shop/Product/{Id=1}")]
         public IActionResult SingleProduct(int Id)
         {
+            getSession();
             ViewBag.SanPham = _Sanpham.GetSanPham(Id);
             ViewBag.ChiTietSanPham = _Sanpham.GetChiTietSanPham(Id);
             ViewBag.Loai = _Sanpham.GetLoaiSanPham(Id);
