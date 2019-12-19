@@ -39,6 +39,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             IEnumerable<Sanpham> list = _Sanpham.GetSanPhams;
             foreach (Sanpham l in list)
             {
+                ctdh = new Chitietdonhang();
                 ctdh.Id = HttpContext.Session.GetInt32("Id");
                 ctdh.IdSanPham = l.Id;
                 ctdh.SoLuong = 0;
