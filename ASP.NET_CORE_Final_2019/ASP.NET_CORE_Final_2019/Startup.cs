@@ -38,16 +38,22 @@ namespace ASP.NET_CORE_Final_2019
             });
 
             services.AddDbContext<VEGEFOOD_DBContext>(option =>
-option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connection=True;"));
+option.UseSqlServer("Server=(localdb)\\MSSQLLOCALDB;Database=VEGEFOOD_DB;Trusted_Connection=True;"));
             services.AddScoped<DbContext, VEGEFOOD_DBContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IFSanpham, SanphamRepository>();
+            services.AddTransient<IFDonHang, DonhangRepository>();
             services.AddTransient<INhaCungCap, NhaCungCapRepository>();
             services.AddTransient<IKhachHang, KhachHangRepository>();
             services.AddTransient<IDonHang, DonHangRepository>();
             services.AddTransient<ILoaiSanPham, LoaiSanPhamRepository>();
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            services.AddDistributedMemoryCache();           // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
+            services.AddSession(cfg => {                    // Đăng ký dịch vụ Session             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
+                cfg.IdleTimeout = new TimeSpan(0, 180, 0);    // Thời gian tồn tại của Session
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +70,7 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
                 app.UseHsts();
             }
 
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -73,7 +80,7 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
                 routes.MapRoute("areaRoute", "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Cha}/{action=Index}/{id?}");
             });
         }
     }
