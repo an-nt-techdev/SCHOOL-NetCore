@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="GiaKhuyenMai" class="control-label">% Khuyến Mãi</label>
-                                        <input asp-for="GiaKhuyenMai" class="form-control" />
+                                        <input asp-for="GiaKhuyenMai" class="form-control" type="number" min="0" max="100" />
                                         <span asp-validation-for="GiaKhuyenMai" class="text-danger">(* % khuyến mãi  = 100- số nhập vào )</span>
                                     </div>
                                     <div class="form-group">

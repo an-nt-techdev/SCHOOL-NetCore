@@ -57,17 +57,16 @@ create table DONHANG
 (
 Id int Identity(1,1) primary key,
 EmailKhachHang nvarchar(200),
-Ngay date,
-TrangThai int
+TrangThai int,
+Ngay DateTime
 )
 --Chi Tiet Don Hang
 create table CHITIETDONHANG
 (
-Id int Identity(1,1),
+Id int primary key,
 IdSanPham int,
 SoLuong int,
-Gia float,
-primary key(Id, IdSanPham)
+Gia float
 )
 -- --Insert Loai San Pham
 -- insert into LOAISANPHAM(Ten) values

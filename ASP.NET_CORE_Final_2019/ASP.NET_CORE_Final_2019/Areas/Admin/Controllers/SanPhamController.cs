@@ -58,7 +58,8 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Detail(Chitietsanpham _ChiTietSanPham)
         {
-            return View();
+            IFSanpham.updateChiTietSanPham(_ChiTietSanPham);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -78,9 +79,18 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
             IFSanpham.updateSanPham(_SanPham);
             return RedirectToAction("Index");
         }
-        public IActionResult Detail(int? Id)
+
+        [HttpGet]
+        public IActionResult Delete(int Id)
         {
-            return View();
+            return View(IFSanpham.GetSanPham(Id));
+        }
+
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeleteConfirm(int Id)
+        {
+            IFSanpham.removeSanPham(Id);
+            return RedirectToAction("Index");
         }
     }
 }
