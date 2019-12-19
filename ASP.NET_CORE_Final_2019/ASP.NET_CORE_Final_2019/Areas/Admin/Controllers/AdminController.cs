@@ -22,7 +22,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
             if (pass == "admin")
             {
                HttpContext.Session.SetString("Pass", pass);
-                return RedirectToAction("Index", "LoaiSanPham", new { area = "Admin" });
+                return RedirectToAction("Index", "DonHang", new { area = "Admin" });
             }
             return View();
         }
