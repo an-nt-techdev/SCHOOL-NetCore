@@ -20,7 +20,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         {
             getSession();
 
-            ViewBag.ctdh = _Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id"));
+            //ViewBag.ctdh = _Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id"));
 
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();

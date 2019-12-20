@@ -33,7 +33,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
 
 
         // Get One
-        public Chitietdonhang getChiTietDonHang(int Id, int IdSanPham)
+        public Chitietdonhang getChiTietDonHang(int? Id, int? IdSanPham)
         {
             return db.Chitietdonhang.Find(Id, IdSanPham);
             //throw new NotImplementedException();
@@ -50,11 +50,10 @@ namespace ASP.NET_CORE_Final_2019.Repository
         public IEnumerable<Chitietdonhang> getChiTietDonHang(int? Id)
         {
             IEnumerable<Chitietdonhang> ctdh = db.Chitietdonhang;
-            return ctdh;
-            //foreach (Chitietdonhang list in ctdh)
-            //{
-            //    if (list.Id != Id) { yield return list; }
-            //}
+            foreach (Chitietdonhang list in ctdh)
+            {
+                if (list.Id == Id) yield return list;
+            }
             //throw new NotImplementedException();
         }
 
@@ -90,14 +89,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
         // Update One
         public void updateChiTietDonHang(Chitietdonhang _ChiTietDonHang)
         {
-            IEnumerable<Chitietdonhang> ctdh = getChiTietDonHang(_ChiTietDonHang.Id);
-            Chitietdonhang _ctdh = new Chitietdonhang();
-            foreach (Chitietdonhang l in ctdh)
-            {
-                if (l.IdSanPham == _ChiTietDonHang.IdSanPham) { _ctdh = l; }
-            }
-            _ctdh.SoLuong = _ChiTietDonHang.SoLuong;
-            _ctdh.Gia = _ChiTietDonHang.Gia;
+            db.Chitietdonhang.Update(_ChiTietDonHang);
             db.SaveChanges();
             //throw new NotImplementedException();
         }

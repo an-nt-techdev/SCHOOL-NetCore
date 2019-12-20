@@ -61,18 +61,40 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             ViewBag.ChiTietSanPham = _Sanpham.GetChiTietSanPham(Id);
             ViewBag.Loai = _Sanpham.GetLoaiSanPham(Id);
 
+            ViewBag.ss = HttpContext.Session.GetInt32("Id");
             ViewBag.SanPhamCungLoai = _Sanpham.GetSanPhamsByIdLoaiSanPham(_Sanpham.GetLoaiSanPham(Id).Id);
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             //ViewBag.ListSanPham = _Sanpham.GetSanPhams;
-            return View();
+
+            Chitietdonhang dh = new Chitietdonhang();
+            dh.Id = HttpContext.Session.GetInt32("Id");
+            dh.IdSanPham = Id;
+            dh.SoLuong = 0;
+            dh.Gia = 0;
+
+            return View(dh);
         }
 
         [Route("Shop/Product/{Id=1}")]
         [HttpPost]
         public IActionResult SingleProduct(Chitietdonhang ctdh)
         {
-            getSession();
-            
+            Chitietdonhang _ctdh = _Donhang.getChiTietDonHang(ctdh.Id, ctdh.IdSanPham);
+            Chitietsanpham ctsp = _Sanpham.GetChiTietSanPham(ctdh.IdSanPham);
+            Sanpham sp = _Sanpham.GetSanPham(ctdh.IdSanPham);
+            if (sp.IdLoaiSanPham == 4)
+            {
+                _ctdh.SoLuong = _ctdh.SoLuong + ctdh.SoLuong;
+                _ctdh.Gia = ctsp.Gia * ctsp.GiaKhuyenMai / 100 * _ctdh.SoLuong;
+            }
+            else
+            {
+                _ctdh.SoLuong = _ctdh.SoLuong + ctdh.SoLuong;
+                _ctdh.Gia = ctsp.Gia * (ctsp.GiaKhuyenMai / 100) * (_ctdh.SoLuong / 1000);
+            }
+
+            _Donhang.updateChiTietDonHang(_ctdh);
+            getSession();            
             return RedirectToAction("Index", "Cart", new { area = "" } );
         }
     }
