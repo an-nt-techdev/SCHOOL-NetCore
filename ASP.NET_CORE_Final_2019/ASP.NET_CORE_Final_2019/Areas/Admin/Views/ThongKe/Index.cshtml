@@ -26,7 +26,7 @@
                                     double? Total_Day = 0;
                                     DateTime ShowDate = date;
                                     List<Donhang> res = new List<Donhang>();
-                                   
+
                                     foreach (var donhang in ViewBag.ListDonHang)
                                     {
                                         if (donhang.TrangThai == 2)
@@ -84,23 +84,23 @@
                                                     @string.Format("{0:#,0.####}", sum) VND
                                                 </td>
                                             </tr>
+                                        }
 
-                                        <th>
-                                            Tổng Thu Nhập Trong Ngày : @Total_Day
-                                        </th>
-                                        <th>
-                                            @{
-                                                var listTieuThu = db.Thongkengay.Where(p => p.Ngay == ShowDate).ToList();
-                                                foreach (var testing in listTieuThu)
-                                                {
-                                                    Sanpham a = ViewBag.ListSanPham.Find(testing.IdSanPham);
-                                                    <div style="display:block"> @a.Ten : @testing.SoLuongTieuThu</div>
-                                                }
+                                    <th>
+                                        Tổng Thu Nhập Trong Ngày : @Total_Day
+                                    </th>
+                                    <th>
+                                        @{
+                                            var listTieuThu = db.Thongkengay.Where(p => p.Ngay == ShowDate).ToList();
+                                            foreach (var testing in listTieuThu)
+                                            {
+                                                Sanpham a = ViewBag.ListSanPham.Find(testing.IdSanPham);
+                                                <div style="display:block"> @a.Ten : @testing.SoLuongTieuThu</div>
                                             }
-                                        </th>
-                                    }
-                                        </tbody>
-                                    }
+                                        }
+                                    </th>
+                                    </tbody>
+                                }
 
                             </table>
                         </div>

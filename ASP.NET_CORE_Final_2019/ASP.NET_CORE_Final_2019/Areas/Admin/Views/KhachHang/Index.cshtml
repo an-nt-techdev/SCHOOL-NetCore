@@ -18,6 +18,9 @@
                                 <thead class=" text-primary">
                                     <tr>
                                         <th>
+                                            Email Khách Hàng
+                                        </th>
+                                        <th>
                                             Tên
                                         </th>
                                         <th>
@@ -33,6 +36,9 @@
                                     @foreach (var item in Model)
                                     {
                                     <tr>
+                                        <td>
+                                            @item.Email
+                                        </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Ten)
                                         </td>
