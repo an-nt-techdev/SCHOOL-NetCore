@@ -1,4 +1,4 @@
-﻿@model ASP.NET_CORE_Final_2019.Models.Nhacungcap
+﻿@model ASP.NET_CORE_Final_2019.Models.Khachhang
 
 @{
     ViewData["Title"] = "Edit";
@@ -17,21 +17,21 @@
                             <div class="col-md-4">
                                 <form asp-action="Edit">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <input type="hidden" asp-for="Id" />
+                                    <input type="hidden" asp-for="Email" />
                                     <div class="form-group">
                                         <label asp-for="Ten" class="control-label"></label>
                                         <input asp-for="Ten" class="form-control" />
                                         <span asp-validation-for="Ten" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="Diachi" class="control-label"></label>
-                                        <input asp-for="Diachi" class="form-control" />
-                                        <span asp-validation-for="Diachi" class="text-danger"></span>
+                                        <label asp-for="Sdt" class="control-label"></label>
+                                        <input asp-for="Sdt" class="form-control" />
+                                        <span asp-validation-for="Sdt" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="Sdt" class="control-label"></label>
-                                        <input asp-for="Sdt" class="form-control" type="number"/>
-                                        <span asp-validation-for="Sdt" class="text-danger"></span>
+                                        <label asp-for="DiaChi" class="control-label"></label>
+                                        <input asp-for="DiaChi" class="form-control" />
+                                        <span asp-validation-for="DiaChi" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" value="Save" class="btn btn-primary" />
@@ -49,5 +49,4 @@
         </div>
     </div>
 </div>
-
 

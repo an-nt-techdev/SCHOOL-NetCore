@@ -4,6 +4,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@{ 
+    VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();
+}
 <div class="main-panel">
     <div class="content">
         <div class="row">
@@ -49,13 +52,17 @@
                                             @Html.DisplayFor(modelItem => item.DiaChi)
                                         </td>
                                         <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Email">Edit</a> |
-                                            <a asp-action="Details" asp-route-id="@item.Email">Details</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.Email">Delete</a>
+                                            <a asp-action="Edit" asp-route-Email="@item.Email">Edit</a> 
+                                            @if (db.Donhang.Where(p=>p.EmailKhachHang==item.Email)==null)
+                                            {
+                                           
+                                            <a asp-action="Delete" asp-route-Email="@item.Email">| Delete</a>
+                                            }
+
                                         </td>
                                     </tr>
                                     }
-                                    <tr>
+                                    @*<tr>
                                         <td>
                                             <button>
                                                 <a asp-action="Create">
@@ -63,7 +70,7 @@
                                                 </a>
                                             </button>
                                         </td>
-                                    </tr>
+                                    </tr>*@
                                 </tbody>
                             </table>
                         </div>
