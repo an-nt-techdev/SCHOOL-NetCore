@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@{VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();}
 <div class="main-panel">
     <div class="content">
         <div class="row">
@@ -11,12 +12,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title" style="background-image:url('/images/p9.jpg')">Thống Kê</h4>
-                        @{
-                            foreach (var testing in ViewBag.ListThongKeNgay)
-                            {
-                                <p>@testing.Ngay : @testing.IdSanPham : @testing.SoLuongTieuThu</p>
-                            }
-                        }
+                        @*@foreach (var testingg in ViewBag.ListThongKeNgay)
+                        {
+                        Sanpham a = ViewBag.ListSanPham.Find(testingg.IdSanPham);
+                        <p>@testingg.Ngay : @a.Ten : @testingg.SoLuongTieuThu</p>
+                        }*@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -25,11 +25,11 @@
                                 {
                                     double? Total_Day = 0;
                                     DateTime ShowDate = date;
-
                                     List<Donhang> res = new List<Donhang>();
+                                   
                                     foreach (var donhang in ViewBag.ListDonHang)
                                     {
-                                        if (donhang.TrangThai==2)
+                                        if (donhang.TrangThai == 2)
                                         {
                                             if (donhang.Ngay.ToShortDateString() == ShowDate.ToShortDateString())
                                             {
@@ -60,7 +60,7 @@
                                     <tbody>
                                         @foreach (var item in res)
                                         {
-                                            VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();
+
                                             var list = db.Chitietdonhang.Where(p => p.Id == item.Id).ToList();
                                             double? sum = 0;
                                             foreach (var i in list)
@@ -69,28 +69,38 @@
 
                                             }
                                             Total_Day += sum;
-                                                <tr>
-                                                    <td>
-                                                        @item.Id
-                                                    </td>
-                                                    <td>
-                                                        @item.EmailKhachHang
-                                                    </td>
-                                                    <td>
-                                                        @item.Ngay.ToString("HH:mm:ss")
+                                            <tr>
+                                                <td>
+                                                    @item.Id
+                                                </td>
+                                                <td>
+                                                    @item.EmailKhachHang
+                                                </td>
+                                                <td>
+                                                    @item.Ngay.ToString("HH:mm:ss")
 
-                                                    </td>
-                                                    <td>
-                                                        @string.Format("{0:#,0.####}", sum) VND
-                                                    </td>
-                                                </tr>
-                                            
-                                            <th>
-                                                Tổng Thu Nhập Trong Ngày : @Total_Day
-                                            </th>
-                                        }
-                                    </tbody>
-                                }
+                                                </td>
+                                                <td>
+                                                    @string.Format("{0:#,0.####}", sum) VND
+                                                </td>
+                                            </tr>
+
+                                        <th>
+                                            Tổng Thu Nhập Trong Ngày : @Total_Day
+                                        </th>
+                                        <th>
+                                            @{
+                                                var listTieuThu = db.Thongkengay.Where(p => p.Ngay == ShowDate).ToList();
+                                                foreach (var testing in listTieuThu)
+                                                {
+                                                    Sanpham a = ViewBag.ListSanPham.Find(testing.IdSanPham);
+                                                    <div style="display:block"> @a.Ten : @testing.SoLuongTieuThu</div>
+                                                }
+                                            }
+                                        </th>
+                                    }
+                                        </tbody>
+                                    }
 
                             </table>
                         </div>
