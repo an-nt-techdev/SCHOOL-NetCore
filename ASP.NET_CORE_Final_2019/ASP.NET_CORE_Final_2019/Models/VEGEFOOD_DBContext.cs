@@ -38,6 +38,8 @@ namespace ASP.NET_CORE_Final_2019.Models
 
             modelBuilder.Entity<Chitietdonhang>(entity =>
             {
+                entity.HasKey(e => new { e.Id, e.IdSanPham })
+                   .HasName("PK__CHITIETD__5E3345661AC86B8C");
                 entity.ToTable("CHITIETDONHANG");
             });
 

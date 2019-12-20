@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ASP.NET_CORE_Final_2019.Areas.Services;
+using ASP.NET_CORE_Final_2019.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
@@ -21,9 +22,12 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         [Route("admin/[controller]")]
         public IActionResult Index()
         {
+            VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();
             ViewBag.ListDonHang = IDonHang.GetDonhangs;
             ViewBag.ListDate = IThongKe.GetDates();
-            ViewBag.listChiTietDonHang = IDonHang.GetChitietdonhangs;
+            List<Chitietdonhang> res = db.Chitietdonhang.ToList();
+            ViewBag.ListChiTietDonHang = res;
+            ViewBag.ListThongKeNgay = IThongKe.GetThongkengays;
             return View(IDonHang.GetDonhangs);
         }
     }

@@ -16,6 +16,8 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
             db = _db;
         }
 
+        public IEnumerable<Thongkengay> GetThongkengays => db.Thongkengay;
+
         public IEnumerable<DateTime> GetDates()
         {
             List<DateTime> check = new List<DateTime>();
