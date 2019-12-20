@@ -25,8 +25,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
             VEGEFOOD_DBContext db = new VEGEFOOD_DBContext();
             ViewBag.ListDonHang = IDonHang.GetDonhangs;
             ViewBag.ListDate = IThongKe.GetDates();
-            List<Chitietdonhang> res = db.Chitietdonhang.ToList();
-            ViewBag.ListChiTietDonHang = res;
+            ViewBag.ListChiTietDonHang = IDonHang.GetChitietdonhangs;
             ViewBag.ListThongKeNgay = IThongKe.GetThongkengays;
             return View(IDonHang.GetDonhangs);
         }
