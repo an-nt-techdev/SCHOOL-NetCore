@@ -86,7 +86,7 @@
                             IEnumerable<Donhang> list = db.Donhang;
                             foreach(Donhang item in list)
                             {
-                                if (item.TrangThai == 0)
+                                if (item.TrangThai == 0 && item.EmailKhachHang!="not")
                                 {
                                     num++;
                                 }

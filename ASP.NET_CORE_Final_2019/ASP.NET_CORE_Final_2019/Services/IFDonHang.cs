@@ -27,6 +27,6 @@ namespace ASP.NET_CORE_Final_2019.Services
         // Remove One
         void removeDonHang(int Id);
         void removeChiTietDonHang(int Id);
-        void removeChiTietDonHang(int Id, int IdSanPham);
+        void removeChiTietDonHang(int? Id, int? IdSanPham);
     }
 }

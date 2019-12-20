@@ -53,5 +53,12 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
             ViewBag.DonHang = IDonHang.GetDonhang(Id);
             return View(IDonHang.GetChitietdonhang(Id));
         }
+
+        [HttpGet]
+        public IActionResult Clean()
+        {
+            IDonHang.Clean();
+            return RedirectToAction("Index");
+        }
     }
 }

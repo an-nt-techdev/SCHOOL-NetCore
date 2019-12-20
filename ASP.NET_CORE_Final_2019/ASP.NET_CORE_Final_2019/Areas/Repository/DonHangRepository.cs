@@ -27,6 +27,25 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
             db.SaveChanges();
         }
 
+        public void Clean()
+        {
+            var listDonHang = db.Donhang.ToList();
+            foreach (Donhang item in listDonHang)
+            {
+                if (item.EmailKhachHang == "not")
+                {
+                    var listChiTietDonHang = db.Chitietdonhang.Where(p => p.Id == item.Id).ToList();
+                    foreach(Chitietdonhang rm in listChiTietDonHang)
+                    {
+                        db.Chitietdonhang.Remove(rm);
+                        db.SaveChanges();
+                    }
+                    db.Donhang.Remove(item);
+                    db.SaveChanges();
+                }
+            }
+        }
+
         public IEnumerable<Chitietdonhang> GetChitietdonhang(int Id)
         {
             IEnumerable<Chitietdonhang> list = db.Chitietdonhang;
