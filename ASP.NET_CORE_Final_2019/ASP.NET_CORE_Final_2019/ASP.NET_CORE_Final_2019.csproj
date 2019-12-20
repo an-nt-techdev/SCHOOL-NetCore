@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Cart\checkout.cshtml" />
     <Content Remove="Views\Cart\Index.cshtml" />
   </ItemGroup>
 
@@ -24,6 +25,7 @@
 
 
   <ItemGroup>
+    <None Include="Views\Checkout\Checkout.cshtml" />
     <None Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
 

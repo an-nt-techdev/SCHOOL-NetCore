@@ -1,0 +1,80 @@
+﻿@{
+	ViewData["Title"] = "Checkout";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ASP.NET_CORE_Final_2019.Models.Khachhang
+
+<div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
+	<div class="container">
+		<div class="row no-gutters slider-text align-items-center justify-content-center">
+			<div class="col-md-9 ftco-animate text-center">
+				<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span></p>
+				<h1 class="mb-0 bread">Checkout</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section class="ftco-section">
+	<form asp-action="Checkout" class="billing-form">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-xl-7 ftco-animate">
+
+					<h3 class="mb-4 billing-heading">Thông tin thanh toán</h3>
+					<div class="row align-items-end">
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="firstname">Họ - tên</label>
+								<input asp-for="Ten" type="text" class="form-control" placeholder="">
+							</div>
+						</div>
+						<div class="w-100"></div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="firstname">Địa chỉ</label>
+								<input asp-for="DiaChi" type="text" class="form-control" placeholder="Vui lòng điền đầy đủ số nhà, đường, phường, quận, thành phố">
+							</div>
+						</div>
+						<div class="w-100"></div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="phone">Số điện thoại</label>
+								<input asp-for="Sdt" type="number" class="form-control" placeholder="ví dụ: 0907883642">
+							</div>
+						</div>
+						<div class="w-100"></div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="emailaddress">Địa chỉ Email</label>
+								<input asp-for="Email" type="email" class="form-control" placeholder="Địa chỉ Email này sẽ lưu trữ vào hệ thống để khách hàng có thể tìm kiếm đơn hàng">
+							</div>
+						</div>
+						<div class="w-100"></div>
+
+					</div>
+
+				</div>
+				<div class="col-xl-5">
+					<div class="row mt-5 pt-3">
+						<div class="col-md-12">
+							<div class="cart-detail p-3 p-md-4">
+								<h3 class="billing-heading mb-4">Phương thức thanh toán</h3>
+								<div class="form-group">
+									<div class="col-md-12">
+										<label><input type="radio" name="optradio" class="mr-2" checked required> Thanh toán khi nhận hàng</label>
+									</div>
+								</div>
+								<p><input type="submit" class="btn btn-primary py-3 px-4" value="Xác nhận" /></p>
+							</div>
+						</div>
+					</div>
+				</div> <!-- .col-md-8 -->
+			</div>
+		</div>
+	</form><!-- END -->
+</section> <!-- .section -->
