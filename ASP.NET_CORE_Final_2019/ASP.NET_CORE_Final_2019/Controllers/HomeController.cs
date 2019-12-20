@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using ASP.NET_CORE_Final_2019.Models;
 using ASP.NET_CORE_Final_2019.Services;
 using Microsoft.AspNetCore.Http;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
 {
@@ -16,6 +18,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         {}
 
         [Route("Home")]
+        [HttpGet]
         public IActionResult Index()
         {
             getSession();
@@ -25,12 +28,47 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();
             ViewBag.ListSanPhamBanChayNhat = _Sanpham.GetSanPhamBanChayNhat();
-            return View(_Sanpham.Get8SanPhams());
+            ViewBag.List8SanPham = _Sanpham.Get8SanPhams();
+            return View();
         }
 
-        [Route("Home/Privacy")]
-        public IActionResult Privacy()
+        [Route("Home")]
+        [HttpPost]
+        public IActionResult Index(Contact _Contact)
         {
+            try
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Thiên Ân", "ndsg1964@gmail.com"));
+                message.To.Add(new MailboxAddress("Khoa Bá", "ohwhynotme1999@gmail.com"));
+                message.Subject = "Thông báo từ khách hàng có Email: " + _Contact.Email;
+                message.Body = new TextPart("plain")
+                {
+                    Text = _Contact.ChuDe + " | ĐK nhận Email: " + _Contact.Email + " | Nội dung: " + _Contact.NoiDung
+                };
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("ndsg1964@gmail.com", "Thienanbao0399");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.Clear();
+                ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
+            }
+
+            getSession();
+
+            //ViewBag.ctdh = _Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id"));
+
+            ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
+            ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();
+            ViewBag.ListSanPhamBanChayNhat = _Sanpham.GetSanPhamBanChayNhat();
+            ViewBag.List8SanPham = _Sanpham.Get8SanPhams();
+
             return View();
         }
 
