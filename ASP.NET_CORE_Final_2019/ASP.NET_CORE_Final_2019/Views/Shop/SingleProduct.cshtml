@@ -43,7 +43,7 @@
                     Sản Phẩm Đạt Chuẩn Chất Lượng. Được Công Nhận Bởi Hội Sao Vàng Thực Phẩm Việt Nam
                 </p>
                 <form asp-action="SingleProduct">
-                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Id" value="@ViewBag.ss"/>
                     <input type="hidden" asp-for="IdSanPham" />
                     <div class="row mt-4">
                         @*<div class="col-md-6">
@@ -162,7 +162,7 @@
                                             <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                                 <span><i class="ion-ios-menu"></i></span>
                                             </a>
-                                            <a href="Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                            <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                                 <span><i class="ion-ios-cart"></i></span>
                                             </a>
                                             @*<a href="" class="heart d-flex justify-content-center align-items-center ">

@@ -35,7 +35,12 @@ namespace ASP.NET_CORE_Final_2019.Repository
         // Get One
         public Chitietdonhang getChiTietDonHang(int? Id, int? IdSanPham)
         {
-            return db.Chitietdonhang.Find(Id, IdSanPham);
+            IEnumerable<Chitietdonhang> ctdh = getChiTietDonHang(Id);
+            foreach (Chitietdonhang list in ctdh)
+            {
+                if (list.IdSanPham == IdSanPham) return list;
+            }
+            return null;
             //throw new NotImplementedException();
         }
         public Donhang getDonHang(int? Id)

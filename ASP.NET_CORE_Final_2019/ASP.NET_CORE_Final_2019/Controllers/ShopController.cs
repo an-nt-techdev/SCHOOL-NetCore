@@ -90,11 +90,11 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             else
             {
                 _ctdh.SoLuong = _ctdh.SoLuong + ctdh.SoLuong;
-                _ctdh.Gia = ctsp.Gia * (ctsp.GiaKhuyenMai / 100) * (_ctdh.SoLuong / 1000);
+                _ctdh.Gia = (ctsp.Gia * ctsp.GiaKhuyenMai / 100 * _ctdh.SoLuong) / 1000;
             }
 
             _Donhang.updateChiTietDonHang(_ctdh);
-            getSession();            
+            //getSession();            
             return RedirectToAction("Index", "Cart", new { area = "" } );
         }
     }
