@@ -24,24 +24,31 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             return View();
         }
 
-        [Route("Contact/Go")]
+        [Route("Contact")]
         [HttpPost]
         public IActionResult Index(Contact _Contact)
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Notification", "ndsg1964@gmail.com"));
-            message.To.Add(new MailboxAddress("Notification", "ohwhynotme1999@gmail.com"));
-            message.Subject = "Thông báo từ khách hàng có Email: " + _Contact.Email;
-            message.Body = new TextPart("plain")
+            try
             {
-                Text = _Contact.ChuDe + " | Tên người gửi: " + _Contact.Ten + " | Nội dung: " + _Contact.NoiDung
-            };
-            using (var client = new SmtpClient())
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Thiên Ân", "ndsg1964@gmail.com"));
+                message.To.Add(new MailboxAddress("Khoa Bá", "ohwhynotme1999@gmail.com"));
+                message.Subject = "Thông báo từ khách hàng có Email: " + _Contact.Email;
+                message.Body = new TextPart("plain")
+                {
+                    Text = _Contact.ChuDe + " | Tên người gửi: " + _Contact.Ten + " | Nội dung: " + _Contact.NoiDung
+                };
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("ndsg1964@gmail.com", "Thienanbao0399");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+            } catch (Exception ex)
             {
-                client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate("ndsg1964@gmail.com", "visualstudio");
-                client.Send(message);
-                client.Disconnect(true);
+                ModelState.Clear();
+                ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
             }
 
             return RedirectToAction("Index", "Home", new { area = ""});
