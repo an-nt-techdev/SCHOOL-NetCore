@@ -11,14 +11,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 {
     public class ShopController : ChaController
     {
-        public readonly IFSanpham _Sanpham;
-        public readonly IFDonHang _Donhang;
-
         public ShopController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
-        {
-            _Sanpham = _IFSanpham;
-            _Donhang = _IFDonhang;
-        }
+        {}
 
         [Route("Shop/{Page=1}")]
         public IActionResult Index(int Page)
@@ -59,6 +53,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         }
 
         [Route("Shop/Product/{Id=1}")]
+        [HttpGet]
         public IActionResult SingleProduct(int Id)
         {
             getSession();
@@ -70,6 +65,15 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             //ViewBag.ListSanPham = _Sanpham.GetSanPhams;
             return View();
+        }
+
+        [Route("Shop/Product/{Id=1}")]
+        [HttpPost]
+        public IActionResult SingleProduct(Chitietdonhang ctdh)
+        {
+            getSession();
+            
+            return RedirectToAction("Index", "Cart", new { area = "" } );
         }
     }
 }

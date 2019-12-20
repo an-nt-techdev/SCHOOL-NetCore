@@ -63,10 +63,11 @@ Ngay DateTime
 --Chi Tiet Don Hang
 create table CHITIETDONHANG
 (
-Id int primary key,
+Id int,
 IdSanPham int,
 SoLuong int,
-Gia float
+Gia float,
+PRIMARY KEY(Id, IdSanPham)
 )
 -- --Insert Loai San Pham
 -- insert into LOAISANPHAM(Ten) values

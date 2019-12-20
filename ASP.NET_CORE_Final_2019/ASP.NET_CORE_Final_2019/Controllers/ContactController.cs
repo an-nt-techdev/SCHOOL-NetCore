@@ -11,14 +11,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 {
     public class ContactController : ChaController
     {
-        public readonly IFSanpham _Sanpham;
-        public readonly IFDonHang _Donhang;
-
         public ContactController(IFSanpham _IFSanpham, IFDonHang _IFDonhang) : base(_IFSanpham, _IFDonhang)
-        {
-            _Sanpham = _IFSanpham;
-            _Donhang = _IFDonhang;
-        }
+        { }
 
         [Route("Contact")]
         public IActionResult Index()
