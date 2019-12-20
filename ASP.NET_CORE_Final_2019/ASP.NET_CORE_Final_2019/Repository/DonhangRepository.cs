@@ -75,10 +75,11 @@ namespace ASP.NET_CORE_Final_2019.Repository
             }
             //throw new NotImplementedException();
         }
-        public void removeChiTietDonHang(int Id, int IdSanPham)
+        public void removeChiTietDonHang(int? Id, int? IdSanPham)
         {
             Chitietdonhang res = getChiTietDonHang(Id, IdSanPham);
-            db.Remove(res);
+            res.SoLuong = 0;
+            res.Gia = 0;
             db.SaveChanges();
             //throw new NotImplementedException();
         }

@@ -19,7 +19,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         public IActionResult Index()
         {
             getSession();
-            return View();
+            ViewBag.SanPham = _Sanpham.GetSanPhams;
+            return View(_Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id")));
         }
 
         [Route("Cart/Update/{Id?}/{IdSanPham?}")]
@@ -47,9 +48,11 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         }
 
         [Route("Cart/Remove")]
-        public IActionResult Remove()
+        [HttpGet]
+        public IActionResult Remove(int? Id)
         {
-            return View();
+            _Donhang.removeChiTietDonHang(HttpContext.Session.GetInt32("Id"), Id);
+            return RedirectToAction("Index");
         }
     }
 }
