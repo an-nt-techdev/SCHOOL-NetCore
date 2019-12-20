@@ -47,6 +47,7 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
             services.AddTransient<IKhachHang, KhachHangRepository>();
             services.AddTransient<IDonHang, DonHangRepository>();
             services.AddTransient<ILoaiSanPham, LoaiSanPhamRepository>();
+            services.AddTransient<IThongKe, ThongKeRepository>();
             services.AddDistributedMemoryCache();           // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
             services.AddSession(cfg => {                    // Đăng ký dịch vụ Session             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
                 cfg.IdleTimeout = new TimeSpan(0, 180, 0);    // Thời gian tồn tại của Session

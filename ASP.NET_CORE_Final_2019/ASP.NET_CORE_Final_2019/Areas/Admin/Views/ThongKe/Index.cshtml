@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ASP.NET_CORE_Final_2019.Models.Donhang>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" style="background-image:url('/images/p9.jpg')">Thống Kê</h4>
+                        @{
+                            foreach (var testing in ViewBag.ListChiTietDonHang)
+                            {
+                                <p>@testing.Id : @testing.IdSanPham</p>
+                            }
+                        }
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                @foreach (var date in ViewBag.ListDate)
+                                {
+                                    DateTime ShowDate = date;
+
+                                    List<Donhang> res = new List<Donhang>();
+                                    foreach (var donhang in ViewBag.ListDonHang)
+                                    {
+                                        if (donhang.Ngay.ToShortDateString() == ShowDate.ToShortDateString())
+                                        {
+                                            res.Add(donhang);
+                                        }
+                                    }
+
+                                    <thead>
+                                    <th style="background-color:lawngreen">@ShowDate.ToShortDateString()</th>
+                                    <tr>
+
+                                        <th>
+                                            Email Khách Hàng
+                                        </th>
+                                        <th>
+                                            Giờ Đặt
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TrangThai)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in res)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.EmailKhachHang
+                                                </td>
+                                                <td>
+                                                    @item.Ngay.ToString("HH:mm:ss")
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.TrangThai)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                }
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

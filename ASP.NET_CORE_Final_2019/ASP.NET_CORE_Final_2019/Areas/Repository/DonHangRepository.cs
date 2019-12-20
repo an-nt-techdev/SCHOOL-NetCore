@@ -18,6 +18,8 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
 
         public IEnumerable<Donhang> GetDonhangs => db.Donhang;
 
+        public IEnumerable<Chitietdonhang> GetChitietdonhangs => db.Chitietdonhang;
+
         public void ChuaXuLy(int Id)
         {
             Donhang res = db.Donhang.Find(Id);

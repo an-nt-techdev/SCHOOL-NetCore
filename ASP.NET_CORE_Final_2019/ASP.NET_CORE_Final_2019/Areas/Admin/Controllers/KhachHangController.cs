@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("admin/[controller]")]
     public class KhachHangController : Controller
     {
         public readonly IKhachHang IKhachHang;
@@ -17,6 +16,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         {
             IKhachHang = _IKhachHang;
         }
+        [Route("admin/[controller]")]
         public IActionResult Index()
         {
             return View(IKhachHang.GetKhachhangs);
