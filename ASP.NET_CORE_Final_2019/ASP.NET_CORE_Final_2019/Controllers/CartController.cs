@@ -40,7 +40,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             else
             {
                 ctdh.SoLuong = ctdh.SoLuong + 100;
-                ctdh.Gia = (ctsp.Gia * ctsp.GiaKhuyenMai / 100 * ctdh.SoLuong) / 1000;
+                ctdh.Gia = (ctsp.Gia * ctsp.GiaKhuyenMai / 100) * ctdh.SoLuong / 1000;
             }
             
             _Donhang.updateChiTietDonHang(ctdh);

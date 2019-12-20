@@ -27,7 +27,7 @@
 									<th>&nbsp;</th>
 									<th>&nbsp;</th>
 									<th>Tên sản phẩm</th>
-									<th>Giá bán</th>
+									<th>Giá bán(1kg hoặc 1 ly)</th>
 									<th>Số lượng (gram/ly)</th>
 									<th>Tổng cộng</th>
 								</tr>
@@ -37,7 +37,7 @@
                                 {
                                     if (item.SoLuong!=0)
                                     {
-                                        total = total + item.Gia * item.SoLuong;
+                                        total = total + item.Gia;
                                         Sanpham ti = ViewBag.SanPham.Find(item.IdSanPham);
                                         Chitietsanpham tu = ViewBag.ChiTietSanPham.Find(item.IdSanPham);
                                 <tr class="text-center">

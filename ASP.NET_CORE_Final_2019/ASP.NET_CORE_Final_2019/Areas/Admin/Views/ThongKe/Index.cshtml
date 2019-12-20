@@ -65,7 +65,7 @@
                                             double? sum = 0;
                                             foreach (var i in list)
                                             {
-                                                sum = sum + (i.SoLuong * i.Gia);
+                                                sum = sum + i.Gia;
 
                                             }
                                             Total_Day += sum;
@@ -95,7 +95,15 @@
                                             foreach (var testing in listTieuThu)
                                             {
                                                 Sanpham a = ViewBag.ListSanPham.Find(testing.IdSanPham);
-                                                <div style="display:block"> @a.Ten : @testing.SoLuongTieuThu</div>
+                                                if (a.IdLoaiSanPham == 4)
+                                                {
+                                                    <div style="display:block"> @a.Ten : @testing.SoLuongTieuThu Ly</div>
+                                                }
+                                                else
+                                                {
+                                                    <div style="display:block"> @a.Ten : @testing.SoLuongTieuThu gam</div>
+                                                }
+
                                             }
                                         }
                                     </th>
