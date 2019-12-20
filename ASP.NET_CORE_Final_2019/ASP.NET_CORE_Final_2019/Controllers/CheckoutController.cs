@@ -6,6 +6,7 @@ using ASP.NET_CORE_Final_2019.Services;
 using ASP.NET_CORE_Final_2019.Models;
 using Microsoft.AspNetCore.Mvc;
 using ASP.NET_CORE_Final_2019.Areas.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
 {
@@ -29,7 +30,11 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [HttpPost]
         public IActionResult Checkout(Khachhang _kh)
         {
-            _KhachHang.AddKhachHang(_kh);
+            if (_KhachHang.GetKhachHang(_kh.Email) != null)
+            {
+                _KhachHang.UpdateKhachHang(_kh);
+            }
+            _KhachHang.AddKhachHang(_kh, HttpContext.Session.GetInt32("Id"));
             return RedirectToAction("Index", "Home", new { area = ""});
         }
     }

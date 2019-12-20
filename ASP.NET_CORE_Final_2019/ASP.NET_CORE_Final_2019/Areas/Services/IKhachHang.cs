@@ -18,7 +18,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Services
 
 
         // Add One
-        void AddKhachHang(Khachhang KhachHang);
+        void AddKhachHang(Khachhang KhachHang ,int? Id);
 
 
         // Update One

@@ -37,27 +37,28 @@
                                 {
                                     if (item.SoLuong!=0)
                                     {
-                                        total = total + item.Gia;
+                                        total = total + item.Gia * item.SoLuong;
                                         Sanpham ti = ViewBag.SanPham.Find(item.IdSanPham);
-                                         <tr class="text-center">
-									<td class="product-remove"><a asp-controller="Cart" asp-action="Remove" asp-route-Id="@item.IdSanPham"><span class="ion-ios-close"></span></a></td>
+                                        Chitietsanpham tu = ViewBag.ChiTietSanPham.Find(item.IdSanPham);
+                                <tr class="text-center">
+                                    <td class="product-remove"><a asp-controller="Cart" asp-action="Remove" asp-route-Id="@item.IdSanPham"><span class="ion-ios-close"></span></a></td>
 
-									<td class="image-prod"><div class="img" style="background-image:url('@ti.HinhAnh');"></div></td>
+                                    <td class="image-prod"><div class="img" style="background-image:url('@ti.HinhAnh');"></div></td>
 
-									<td class="product-name">
-										<h3>@ti.Ten</h3>
-									</td>
+                                    <td class="product-name">
+                                        <h3>@ti.Ten</h3>
+                                    </td>
 
-									<td class="price"> @string.Format("{0:#,0.####}", item.Gia) VND</td>
+                                    <td class="price"> @string.Format("{0:#,0.####}", (tu.Gia*tu.GiaKhuyenMai)/100) VND</td>
 
-									<td class="quantity">
-										<div class="input-group mb-3">
-											<input type="text" name="quantity" class="quantity form-control input-number" value="@item.SoLuong" disabled min="1" max="100">
-										</div>
-									</td>
+                                    <td class="quantity">
+                                        <div class="input-group mb-3">
+                                            <input type="text" name="quantity" class="quantity form-control input-number" value="@item.SoLuong" disabled min="1" max="100">
+                                        </div>
+                                    </td>
 
-									<td class="total"> @string.Format("{0:#,0.####}", item.Gia) VND</td>
-								</tr>
+                                    <td class="total"> @string.Format("{0:#,0.####}", item.Gia) VND</td>
+                                </tr>
                                     }
                                    
                                 }

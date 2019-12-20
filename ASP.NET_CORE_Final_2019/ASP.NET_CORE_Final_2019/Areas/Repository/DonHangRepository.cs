@@ -70,9 +70,36 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
 
         public void HoanThanh(int Id)
         {
-            Donhang res = db.Donhang.Find(Id);
-            res.TrangThai = 2;
+            Donhang e = db.Donhang.Find(Id);
+            e.TrangThai = 2;
             db.SaveChanges();
+            //update số lượng tiêu thụ chi tiết sản phẩm
+           var ChiTietDonHang = db.Chitietdonhang.Where(p => p.Id == e.Id).ToList();
+            foreach (Chitietdonhang item in ChiTietDonHang)
+            {
+                if (item.SoLuong != 0)
+                {
+                    Chitietsanpham up = db.Chitietsanpham.Where(p => p.IdSanPham == item.IdSanPham).FirstOrDefault();
+                    up.SoLuongTieuThu = up.SoLuongTieuThu + item.SoLuong;
+                    db.SaveChanges();
+                    //check bảng thống kê
+                    if (db.Thongkengay.Find(e.Ngay, item.IdSanPham) != null) // update
+                    {
+                        Thongkengay res = db.Thongkengay.Find(e.Ngay, item.IdSanPham);
+                        res.SoLuongTieuThu = res.SoLuongTieuThu + item.SoLuong;
+                        db.SaveChanges();
+                    }
+                    else // insert
+                    {
+                        Thongkengay res = new Thongkengay();
+                        res.Ngay = e.Ngay;
+                        res.IdSanPham = item.IdSanPham;
+                        res.SoLuongTieuThu = item.SoLuong;
+                        db.Thongkengay.Add(res);
+                        db.SaveChanges();
+                    }
+                }
+            }
         }
     }
 }
