@@ -34,7 +34,7 @@
                                     @foreach (var item in Model)
                                     {
                                         Sanpham ti = ViewBag.SanPham.Find(item.IdSanPham);
-                                        sum = sum + item.Gia * item.SoLuong;
+                                        sum = sum + item.Gia;
                                         <tr>
                                             <td>
                                                 @ti.Ten
