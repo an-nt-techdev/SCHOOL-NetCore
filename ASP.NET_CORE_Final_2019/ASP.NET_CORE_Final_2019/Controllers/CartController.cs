@@ -25,7 +25,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [Route("Cart/Update/{Id?}/{IdSanPham?}")]
         public IActionResult Update(int Id, int IdSanPham)
         {
-            Chitietdonhang ctdh = new Chitietdonhang();
+            Chitietdonhang ctdh = _Donhang.getChiTietDonHang(Id, IdSanPham);
             Chitietsanpham ctsp = _Sanpham.GetChiTietSanPham(IdSanPham);
             Sanpham sp = _Sanpham.GetSanPham(IdSanPham);
             ctdh.Id = Id;

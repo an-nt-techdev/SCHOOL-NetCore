@@ -18,8 +18,8 @@ namespace ASP.NET_CORE_Final_2019.Services
         IEnumerable<Chitietsanpham> GetChiTietSanPhams { get; }
 
         // Get One
-        Sanpham GetSanPham(int Id);
-        Chitietsanpham GetChiTietSanPham(int Id);
+        Sanpham GetSanPham(int? Id);
+        Chitietsanpham GetChiTietSanPham(int? Id);
         Loaisanpham GetLoaiSanPham(int Id);
         
         // Add One

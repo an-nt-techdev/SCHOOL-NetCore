@@ -45,7 +45,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
 
 
             // Sản phẩm
-        public Sanpham GetSanPham(int Id)
+        public Sanpham GetSanPham(int? Id)
         {
             Sanpham res = db.Sanpham.Find(Id);
             return res;
@@ -142,7 +142,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
 
 
             // Chi tiết sản phẩm
-        public Chitietsanpham GetChiTietSanPham(int Id)
+        public Chitietsanpham GetChiTietSanPham(int? Id)
         {
             Chitietsanpham res = db.Chitietsanpham.Find(Id);
             return res;

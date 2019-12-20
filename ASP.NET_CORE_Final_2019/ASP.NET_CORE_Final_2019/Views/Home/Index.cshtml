@@ -1,11 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@foreach (Chitietdonhang ctdh in ViewBag.ctdh)
-{
-    <p>@ctdh.Id</p><p>@ctdh.IdSanPham</p><p>@ctdh.Gia</p><p>@ctdh.SoLuong</p>
-
-}
 <section id="home-section" class="hero">
     <div class="home-slider owl-carousel">
         <div class="slider-item" style="background-image: url('/images/bg_1.jpg');">
