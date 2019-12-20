@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@model ASP.NET_CORE_Final_2019.Models.Contact
+
 <div class="hero-wrap hero-bread" style="background-image:url('/images/bg_1.jpg')">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -42,18 +44,18 @@
         </div>
         <div class="row block-9">
             <div class="col-md-6 order-md-last d-flex">
-                <form action="" class="bg-white p-5 contact-form">
+                <form asp-action="Go" class="bg-white p-5 contact-form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Tên của bạn">
+                        <input type="text" class="form-control" asp-for="Ten" placeholder="Tên của bạn">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Email của bạn">
+                        <input type="email" class="form-control" asp-for="Email" placeholder="Email của bạn">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Chủ đề">
+                        <input type="text" class="form-control" asp-for="ChuDe" placeholder="Chủ đề">
                     </div>
                     <div class="form-group">
-                        <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Nội dung"></textarea>
+                        <textarea name="" id="" cols="30" rows="7" asp-for="NoiDung" class="form-control" placeholder="Nội dung"></textarea>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
