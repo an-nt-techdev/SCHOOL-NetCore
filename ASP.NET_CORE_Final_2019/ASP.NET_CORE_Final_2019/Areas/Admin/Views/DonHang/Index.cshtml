@@ -32,7 +32,7 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        if (item.EmailKhachHang != "not")
+                                        if (item.EmailKhachHang != "not" && item.TrangThai!=2)
                                         {
                                             <tr>
                                                 <td>
@@ -45,10 +45,6 @@
                                                 else if (item.TrangThai == 1)
                                                 {
                                                     <td>Đang Giao</td>
-                                                }
-                                                else
-                                                {
-                                                    <td>Đã Hoàn Thành</td>
                                                 }
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Ngay)

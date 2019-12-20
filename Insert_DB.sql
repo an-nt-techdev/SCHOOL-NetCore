@@ -102,9 +102,9 @@ Insert into KHACHHANG values
 (N'tranbakhoa@gmail.com',N'Trần Bá Khoa','098671201',N'119Ca2 Thạnh Lộc'),
 (N'nguyenphuocnha@gmail.com',N'Nguyễn Phước Nhã','09172912',N'109 Bùi Tuấn Dũng')
 insert into DONHANG values
-(1,N'nguyenthienan@gmail.com',0,'2019-11-20'),
-(2,N'nguyenphuocnha@gmail.com',0,'2019-11-21'),
-(3,N'tranbakhoa@gmail.com',0,'2019-11-21'),
+(1,N'nguyenthienan@gmail.com',0,'2019-12-20'),
+(2,N'nguyenphuocnha@gmail.com',0,'2019-12-20'),
+(3,N'tranbakhoa@gmail.com',0,'2019-11-19'),
 (4,N'vuongduytai@gmail.com',0,'2019-11-19')
 
 insert into CHITIETDONHANG values (3,1,5,14000),(3,2,7,15000),(4,2,3,5000)
