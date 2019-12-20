@@ -12,19 +12,16 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 {
     public class HomeController : ChaController
     {
-        public readonly IFSanpham _Sanpham;
-        public readonly IFDonHang _Donhang;
-
         public HomeController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
-        {
-            _Sanpham = _IFSanpham;
-            _Donhang = _IFDonhang;
-        }
+        {}
 
         [Route("Home")]
         public IActionResult Index()
         {
             getSession();
+
+            ViewBag.ctdh = _Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id"));
+
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();
             ViewBag.ListSanPhamBanChayNhat = _Sanpham.GetSanPhamBanChayNhat();

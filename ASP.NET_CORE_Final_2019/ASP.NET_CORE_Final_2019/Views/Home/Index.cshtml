@@ -1,6 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@foreach (Chitietdonhang ctdh in ViewBag.ctdh)
+{
+    <p>@ctdh.Id</p><p>@ctdh.IdSanPham</p><p>@ctdh.Gia</p><p>@ctdh.SoLuong</p>
+
+}
 <section id="home-section" class="hero">
     <div class="home-slider owl-carousel">
         <div class="slider-item" style="background-image: url('/images/bg_1.jpg');">
@@ -177,7 +182,7 @@
                                         <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i class="ion-ios-menu"></i></span>
                                         </a>
-                                        <a href="" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <a href="Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i class="ion-ios-cart"></i></span>
                                         </a>
                                         @*<a href="" class="heart d-flex justify-content-center align-items-center ">
@@ -240,7 +245,7 @@
                                         <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i class="ion-ios-menu"></i></span>
                                         </a>
-                                        <a href="" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <a href="Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i class="ion-ios-cart"></i></span>
                                         </a>
                                         @*<a href="" class="heart d-flex justify-content-center align-items-center ">
@@ -303,7 +308,7 @@
                                         <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i class="ion-ios-menu"></i></span>
                                         </a>
-                                        <a href="" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <a href="Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i class="ion-ios-cart"></i></span>
                                         </a>
                                         @*<a href="" class="heart d-flex justify-content-center align-items-center ">
@@ -388,7 +393,7 @@
                                     <i class="icon-quote-left"></i>
                                 </span>
                             </div>
-                            <div class="text text-center"> 
+                            <div class="text text-center">
                                 <p class="mb-5 pl-4 line" style="text-align: justify; height:212px;">10 điểm cho chất lượng, các loại đậu rất ngon và bổ dưỡng. Nếu các bạn muốn nấu một nồi chè thơm ngon bổ dưỡng thì đừng ngần ngại, hãy đến ngay <b>Khoa Rau Củ</b> để mua những hạt đậu cao cấp nhé!</p>
                                 <p class="name">Nhã Nguyễn</p>
                                 <span class="position">Java Developer</span>

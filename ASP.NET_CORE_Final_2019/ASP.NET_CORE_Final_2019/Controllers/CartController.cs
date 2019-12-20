@@ -12,14 +12,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 {
     public class CartController : ChaController
     {
-        public readonly IFSanpham _Sanpham;
-        public readonly IFDonHang _Donhang;
-
         public CartController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
-        {
-            _Sanpham = _IFSanpham;
-            _Donhang = _IFDonhang;
-        }
+        {}
 
         [Route("Cart")]
         public IActionResult Index()
@@ -28,17 +22,28 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             return View();
         }
 
-        [Route("Cart/Create")]
-        public void Create()
+        [Route("Cart/Update/{Id?}/{IdSanPham?}")]
+        public IActionResult Update(int Id, int IdSanPham)
         {
-            getSession();
-        }
-
-        [Route("Cart/Update")]
-        public void Update()
-        {
-            getSession();
+            Chitietdonhang ctdh = new Chitietdonhang();
+            Chitietsanpham ctsp = _Sanpham.GetChiTietSanPham(IdSanPham);
+            Sanpham sp = _Sanpham.GetSanPham(IdSanPham);
+            ctdh.Id = Id;
+            ctdh.IdSanPham = IdSanPham;
+            if (sp.IdLoaiSanPham == 4)
+            {
+                ctdh.SoLuong = ctdh.SoLuong + 1;
+                ctdh.Gia = ctsp.Gia * ctsp.GiaKhuyenMai / 100 * ctdh.SoLuong;
+            }
+            else
+            {
+                ctdh.SoLuong = ctdh.SoLuong + 100;
+                ctdh.Gia = ctsp.Gia * (ctsp.GiaKhuyenMai / 100) * (ctdh.SoLuong / 1000);
+            }
             
+            _Donhang.updateChiTietDonHang(ctdh);
+            getSession();
+            return RedirectToAction("Index", "Cart", new { area = ""} );
         }
 
         [Route("Cart/Remove")]
