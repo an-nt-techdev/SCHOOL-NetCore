@@ -32,7 +32,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
             IEnumerable<Chitietdonhang> list = db.Chitietdonhang;
             foreach(Chitietdonhang item in list)
             {
-                if (item.Id == Id) yield return item;
+                if (item.Id == Id && item.SoLuong!=0) yield return item;
             }
         }
 
