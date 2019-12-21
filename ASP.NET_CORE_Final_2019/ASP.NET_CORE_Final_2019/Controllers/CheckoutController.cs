@@ -62,7 +62,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
             }
 
-            return RedirectToAction("Index", "Home", new { area = ""});
+            return RedirectToAction("Start", "Cha", new { area = ""});
         }
     }
 }
