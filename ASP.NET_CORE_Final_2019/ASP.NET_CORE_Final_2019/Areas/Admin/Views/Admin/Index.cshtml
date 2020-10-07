@@ -1,5 +1,24 @@
 ﻿@{
     Layout = null;
+
+    var sessionName = new Byte[20];
+    bool nameOK = Context.Session.TryGetValue("Pass", out sessionName);
+    if (nameOK)
+    {
+        string result = System.Text.Encoding.UTF8.GetString(sessionName);
+        if (result != "admin")
+        {
+            Context.Response.Redirect("/Admin");
+        }
+        else
+        {
+            Context.Response.Redirect("/Admin/DonHang");
+        }
+    }
+    else
+    {
+        //Context.Response.Redirect("/Admin");
+    }
 }
 <div class="row">
     <div class="col-md-4">

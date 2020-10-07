@@ -19,6 +19,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Index(String pass)
         {
+
             if (pass == "admin")
             {
                HttpContext.Session.SetString("Pass", pass);
