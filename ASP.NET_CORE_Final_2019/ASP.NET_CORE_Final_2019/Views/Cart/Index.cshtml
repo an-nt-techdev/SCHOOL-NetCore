@@ -4,6 +4,7 @@
 }
 @{ 
     double? total = 0;
+    double? total2 = 0;
 }
 	<div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
 		<div class="container">
@@ -60,7 +61,7 @@
                                     <td class="total"> @string.Format("{0:#,0.####}", item.Gia) VND</td>
                                 </tr>
                                     }
-                                   
+                                   total2 = total / 23000;
                                 }
 								
 							</tbody>
@@ -104,7 +105,7 @@
 						<hr>
 						<p class="d-flex total-price">
 							<span>Total</span>
-							<span> @string.Format("{0:#,0.####}", total) VND</span>
+							<span> @string.Format("{0:#,0.####}", total) VND ~ @(Math.Round((Double)total2,2))$</span>
 						</p>
 					</div>
 					<p><a asp-controller="Checkout" asp-action="Checkout" class="btn btn-primary py-3 px-4">Tiến Hành Thanh Toán</a></p>
