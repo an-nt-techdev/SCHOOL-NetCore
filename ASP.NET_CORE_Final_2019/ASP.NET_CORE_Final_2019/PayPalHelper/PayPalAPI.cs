@@ -8,9 +8,7 @@ using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ASP.NET_CORE_Final_2019.PayPalHelper
 {
@@ -36,7 +34,7 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Fail to login PayPal");
+                Debug.WriteLine("Fail to login PayPal: " +ex);
                 return null;
             }
         }
@@ -51,7 +49,7 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             }
             catch(Exception ex)
             {
-                Debug.WriteLine("Fail to login PayPal");
+                Debug.WriteLine("Fail to login PayPal: "+ ex);
                 return null;
             }
         }
@@ -92,7 +90,7 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             return accessToken;
         }
 
-        private static async Task<PayPalPaymentCreatedResponse> CreatePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken,double total, string currency)
+        private async Task<PayPalPaymentCreatedResponse> CreatePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken,double total, string currency)
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "v1/payments/payment");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.access_token);
@@ -102,8 +100,8 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
                 intent = "sale",
                 redirect_urls = new
                 {
-                    return_url = "http://example.com/your_redirect_url.html",
-                    cancel_url = "http://example.com/your_cancel_url.html"
+                    return_url = configuration["PayPal:returnUrl"],
+                    cancel_url = configuration["PayPal:cancelUrl"]
                 },
                 payer = new { payment_method = "paypal" },
                 transactions = JArray.FromObject(new[]

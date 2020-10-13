@@ -39,8 +39,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             try
             {
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("Thiên Ân", "ndsg1964@gmail.com"));
-                message.To.Add(new MailboxAddress("Khoa Bá", "ohwhynotme1999@gmail.com"));
+                message.From.Add(new MailboxAddress("Bá Khoa", "tbkhoa1999.com"));
+                message.To.Add(new MailboxAddress(_Contact.Ten, _Contact.Email));
                 message.Subject = "Thông báo từ khách hàng có Email: " + _Contact.Email;
                 message.Body = new TextPart("plain")
                 {
@@ -49,7 +49,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 using (var client = new SmtpClient())
                 {
                     client.Connect("smtp.gmail.com", 587, false);
-                    client.Authenticate("ndsg1964@gmail.com", "Thienanbao0399");
+                    client.Authenticate("tbkhoa1999@gmail.com", "Iamonmyway1999@10101999");
                     client.Send(message);
                     client.Disconnect(true);
                 }

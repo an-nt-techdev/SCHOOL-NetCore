@@ -58,7 +58,8 @@ create table DONHANG
 Id int primary key,
 EmailKhachHang nvarchar(200),
 TrangThai int,
-Ngay DateTime
+Ngay DateTime,
+PhuongThucThanhToan nvarchar(200)
 )
 --Chi Tiet Don Hang
 create table CHITIETDONHANG

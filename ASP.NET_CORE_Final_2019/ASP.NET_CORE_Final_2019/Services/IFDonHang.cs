@@ -11,6 +11,7 @@ namespace ASP.NET_CORE_Final_2019.Services
 
         // Get One
         Donhang getDonHang(int? Id);
+        void UpdatePhuongThuc(int? Id, string phuongthuc);
         Chitietdonhang getChiTietDonHang(int? Id, int? IdSanPham);
 
         // Get List

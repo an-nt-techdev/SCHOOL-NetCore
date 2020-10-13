@@ -2,7 +2,7 @@
 	ViewData["Title"] = "Checkout";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model ASP.NET_CORE_Final_2019.Models.Khachhang
+@model ASP.NET_CORE_Final_2019.Models.CheckoutSum
 
 <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
 	<div class="container">
@@ -27,7 +27,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="firstname">Họ - tên</label>
-								<input asp-for="Ten" type="text" class="form-control" placeholder="" required>
+								<input asp-for="khachhang.Ten" type="text" class="form-control" placeholder="" required>
 							</div>
 						</div>
 						<div class="w-100"></div>
@@ -35,7 +35,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="firstname">Địa chỉ</label>
-								<input asp-for="DiaChi" type="text" class="form-control" placeholder="Vui lòng điền đầy đủ số nhà, đường, phường, quận, thành phố" required>
+								<input asp-for="khachhang.DiaChi" type="text" class="form-control" placeholder="Vui lòng điền đầy đủ số nhà, đường, phường, quận, thành phố" required>
 							</div>
 						</div>
 						<div class="w-100"></div>
@@ -43,7 +43,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="phone">Số điện thoại</label>
-								<input asp-for="Sdt" type="number" class="form-control" placeholder="ví dụ: 0907883642" required>
+								<input asp-for="khachhang.Sdt" type="number" class="form-control" placeholder="ví dụ: 0907883642" required>
 							</div>
 						</div>
 						<div class="w-100"></div>
@@ -51,7 +51,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="emailaddress">Địa chỉ Email</label>
-								<input asp-for="Email" type="email" class="form-control" placeholder="Địa chỉ Email này sẽ lưu trữ vào hệ thống để khách hàng có thể tìm kiếm đơn hàng" required>
+								<input asp-for="khachhang.Email" type="email" class="form-control" placeholder="Địa chỉ Email này sẽ lưu trữ vào hệ thống để khách hàng có thể tìm kiếm đơn hàng" required>
 							</div>
 						</div>
 						<div class="w-100"></div>
@@ -66,11 +66,12 @@
 								<h3 class="billing-heading mb-4">Phương thức thanh toán</h3>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label><input type="radio" name="optradio" class="mr-2" checked> Thanh toán khi nhận hàng</label>
+                                        <label><input type="radio" name="PhuongThucThanhToan" value="Thanh toán khi nhận hàng" class="mr-2" checked> Thanh toán khi nhận hàng</label>
                                     </div>
                                     <div class="col-md-12">
-                                        <label><input type="radio" name="optradio" class="mr-2" checked> Paypal</label>
+                                        <label><input type="radio" name="PhuongThucThanhToan" value="PayPal" class="mr-2"> Paypal</label>
                                     </div>
+									<span asp-validation-for="PhuongThucThanhToan" class="text-danger"></span>
                                 </div>
 								<p><input type="submit" class="btn btn-primary py-3 px-4" value="Xác nhận" /></p>
 							</div>

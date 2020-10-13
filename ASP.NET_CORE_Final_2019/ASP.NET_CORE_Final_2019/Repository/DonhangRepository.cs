@@ -106,6 +106,14 @@ namespace ASP.NET_CORE_Final_2019.Repository
             //throw new NotImplementedException();
         }
 
+        public void UpdatePhuongThuc(int? Id, string phuongthuc)
+        {
+            Donhang res = getDonHang(Id);
+            res.PhuongThucThanhToan = phuongthuc;
+            db.Donhang.Update(res);
+            db.SaveChanges();
+        }
+
 
         //        // Loại sản phẩm
         //    public Loaisanpham GetLoaiSanPham(int Id)

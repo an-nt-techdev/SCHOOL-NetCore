@@ -9,5 +9,6 @@ namespace ASP.NET_CORE_Final_2019.Models
         public string EmailKhachHang { get; set; }
         public DateTime Ngay { get; set; }
         public int? TrangThai { get; set; }
+        public string PhuongThucThanhToan { get; set; }
     }
 }
