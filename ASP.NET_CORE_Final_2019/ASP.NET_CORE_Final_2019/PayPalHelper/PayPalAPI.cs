@@ -121,11 +121,6 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             //        }
             //    })
             //});
-            var list = new List<Item>();
-            foreach (var item in itemList.Items)
-            {
-                list.Add(item);
-            }
 
             var payment = new Payment()
             {
@@ -140,7 +135,6 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
                             Currency = currency
                         },
                         ItemList = itemList
-                    
                     }
                 },
                 RedirectUrls = new RedirectUrls()

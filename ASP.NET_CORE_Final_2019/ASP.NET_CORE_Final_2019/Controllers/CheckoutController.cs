@@ -79,6 +79,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             } // end thanh toan khi nhan hang
             else if(sum.PhuongThucThanhToan =="PayPal")
             {
+                Double summ = 0;
                 var PayPalAPI = new PayPalAPI(_configuration);
                 var itemList = new ItemList()
                 {
@@ -93,16 +94,17 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                         Name = sp.Ten,
                         Currency ="USD",
                         Price =  Math.Round(((Decimal)item.Gia/23000),2).ToString(),
-                        Quantity = (item.SoLuong).ToString()
+                        Quantity = item.SoLuong.ToString()
                     });
+                    summ = summ + (Double)Math.Round(((Decimal)item.Gia / 23000), 2);
                 }
                 //foreach(var item in itemList.Items)
                 //{
                 //    Debug.WriteLine(item.Name +" "+ item.Quantity);
                 //}
                 // 
-                string URL = await PayPalAPI.getRedirectURLtoPayPal(total, "USD", itemList);
-
+                string URL = await PayPalAPI.getRedirectURLtoPayPal(summ, "USD", itemList);
+                Debug.WriteLine(summ);
                 return Redirect(URL);
             }
             return RedirectToAction("Start", "Cha", new { area = "" });
