@@ -12,6 +12,7 @@ using MailKit.Net.Smtp;
 using System.Diagnostics;
 using ASP.NET_CORE_Final_2019.PayPalHelper;
 using Microsoft.Extensions.Configuration;
+using PayPal.v1.Payments;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
 {
@@ -19,26 +20,29 @@ namespace ASP.NET_CORE_Final_2019.Controllers
     {
         public readonly IKhachHang _KhachHang;
         public readonly IFDonHang _Donhang;
+        public readonly IDonHang _DonhangAdmin;
         public IConfiguration _configuration { get; }
-        public CheckoutController(IFSanpham _IFSanpham, IFDonHang _IFDonhang, IKhachHang _IKhachHang, IConfiguration _Iconfiguration) : base(_IFSanpham, _IFDonhang)
+        public CheckoutController(IFSanpham _IFSanpham, IFDonHang _IFDonhang, IKhachHang _IKhachHang, IConfiguration _Iconfiguration, IDonHang _IDonhang) : base(_IFSanpham, _IFDonhang)
         {
             _KhachHang = _IKhachHang;
             _Donhang = _IFDonhang;
             _configuration = _Iconfiguration;
+            _DonhangAdmin = _IDonhang;
         }
 
         [Route("Checkout")]
         [HttpGet]
-        public IActionResult Checkout()
+        public IActionResult Checkout(Double total)
         {
             getSession();
+            ViewBag.total = total;
             return View();
         }
 
         [Route("Checkout")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Checkout(CheckoutSum sum)
+        public async Task<IActionResult> Checkout(CheckoutSum sum, Double total)
         {
             if (_KhachHang.GetKhachHang(sum.khachhang.Email) != null)
             {
@@ -76,10 +80,45 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             else if(sum.PhuongThucThanhToan =="PayPal")
             {
                 var PayPalAPI = new PayPalAPI(_configuration);
-                string URL = await PayPalAPI.getRedirectURLtoPayPal(20, "USD");
+                var itemList = new ItemList()
+                {
+                    Items = new List<Item>()
+                };
+                IEnumerable<Chitietdonhang> a = _DonhangAdmin.GetChitietdonhang((int)HttpContext.Session.GetInt32("Id"));
+                foreach(var item in a)
+                {
+                    Sanpham sp = _Sanpham.GetSanPham(item.IdSanPham);
+                    itemList.Items.Add(new Item()
+                    {
+                        Name = sp.Ten,
+                        Currency ="USD",
+                        Price =  Math.Round(((Decimal)item.Gia/23000),2).ToString(),
+                        Quantity = (item.SoLuong).ToString()
+                    });
+                }
+                //foreach(var item in itemList.Items)
+                //{
+                //    Debug.WriteLine(item.Name +" "+ item.Quantity);
+                //}
+                // 
+                string URL = await PayPalAPI.getRedirectURLtoPayPal(total, "USD", itemList);
+
                 return Redirect(URL);
             }
             return RedirectToAction("Start", "Cha", new { area = "" });
+        }
+		[Route("Checkout/Success")]
+        public async Task<IActionResult> Success([FromQuery(Name = "paymentId" )] string paymentId, [FromQuery(Name = "PayerID" )] string payerId )
+        {
+			var PayPalAPI = new PayPalAPI(_configuration);
+            var result = await PayPalAPI.executedPayment(paymentId, payerId);
+			return View();
+		}
+
+        [Route("Checkout/Fail")]
+        public IActionResult Fail()
+        {
+            return View();
         }
     }
 }

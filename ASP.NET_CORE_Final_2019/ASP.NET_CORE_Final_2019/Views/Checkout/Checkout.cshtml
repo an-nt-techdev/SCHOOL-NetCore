@@ -16,7 +16,7 @@
 </div>
 
 <section class="ftco-section">
-	<form asp-action="Checkout" class="billing-form">
+	<form asp-action="Checkout" asp-route-total="@ViewBag.total" class="billing-form">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">

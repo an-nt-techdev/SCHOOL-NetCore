@@ -5,6 +5,7 @@
 @{ 
     double? total = 0;
     double? total2 = 0;
+    double? gia1donvi = 0;
 }
 	<div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
 		<div class="container">
@@ -41,6 +42,8 @@
                                         total = total + item.Gia;
                                         Sanpham ti = ViewBag.SanPham.Find(item.IdSanPham);
                                         Chitietsanpham tu = ViewBag.ChiTietSanPham.Find(item.IdSanPham);
+                                        gia1donvi = item.Gia / item.SoLuong;
+                                        total2 = total2 + (gia1donvi / 23000) * item.SoLuong;
                                 <tr class="text-center">
                                     <td class="product-remove"><a asp-controller="Cart" asp-action="Remove" asp-route-Id="@item.IdSanPham"><span class="ion-ios-close"></span></a></td>
 
@@ -61,7 +64,7 @@
                                     <td class="total"> @string.Format("{0:#,0.####}", item.Gia) VND</td>
                                 </tr>
                                     }
-                                   total2 = total / 23000;
+                                    total2 = (Double?)Math.Round( (Decimal)total2, 2);
                                 }
 								
 							</tbody>
@@ -108,7 +111,7 @@
 							<span> @string.Format("{0:#,0.####}", total) VND ~ @(Math.Round((Double)total2,2))$</span>
 						</p>
 					</div>
-					<p><a asp-controller="Checkout" asp-action="Checkout" class="btn btn-primary py-3 px-4">Tiến Hành Thanh Toán</a></p>
+					<p><a asp-controller="Checkout" asp-action="Checkout" asp-route-total ="@(Math.Round((Double)total2,2))" class="btn btn-primary py-3 px-4">Tiến Hành Thanh Toán</a></p>
 				</div>
 			</div>
 		</div>

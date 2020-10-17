@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PayPal.v1.Payments;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
         public class Transaction
         {
             public Amount amount { get; set; }
+            public string itemList { get; set; }
             public object[] related_resources { get; set; }
         }
 
@@ -31,7 +33,11 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             public string total { get; set; }
             public string currency { get; set; }
         }
-
+        public class ItemListt
+        {
+            public string test1 { get; set; }
+            public string test2 { get; set; }
+        }
         public class Link
         {
             public string href { get; set; }

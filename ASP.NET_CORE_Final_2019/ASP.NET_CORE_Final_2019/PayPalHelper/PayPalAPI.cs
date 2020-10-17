@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Diagnostics;
+using PayPal.v1.Payments;
 
 namespace ASP.NET_CORE_Final_2019.PayPalHelper
 {
@@ -20,7 +21,7 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             configuration = _configuration;
         }
 
-        public async Task<string> getRedirectURLtoPayPal(double total, string currency)
+        public async Task<string> getRedirectURLtoPayPal(double total, string currency, ItemList itemList)
         {
             try
             {
@@ -28,13 +29,13 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
                 {
                     HttpClient http = GetPaypalHttpClient();
                     PayPalAccessToken accessToken = await GetPayPalAccessTokenAsync(http);
-                    PayPalPaymentCreatedResponse createdPayment = await CreatePaypalPaymentAsync(http, accessToken,total,currency);
+                    PayPalPaymentCreatedResponse createdPayment = await CreatePaypalPaymentAsync(http, accessToken,total,currency, itemList);
                     return createdPayment.links.First(x => x.rel == "approval_url").href;
                 }).Result;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Fail to login PayPal: " +ex);
+                Debug.WriteLine("Fail to login PayPal step 1 (get redirect): " +ex.Message );
                 return null;
             }
         }
@@ -49,7 +50,7 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             }
             catch(Exception ex)
             {
-                Debug.WriteLine("Fail to login PayPal: "+ ex);
+                Debug.WriteLine("Fail to login PayPal step 2 (executed): "+ ex.Message);
                 return null;
             }
         }
@@ -90,32 +91,68 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             return accessToken;
         }
 
-        private async Task<PayPalPaymentCreatedResponse> CreatePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken,double total, string currency)
+        private async Task<PayPalPaymentCreatedResponse> CreatePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken,double total, string currency, ItemList itemList)
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "v1/payments/payment");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.access_token);
 
-            var payment = JObject.FromObject(new
+            foreach (var item in itemList.Items)
             {
-                intent = "sale",
-                redirect_urls = new
-                {
-                    return_url = configuration["PayPal:returnUrl"],
-                    cancel_url = configuration["PayPal:cancelUrl"]
-                },
-                payer = new { payment_method = "paypal" },
-                transactions = JArray.FromObject(new[]
-                {
-            new
-            {
-                amount = new
-                {
-                    total = total,
-                    currency = currency
-                }
+                Debug.WriteLine(item.Name + " " + item.Quantity);
             }
-        })
-            });
+            //var payment = JObject.FromObject(new
+            //{
+            //    intent = "sale",
+            //    redirect_urls = new
+            //    {
+            //        return_url = configuration["PayPal:returnUrl"],
+            //        cancel_url = configuration["PayPal:cancelUrl"]
+            //    },
+            //    payer = new { payment_method = "paypal" },
+            //    transactions = JArray.FromObject(new[]
+            //    {
+            //        new
+            //        {
+            //            amount = new Amount()
+            //            {
+            //                Total = total.ToString(),
+            //                Currency = currency
+            //            }
+            //        }
+            //    })
+            //});
+            var list = new List<Item>();
+            foreach (var item in itemList.Items)
+            {
+                list.Add(item);
+            }
+
+            var payment = new Payment()
+            {
+                Intent = "sale",
+                Transactions = new List<Transaction>()
+                {
+                    new Transaction()
+                    {
+                        Amount = new Amount()
+                        {
+                            Total = total.ToString(),
+                            Currency = currency
+                        },
+                        ItemList = itemList
+                    
+                    }
+                },
+                RedirectUrls = new RedirectUrls()
+                {
+                    CancelUrl = configuration["PayPal:cancelUrl"],
+                    ReturnUrl = configuration["PayPal:returnUrl"]
+                },
+                Payer = new Payer()
+                {
+                    PaymentMethod = "paypal"
+                }
+            };
 
             request.Content = new StringContent(JsonConvert.SerializeObject(payment), Encoding.UTF8, "application/json");
 
