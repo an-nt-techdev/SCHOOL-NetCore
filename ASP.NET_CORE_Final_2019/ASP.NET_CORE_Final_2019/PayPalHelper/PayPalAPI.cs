@@ -96,31 +96,10 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "v1/payments/payment");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.access_token);
 
-            foreach (var item in itemList.Items)
-            {
-                Debug.WriteLine(item.Name + " " + item.Quantity);
-            }
-            //var payment = JObject.FromObject(new
+            //foreach (var item in itemList.Items)
             //{
-            //    intent = "sale",
-            //    redirect_urls = new
-            //    {
-            //        return_url = configuration["PayPal:returnUrl"],
-            //        cancel_url = configuration["PayPal:cancelUrl"]
-            //    },
-            //    payer = new { payment_method = "paypal" },
-            //    transactions = JArray.FromObject(new[]
-            //    {
-            //        new
-            //        {
-            //            amount = new Amount()
-            //            {
-            //                Total = total.ToString(),
-            //                Currency = currency
-            //            }
-            //        }
-            //    })
-            //});
+            //    Debug.WriteLine(item.Name + " " + item.Quantity);
+            //}
 
             var payment = new Payment()
             {

@@ -41,10 +41,18 @@
                                     {
                                         total = total + item.Gia;
                                         Sanpham ti = ViewBag.SanPham.Find(item.IdSanPham);
+                                        Decimal soluong = 0;
+                                        if (ti.IdLoaiSanPham == 4)
+                                        {
+                                            soluong = (Decimal)item.SoLuong;
+                                        }
+                                        else
+                                        {
+                                            soluong = (Decimal)item.SoLuong / 100;
+                                        }
                                         Chitietsanpham tu = ViewBag.ChiTietSanPham.Find(item.IdSanPham);
-                                        //gia1donvi = item.Gia / item.SoLuong / 23000;
-                                        //System.Diagnostics.Debug.WriteLine(gia1donvi);
-                                        //total2 = gia1donvi * item.SoLuong;
+                                        gia1donvi = (Double?) Math.Round(((Decimal)item.Gia / 23000 / soluong), 2);
+										total2 = total2 + ( gia1donvi * (Double?)soluong);
                                 <tr class="text-center">
                                     <td class="product-remove"><a asp-controller="Cart" asp-action="Remove" asp-route-Id="@item.IdSanPham"><span class="ion-ios-close"></span></a></td>
 
@@ -65,8 +73,7 @@
                                     <td class="total"> @string.Format("{0:#,0.####}", item.Gia) VND</td>
                                 </tr>
                                     }
-                                    total2 = (Double?)Math.Round((Decimal)total / 23000, 2);
-                                    //total2 = (Double?) Math.Round((Decimal)total/23000, 2, MidpointRounding.AwayFromZero)
+                                    //total2 = (Double?)Math.Round((Decimal)total / 23000, 2);
                                 }
 								
 							</tbody>
@@ -113,7 +120,7 @@
 							<span> @string.Format("{0:#,0.####}", total) VND ~ @total2 $</span>
 						</p>
 					</div>
-					<p><a asp-controller="Checkout" asp-action="Checkout" asp-route-total ="@total2" class="btn btn-primary py-3 px-4">Tiến Hành Thanh Toán</a></p>
+					<p><a asp-controller="Checkout" asp-action="Checkout" class="btn btn-primary py-3 px-4">Tiến Hành Thanh Toán</a></p>
 				</div>
 			</div>
 		</div>
