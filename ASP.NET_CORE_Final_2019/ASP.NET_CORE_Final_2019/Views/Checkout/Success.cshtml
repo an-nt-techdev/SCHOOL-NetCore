@@ -1,16 +1,30 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="/Home">Trang chủ</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Success</title>
-</head>
-<body>
-    <h2>Success</h2>
-</body>
-</html>
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <h2>Thanh Toán Thành Công!</h2>
+                    <form asp-controller="Cha"
+                          asp-action="Start" method="post">
+                          <p class="breadcrumbs"><span class="mr-2"><button type="submit">Tiếp Tục Mua Sắm</button></span></p>
+                    </form>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
