@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Content Remove="Views\Cart\checkout.cshtml" />
-    <Content Remove="Views\Cart\Index.cshtml" />
   </ItemGroup>
 
 
@@ -35,12 +34,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <None Include="Views\Checkout\Checkout.cshtml" />
-    <None Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
 
 </Project>
