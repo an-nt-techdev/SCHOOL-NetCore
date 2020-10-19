@@ -37,9 +37,16 @@ namespace ASP.NET_CORE_Final_2019
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //services.AddDbContext<VEGEFOOD_DBContext>(option =>
+            //    option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connection=True;"));
+            // test
             services.AddDbContext<VEGEFOOD_DBContext>(option =>
-option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connection=True;"));
+                option.UseSqlServer(Configuration.GetConnectionString("VEGEFOOD_DBContext")));
+            //
             services.AddScoped<DbContext, VEGEFOOD_DBContext>();
+            //
+            services.AddSingleton(provider => Configuration);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IFSanpham, SanphamRepository>();
             services.AddTransient<IFDonHang, DonhangRepository>();

@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Configuration;
+using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols;
 
 namespace ASP.NET_CORE_Final_2019.Models
 {
@@ -28,7 +32,12 @@ namespace ASP.NET_CORE_Final_2019.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connection=True;");
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("VEGEFOOD_DBContext"));
+                //optionsBuilder.UseSqlServer("");
             }
         }
 

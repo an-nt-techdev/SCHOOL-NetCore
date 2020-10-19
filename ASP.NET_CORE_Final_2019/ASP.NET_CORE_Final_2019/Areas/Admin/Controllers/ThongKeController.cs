@@ -6,6 +6,7 @@ using ASP.NET_CORE_Final_2019.Areas.Services;
 using ASP.NET_CORE_Final_2019.Models;
 using ASP.NET_CORE_Final_2019.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
 {
@@ -15,11 +16,13 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         public readonly IThongKe IThongKe;
         public readonly IDonHang IDonHang;
         public readonly IFSanpham IFSanPham;
-        public ThongKeController(IThongKe _IThongKe,IDonHang _IDonHang,IFSanpham _IFSanPham)
+        public IConfiguration Configuration;
+        public ThongKeController(IThongKe _IThongKe,IDonHang _IDonHang,IFSanpham _IFSanPham, IConfiguration configuration)
         {
             IThongKe = _IThongKe;
             IDonHang = _IDonHang;
             IFSanPham = _IFSanPham;
+            Configuration = configuration;
         }
 
         [Route("admin/[controller]")]
