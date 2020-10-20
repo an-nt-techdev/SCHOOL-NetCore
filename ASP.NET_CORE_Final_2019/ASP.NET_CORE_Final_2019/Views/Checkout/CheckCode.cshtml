@@ -1,0 +1,25 @@
+﻿
+@{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model CheckoutSum
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Verify Code</title>
+    <form asp-action="VerifyCode" method="post">
+        <input name="code" type="text" />
+        <p>@Model.khachhang.Sdt</p>
+        <input type="hidden" asp-for="khachhang.Sdt" value="@Model.khachhang.Sdt" />
+        <input type="hidden" asp-for="khachhang.Ten" value="@Model.khachhang.Ten" />
+        <input type="hidden" asp-for="khachhang.Email" value="@Model.khachhang.Email" />
+        <input type="hidden" asp-for="khachhang.DiaChi" value="@Model.khachhang.DiaChi" />
+        <span type="hidden" asp-validation-for="PhuongThucThanhToan" value="@Model.PhuongThucThanhToan" />
+        <button type="submit">Xác Nhận</button>
+    </form>
+</head>
+<body>
+</body>
+</html>
