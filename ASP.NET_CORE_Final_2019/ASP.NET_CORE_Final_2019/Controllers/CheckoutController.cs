@@ -13,6 +13,7 @@ using System.Diagnostics;
 using ASP.NET_CORE_Final_2019.PayPalHelper;
 using Microsoft.Extensions.Configuration;
 using PayPal.v1.Payments;
+using System.Net.Http;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
 {
@@ -37,7 +38,41 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             getSession();
             return View();
         }
+        [Route("SendCode")]
+        [HttpPost]
+        public IActionResult SendCode(CheckoutSum sum)
+        {
+            //test send SMS code
+            var AuthyAPIKey = "tgDxCGfgDsoz0zwFf39dWCUkLuvL3Lm1";
 
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("X-Authy-API-Key", AuthyAPIKey);
+
+                var requestContent = new FormUrlEncodedContent(new[] {
+                new KeyValuePair<string, string>("via", "sms"),
+                new KeyValuePair<string, string>("phone_number", sum.khachhang.Sdt.ToString()),
+                new KeyValuePair<string, string>("locale", "vi"),
+                new KeyValuePair<string, string>("code_length", "6"),
+                new KeyValuePair<string, string>("country_code", "84"),
+            });
+
+                HttpResponseMessage response = client.PostAsync(
+                    "https://api.authy.com/protected/json/phones/verification/start",
+                    requestContent).Result;
+
+                HttpContent responseContent = response.Content;
+                Console.WriteLine(responseContent.ReadAsStringAsync().Result);
+            }
+            return View(sum);
+        }
+        [Route("VerifyCode")]
+        [HttpPost]
+        public IActionResult VerifyCode(CheckoutSum sum, String code)
+        {
+            Debug.WriteLine(code + " khoa ne");
+            return null;
+        }
         [Route("Checkout")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -50,7 +85,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             _KhachHang.AddKhachHang(sum.khachhang, HttpContext.Session.GetInt32("Id"));
             _Donhang.UpdatePhuongThuc(HttpContext.Session.GetInt32("Id"), sum.PhuongThucThanhToan);
 
-            if(sum.PhuongThucThanhToan == "Thanh Toán Khi Nhận Hàng") {
+            if (sum.PhuongThucThanhToan == "Thanh Toán Khi Nhận Hàng")
+            {
 
                 try
                 {
@@ -76,7 +112,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                     ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
                 }
             } // end thanh toan khi nhan hang
-            else if(sum.PhuongThucThanhToan =="PayPal")
+            else if (sum.PhuongThucThanhToan == "PayPal")
             {
                 Double summ = 0;
                 var PayPalAPI = new PayPalAPI(_configuration);
@@ -85,12 +121,12 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                     Items = new List<Item>()
                 };
                 IEnumerable<Chitietdonhang> a = _DonhangAdmin.GetChitietdonhang((int)HttpContext.Session.GetInt32("Id"));
-                foreach(var item in a)
+                foreach (var item in a)
                 {
                     Decimal soluong = 0;
                     string des = "";
                     Sanpham sp = _Sanpham.GetSanPham(item.IdSanPham);
-                    if(sp.IdLoaiSanPham == 4)
+                    if (sp.IdLoaiSanPham == 4)
                     {
                         soluong = (Decimal)item.SoLuong;
                         des = "unit: 1 cup";
@@ -103,19 +139,19 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                     itemList.Items.Add(new Item()
                     {
                         Name = sp.Ten,
-                        Currency ="USD",
-                        Price =  Math.Round(((Decimal)item.Gia/23000/soluong),2).ToString(),
+                        Currency = "USD",
+                        Price = Math.Round(((Decimal)item.Gia / 23000 / soluong), 2).ToString(),
                         Quantity = soluong.ToString(),
                         Description = des
                     });
- 
+
                 }
                 foreach (var item in itemList.Items)
                 {
-                    Debug.WriteLine(item.Name + " " + item.Quantity +" " + item.Price); // debug log
-                    summ = summ + Math.Round((double.Parse(item.Price) * double.Parse(item.Quantity)),2);
+                    Debug.WriteLine(item.Name + " " + item.Quantity + " " + item.Price); // debug log
+                    summ = summ + Math.Round((double.Parse(item.Price) * double.Parse(item.Quantity)), 2);
                 }
-                
+
                 Debug.WriteLine(summ); // debug log
                 string URL = await PayPalAPI.getRedirectURLtoPayPal(summ, "USD", itemList);
                 return Redirect(URL);
