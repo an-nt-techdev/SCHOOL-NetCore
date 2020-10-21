@@ -10,5 +10,6 @@ namespace ASP.NET_CORE_Final_2019.Models
         public DateTime Ngay { get; set; }
         public int? TrangThai { get; set; }
         public string PhuongThucThanhToan { get; set; }
+        public string Description { get; set; }
     }
 }

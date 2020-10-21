@@ -1,4 +1,4 @@
-create database VEGEFOOD_DB
+﻿create database VEGEFOOD_DB
 go
 use VEGEFOOD_DB
 go
@@ -59,7 +59,8 @@ Id int primary key,
 EmailKhachHang nvarchar(200),
 TrangThai int,
 Ngay DateTime,
-PhuongThucThanhToan nvarchar(200)
+PhuongThucThanhToan nvarchar(200),
+Description nvarchar(200)
 )
 --Chi Tiet Don Hang
 create table CHITIETDONHANG

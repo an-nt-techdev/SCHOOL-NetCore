@@ -16,7 +16,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
             db = _db;
         }
 
-        public IEnumerable<Donhang> GetDonhangs => db.Donhang;
+        public IEnumerable<Donhang> GetDonhangs => db.Donhang.OrderByDescending(p => p.Ngay);
 
         public IEnumerable<Chitietdonhang> GetChitietdonhangs => db.Chitietdonhang;
 

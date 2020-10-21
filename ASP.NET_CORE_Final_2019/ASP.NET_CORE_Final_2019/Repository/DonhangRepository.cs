@@ -114,6 +114,14 @@ namespace ASP.NET_CORE_Final_2019.Repository
             db.SaveChanges();
         }
 
+        public void UpdateDescription(int? Id, string description)
+        {
+            Donhang res = getDonHang(Id);
+            res.Description = description;
+            db.Donhang.Update(res);
+            db.SaveChanges();
+        }
+
 
         //        // Loại sản phẩm
         //    public Loaisanpham GetLoaiSanPham(int Id)

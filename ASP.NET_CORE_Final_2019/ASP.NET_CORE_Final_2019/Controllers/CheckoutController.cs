@@ -25,13 +25,14 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         //public readonly IFDonHang _Donhang;
         public readonly IDonHang _DonhangAdmin;
         public IConfiguration _configuration { get; }
-        public string AuthyAPIKey = "tgDxCGfgDsoz0zwFf39dWCUkLuvL3Lm1";
+        public readonly string AuthyAPIKey;
         public CheckoutController(IFSanpham _IFSanpham, IFDonHang _IFDonhang, IKhachHang _IKhachHang, IConfiguration _Iconfiguration, IDonHang _IDonhang) : base(_IFSanpham, _IFDonhang)
         {
             _KhachHang = _IKhachHang;
             //_Donhang = _IFDonhang;
             _configuration = _Iconfiguration;
             _DonhangAdmin = _IDonhang;
+            AuthyAPIKey = _configuration["API:AuthyAPIKey"];
         }
 
         [Route("Checkout")]
@@ -43,6 +44,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         }
         [Route("CheckCode")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CheckCode(CheckoutSum sum)
         {
             //test send SMS code
@@ -68,46 +70,6 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             return View(sum);
         }
 
-        //[Route("VerifyCode")]
-        //[HttpPost]
-        //public async Task<IActionResult> VerifyCode(CheckoutSum sum, String code)
-        //{
-
-            //var client = new HttpClient();
-
-            //// Add authentication header
-            //client.DefaultRequestHeaders.Add("X-Authy-API-Key", AuthyAPIKey);
-
-            //// https://api.authy.com/protected/json/phones/verification/check?phone_number=$USER_PHONE&country_code=$USER_COUNTRY&verification_code=$VERIFY_CODE
-            //var api = "https://api.authy.com/protected/json/phones/verification/check?phone_number=" + sum.khachhang.Sdt + "&country_code=84&verification_code=" + code;
-            //HttpResponseMessage response = await client.GetAsync(api);
-
-            //// Get the response content.
-            //HttpContent responseContent = response.Content;
-
-            //// Get the stream of the content.
-            //using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
-            //{
-            //    // Write the output.
-
-            //    var result = await reader.ReadToEndAsync();
-            //    result = @"[" + result + "]";
-            //    Debug.WriteLine(result);
-            //    dynamic blogPosts = JArray.Parse(result);
-
-            //    dynamic blogPost = blogPosts[0];
-            //    string isTrue = blogPost.success;
-            //    if(isTrue == "True")
-            //    {
-            //        TempData["sum"] = JsonConvert.SerializeObject(sum);
-            //        return RedirectToAction("VerifySuccess");
-            //    }
-            //    else
-            //    {
-            //        return null;
-            //    }
-            //}
-        //}
         [Route("VerifyAndCheckout")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyAndCheckout(CheckoutSum sum, String code)
@@ -130,8 +92,9 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 // Write the output.
 
                 var result = await reader.ReadToEndAsync();
+                // parse json string to array
                 result = @"[" + result + "]";
-                Debug.WriteLine(result);
+
                 dynamic blogPosts = JArray.Parse(result);
 
                 dynamic blogPost = blogPosts[0];
@@ -144,6 +107,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                     }
                     _KhachHang.AddKhachHang(sum.khachhang, HttpContext.Session.GetInt32("Id"));
                     _Donhang.UpdatePhuongThuc(HttpContext.Session.GetInt32("Id"), sum.PhuongThucThanhToan);
+                    _Donhang.UpdateDescription(HttpContext.Session.GetInt32("Id"), "Chưa Thanh Toán");
 
                     if (sum.PhuongThucThanhToan == "Thanh Toán Khi Nhận Hàng")
                     {
@@ -165,11 +129,14 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                                 client.Send(message);
                                 client.Disconnect(true);
                             }
+                            return View("../Checkout/Success");
                         }
                         catch (Exception ex)
                         {
                             ModelState.Clear();
                             ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
+                            Debug.WriteLine("Oops! We have a problem here" + ex.Message);
+                            return RedirectToAction("Fail");
                         }
                     } // end thanh toan khi nhan hang
                     else if (sum.PhuongThucThanhToan == "PayPal")
@@ -211,16 +178,17 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                             Debug.WriteLine(item.Name + " " + item.Quantity + " " + item.Price); // debug log
                             summ = summ + Math.Round((double.Parse(item.Price) * double.Parse(item.Quantity)), 2);
                         }
-
-                        Debug.WriteLine(summ); // debug log
                         string URL = await PayPalAPI.getRedirectURLtoPayPal(summ, "USD", itemList);
                         return Redirect(URL);
                     }
-                    return RedirectToAction("Start", "Cha", new { area = "" });
+                    else
+                    {
+                        return RedirectToAction("Fail");
+                    }
                 }
                 else // Code != Code : Success : False
                 {
-                    return RedirectToAction("Start", "Cha", new { area = "" });
+                    return RedirectToAction("Fail");
                 }
             }
             
@@ -230,7 +198,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         {
 			var PayPalAPI = new PayPalAPI(_configuration);
             var result = await PayPalAPI.executedPayment(paymentId, payerId);
-			return View();
+            _Donhang.UpdateDescription(HttpContext.Session.GetInt32("Id"), "Đã Thanh toán");
+            return View();
 		}
 
         [Route("Checkout/Fail")]
