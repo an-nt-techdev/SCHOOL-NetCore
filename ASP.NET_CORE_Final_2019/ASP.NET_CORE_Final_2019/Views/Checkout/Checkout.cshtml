@@ -43,7 +43,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="phone">Số điện thoại</label>
-								<input asp-for="khachhang.Sdt" type="number" class="form-control" placeholder="ví dụ: 0907883642" required>
+								<input asp-for="khachhang.Sdt" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" placeholder="ví dụ: 0907883642" required>
 							</div>
 						</div>
 						<div class="w-100"></div>

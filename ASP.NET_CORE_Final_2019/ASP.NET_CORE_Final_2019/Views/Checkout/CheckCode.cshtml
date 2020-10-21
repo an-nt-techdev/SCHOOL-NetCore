@@ -3,23 +3,39 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model CheckoutSum
-<!DOCTYPE html>
+@{
 
+    string sdt = "";
+    string temp = Model.khachhang.Sdt + "";
+    for(int i =0;i<temp.Length;i++)
+    {
+        if(i>1 && i < temp.Length - 2)
+        {
+            sdt += "*";
+        }
+        else
+        {
+            sdt += temp[i];
+        }
+    }
+
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Verify Code</title>
-    <form asp-action="VerifyCode" method="post">
+</head>
+<body>
+    <h4>Nhập Mã Xác Thực Đã Được Gửi Qua @sdt</h4>
+    <form asp-action="VerifyAndCheckout" method="post">
         <input name="code" type="text" />
-        <p>@Model.khachhang.Sdt</p>
         <input type="hidden" asp-for="khachhang.Sdt" value="@Model.khachhang.Sdt" />
         <input type="hidden" asp-for="khachhang.Ten" value="@Model.khachhang.Ten" />
         <input type="hidden" asp-for="khachhang.Email" value="@Model.khachhang.Email" />
         <input type="hidden" asp-for="khachhang.DiaChi" value="@Model.khachhang.DiaChi" />
         <span type="hidden" asp-validation-for="PhuongThucThanhToan" value="@Model.PhuongThucThanhToan" />
-        <button type="submit">Xác Nhận</button>
+        <button type="submit" class="btn-success">Xác Nhận</button>
     </form>
-</head>
-<body>
 </body>
 </html>

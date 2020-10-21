@@ -7,7 +7,7 @@ namespace ASP.NET_CORE_Final_2019.Models
     {
         public string Email { get; set; }
         public string Ten { get; set; }
-        public int? Sdt { get; set; }
+        public string Sdt { get; set; }
         public string DiaChi { get; set; }
     }
 }

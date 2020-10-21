@@ -79,6 +79,7 @@ namespace ASP.NET_CORE_Final_2019.Models
                 entity.Property(e => e.DiaChi).HasMaxLength(200);
 
                 entity.Property(e => e.Ten).HasMaxLength(50);
+                entity.Property(e => e.Sdt).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Loaisanpham>(entity =>

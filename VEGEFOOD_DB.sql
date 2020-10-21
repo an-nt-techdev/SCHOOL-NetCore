@@ -7,7 +7,7 @@ create table KHACHHANG
 (
 Email nvarchar(200) primary key,
 Ten nvarchar(50),
-Sdt int,
+Sdt varchar(50),
 DiaChi nvarchar(200)
 )
 --LoaiSanPham
