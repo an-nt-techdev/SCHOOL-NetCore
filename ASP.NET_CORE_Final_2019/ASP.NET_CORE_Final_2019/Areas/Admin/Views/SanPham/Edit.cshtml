@@ -41,8 +41,9 @@
                                     <div class="container mt-3">
                                         <label asp-for="HinhAnh" class="control-label"></label>
                                         <div class="custom-file mb-3">
-                                            <input asp-for="HinhAnh" value="@ViewBag.HinhAnh" type ="file" class="custom-file-input" id="customFile">
-                                            <label asp-for="HinhAnh" class="custom-file-label" for="customFile">Choose file</label>
+                                            <input asp-for="HinhAnh" value="@ViewBag.HinhAnh" type="file" class="custom-file-input" id="customFile">
+                                            <label asp-for="HinhAnh" class="custom-file-label" for="customFile">@ViewBag.HinhAnh</label>
+                                            <input name="oldImage" type="hidden" value="@ViewBag.HinhAnh" />
                                             <span asp-validation-for="HinhAnh" class="text-danger"></span>
                                         </div>
                                     </div>

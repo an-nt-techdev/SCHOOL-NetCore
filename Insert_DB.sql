@@ -1,8 +1,8 @@
-﻿INSERT INTO LOAISANPHAM(Ten) VALUES
-(N'Rau củ'),
-(N'Trái cây'),
-(N'Đậu'),
-(N'Nước ép')
+﻿INSERT INTO LOAISANPHAM(Ten,metatitle) VALUES
+(N'Rau củ','rau-cu'),
+(N'Trái cây','trai-cay'),
+(N'Đậu','dau'),
+(N'Nước ép','nuoc-ep')
 
 INSERT INTO NHACUNGCAP(Ten, Diachi, Sdt) VALUES
 (N'Quốc Tuấn Company', N'8 Trần Văn Quang, Phường 10, Tân Bình, TP.HCM', N'0903787904'),

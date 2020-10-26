@@ -5,6 +5,13 @@
     ViewData["Title"] = "SingleProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section metasocials{
+    <meta property="og:url" content="https://localhost:44340/" />
+    <meta property="og:type" content="" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="http://khoaraucu.somee.com/images/" />
+}
 
 <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
     <div class="container">
@@ -43,58 +50,58 @@
                     Sản Phẩm Đạt Chuẩn Chất Lượng. Được Công Nhận Bởi Hội Sao Vàng Thực Phẩm Việt Nam
                 </p>
                 <form asp-action="SingleProduct">
-                    <input type="hidden" asp-for="Id" value="@ViewBag.ss"/>
+                    <input type="hidden" asp-for="Id" value="@ViewBag.ss" />
                     <input type="hidden" asp-for="IdSanPham" />
                     <div class="row mt-4">
                         @*<div class="col-md-6">
-            <div class="form-group d-flex">
-                <div class="select-wrap">
-                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                    <select name="" id="" class="form-control">
-                        <option value="">Small</option>
-                        <option value="">Medium</option>
-                        <option value="">Large</option>
-                        <option value="">Extra Large</option>
-                    </select>
-                </div>
-            </div>
-        </div>*@
+                                <div class="form-group d-flex">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="" id="" class="form-control">
+                                            <option value="">Small</option>
+                                            <option value="">Medium</option>
+                                            <option value="">Large</option>
+                                            <option value="">Extra Large</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>*@
 
                         <div class="w-100"></div>
                         <div class="input-group col-md-6 d-flex mb-3">
                             @if (ViewBag.Loai.Id != 4)
                             {
                                 @*<span class="input-group-btn mr-2">
-                                    <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" onclick="dec()">
-                                        <i class="ion-ios-remove"></i>
-                                    </button>
-                                </span>*@
+                                        <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" onclick="dec()">
+                                            <i class="ion-ios-remove"></i>
+                                        </button>
+                                    </span>*@
                                 <input asp-for="SoLuong" type="number" min="100" max="100000" step="100">
                                 @*<span class="input-group-btn ml-2">
-                                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" onclick="inc()">
-                                        <i class="ion-ios-add"></i>
-                                    </button>
-                                </span>*@
+                                        <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" onclick="inc()">
+                                            <i class="ion-ios-add"></i>
+                                        </button>
+                                    </span>*@
                                 <p style="margin: 7px; margin-left: 15px;">(Đơn vị: gram)</p>
                             }
                             else
                             {
                                 @*<span class="input-group-btn mr-2">
-                                    <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" onclick="decc()">
-                                        <i class="ion-ios-remove"></i>
-                                    </button>
-                                </span>*@
+                                        <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" onclick="decc()">
+                                            <i class="ion-ios-remove"></i>
+                                        </button>
+                                    </span>*@
                                 <input asp-for="SoLuong" type="number" min="1" max="100" step="1">
                                 @*<span class="input-group-btn ml-2">
-                                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" onclick="incc()">
-                                        <i class="ion-ios-add"></i>
-                                    </button>
-                                </span>*@
+                                        <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" onclick="incc()">
+                                            <i class="ion-ios-add"></i>
+                                        </button>
+                                    </span>*@
                                 <p style="margin: 7px; margin-left: 15px;">(Đơn vị: ly)</p>
                             }
                         </div>
                         <div class="w-100"></div>
-                        <input type="hidden" asp-for="Gia" value="0"/>
+                        <input type="hidden" asp-for="Gia" value="0" />
                         <div class="input-group col-md-12 d-flex mb-3">
                             @if (ViewBag.Loai.Id != 4)
                             {

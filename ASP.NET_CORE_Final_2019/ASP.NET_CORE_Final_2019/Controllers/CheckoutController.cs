@@ -74,31 +74,34 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyAndCheckout(CheckoutSum sum, String code)
         {
+            //---------------------- Mở ra khi  Hoàn Tất Hết
             var clientt = new HttpClient();
 
             // Add authentication header
-            clientt.DefaultRequestHeaders.Add("X-Authy-API-Key", AuthyAPIKey);
+            //clientt.DefaultRequestHeaders.Add("X-Authy-API-Key", AuthyAPIKey);
 
-            // https://api.authy.com/protected/json/phones/verification/check?phone_number=$USER_PHONE&country_code=$USER_COUNTRY&verification_code=$VERIFY_CODE
-            var api = "https://api.authy.com/protected/json/phones/verification/check?phone_number=" + sum.khachhang.Sdt + "&country_code=84&verification_code=" + code;
-            HttpResponseMessage response = await clientt.GetAsync(api);
+            //// https://api.authy.com/protected/json/phones/verification/check?phone_number=$USER_PHONE&country_code=$USER_COUNTRY&verification_code=$VERIFY_CODE
+            //var api = "https://api.authy.com/protected/json/phones/verification/check?phone_number=" + sum.khachhang.Sdt + "&country_code=84&verification_code=" + code;
+            //HttpResponseMessage response = await clientt.GetAsync(api);
 
-            // Get the response content.
-            HttpContent responseContent = response.Content;
+            //// Get the response content.
+            //HttpContent responseContent = response.Content;
 
-            // Get the stream of the content.
-            using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
-            {
-                // Write the output.
+            //// Get the stream of the content.
+            //using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
+            //{
+            //    // Write the output.
 
-                var result = await reader.ReadToEndAsync();
-                // parse json string to array
-                result = @"[" + result + "]";
+            //    var result = await reader.ReadToEndAsync();
+            //    // parse json string to array
+            //    result = @"[" + result + "]";
 
-                dynamic blogPosts = JArray.Parse(result);
+            //    dynamic blogPosts = JArray.Parse(result);
 
-                dynamic blogPost = blogPosts[0];
-                string isTrue = blogPost.success;
+            //    dynamic blogPost = blogPosts[0];
+            //    string isTrue = blogPost.success;
+            string isTrue = "True";
+                // -- End Mở ra
                 if (isTrue == "True") // Code = Code : Success : True
                 {
                     if (_KhachHang.GetKhachHang(sum.khachhang.Email) != null)
@@ -190,7 +193,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 {
                     return RedirectToAction("Fail");
                 }
-            }
+            //} mở ra khi xong het
             
         }
 		[Route("Checkout/Success")]

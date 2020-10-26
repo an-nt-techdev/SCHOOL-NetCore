@@ -167,5 +167,23 @@ namespace ASP.NET_CORE_Final_2019.Repository
             db.SaveChanges();
         }
 
+        public void updateMetatitle(int? Id, string metatitle)
+        {
+            Sanpham a = db.Sanpham.Find(Id);
+            a.metatitle = metatitle;
+            db.SaveChanges();
+        }
+
+        public Sanpham GetSanPhamByMetaTitle(string metatitle)
+        {
+            Sanpham res = db.Sanpham.Where(p => p.metatitle == metatitle).Single();
+            return res;
+        }
+
+        public Loaisanpham getLoaiSanPhamByMetatitle(string metatitle)
+        {
+            Loaisanpham a = db.Loaisanpham.Where(p => p.metatitle == metatitle).SingleOrDefault();
+            return a;
+        }
     }
 }

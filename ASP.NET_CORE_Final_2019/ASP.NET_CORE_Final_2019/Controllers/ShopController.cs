@@ -15,6 +15,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         {}
 
         [Route("Shop/{Page=1}")]
+        [Route("Shop")]
         public IActionResult Index(int Page)
         {
             getSession();
@@ -29,21 +30,24 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             if (Page < 1) ViewBag.CurrentPage = 1;
             else if (Page > ViewBag.AllPage) ViewBag.CurrentPage = ViewBag.AllPage;
             else ViewBag.CurrentPage = Page;
-
+            ViewBag.ISanPham = _Sanpham;
             return View(_Sanpham.GetSanPhams);
         }
 
-        [Route("Shop/Cate/{Id=1}/{Page=1}")]
-        public IActionResult Index(int Id, int Page)
+        [Route("Shop/{metatitle}/{Page}")]
+        [Route("Shop/{metatitle}")]
+        public IActionResult Index(string metatitle, int Page)
         {
             getSession();
             ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
             ViewBag.ListLoaiSanPham = _Sanpham.GetLoaiSanPhams;
             ViewBag.Cate = true;
-
+            Loaisanpham res = _Sanpham.getLoaiSanPhamByMetatitle(metatitle);
+            int Id = res.Id;
             if (_Sanpham.GetSanPhamsByIdLoaiSanPham(Id).Count() % 8 > 0) ViewBag.AllPage = _Sanpham.GetSanPhamsByIdLoaiSanPham(Id).Count() / 8 + 1;
             else ViewBag.AllPage = _Sanpham.GetSanPhamsByIdLoaiSanPham(Id).Count() / 8;
             ViewBag.IdCate = Id;
+            ViewBag.metatitle = res.metatitle;
 
             if (Page < 1) ViewBag.CurrentPage = 1;
             else if (Page > ViewBag.AllPage) ViewBag.CurrentPage = ViewBag.AllPage;
@@ -52,11 +56,15 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             return View(_Sanpham.GetSanPhamsByIdLoaiSanPham(Id));
         }
 
-        [Route("Shop/Product/{Id=1}")]
+        [Route("Shop/{catetitle}/{metatitle}")]
         [HttpGet]
-        public IActionResult SingleProduct(int Id)
+        public IActionResult SingleProduct(string metatitle,string catetitle)
         {
             getSession();
+            Sanpham tmp = _Sanpham.GetSanPhamByMetaTitle(metatitle);
+            Loaisanpham a = _Sanpham.GetLoaiSanPham((int)tmp.IdLoaiSanPham);
+            ViewBag.CateTitle = a.metatitle;
+            var Id = tmp.Id;
             ViewBag.SanPham = _Sanpham.GetSanPham(Id);
             ViewBag.ChiTietSanPham = _Sanpham.GetChiTietSanPham(Id);
             ViewBag.Loai = _Sanpham.GetLoaiSanPham(Id);
@@ -75,7 +83,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             return View(dh);
         }
 
-        [Route("Shop/Product/{Id=1}")]
+        [Route("Shop/{cate}/{Id}")]
         [HttpPost]
         public IActionResult SingleProduct(Chitietdonhang ctdh)
         {

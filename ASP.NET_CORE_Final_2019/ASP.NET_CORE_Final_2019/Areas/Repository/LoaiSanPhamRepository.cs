@@ -43,5 +43,12 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
             res.Ten = _LoaiSanPham.Ten;
             db.SaveChanges();
         }
+
+        public void UpdateMetatitle(int? Id, string metatitle)
+        {
+            Loaisanpham res = db.Loaisanpham.Find(Id);
+            res.metatitle = metatitle;
+            db.SaveChanges();
+        }
     }
 }

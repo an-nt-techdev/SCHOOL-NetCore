@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ASP.NET_CORE_Final_2019.Areas.Services;
 using ASP.NET_CORE_Final_2019.Models;
 using ASP.NET_CORE_Final_2019.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
 {
@@ -24,6 +26,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         [Route("admin/[controller]")]
         public IActionResult Index()
         {
+            ViewBag.IFSanpham = IFSanpham;
             ViewBag.ListNhaCungCap = INhaCungCap.GetNhacungcaps;
             ViewBag.ListLoaiSanPham = IFSanpham.GetLoaiSanPhams;
             return View(IFSanpham.GetSanPhams);
@@ -73,9 +76,18 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Sanpham _SanPham)
+        public IActionResult Edit(Sanpham _SanPham, string oldImage)
         {
-            _SanPham.HinhAnh = "/Images/" + _SanPham.HinhAnh;
+            if (_SanPham.HinhAnh == "" || _SanPham.HinhAnh == null)
+            {
+                _SanPham.HinhAnh = oldImage;
+            }
+            else
+            {
+                _SanPham.HinhAnh = "/Images/" + _SanPham.HinhAnh;
+            }
+            string tmp = FriendlyURLHelper.GetFriendlyTitle(_SanPham.Ten);
+            _SanPham.metatitle = tmp;
             IFSanpham.updateSanPham(_SanPham);
             return RedirectToAction("Index");
         }

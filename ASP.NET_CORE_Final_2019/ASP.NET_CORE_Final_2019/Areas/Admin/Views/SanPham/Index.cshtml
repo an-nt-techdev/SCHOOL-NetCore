@@ -42,6 +42,7 @@
                                     {
                                         Loaisanpham loaisanpham = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
                                         Nhacungcap nhacungcap = ViewBag.ListNhaCungCap.Find(item.IdNhaCungCap);
+                                        ViewBag.IFSanpham.updateMetatitle(item.Id, FriendlyURLHelper.GetFriendlyTitle(item.Ten)); // dong lai sau khi xong
                                         <tr>
                                             <td>@item.Id</td>
                                             <td>@item.Ten</td>

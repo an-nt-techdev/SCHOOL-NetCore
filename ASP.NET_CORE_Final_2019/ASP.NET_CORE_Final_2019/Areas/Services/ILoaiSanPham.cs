@@ -13,5 +13,6 @@ namespace ASP.NET_CORE_Final_2019.Areas.Services
         void Add(Loaisanpham _LoaiSanPham);
         void Remove(int? Id);
         void Update(Loaisanpham _LoaiSanPham);
+        void UpdateMetatitle(int? Id, string metatitle);
     }
 }

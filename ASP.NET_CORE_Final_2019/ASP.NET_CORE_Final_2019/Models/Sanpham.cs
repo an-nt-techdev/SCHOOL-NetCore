@@ -11,5 +11,6 @@ namespace ASP.NET_CORE_Final_2019.Models
         public int? IdNhaCungCap { get; set; }
         public string TrangThai { get; set; }
         public string HinhAnh { get; set; }
+        public string metatitle { get; set; }
     }
 }

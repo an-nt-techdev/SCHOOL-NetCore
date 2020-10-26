@@ -19,6 +19,7 @@ namespace ASP.NET_CORE_Final_2019.Services
 
         // Get One
         Sanpham GetSanPham(int? Id);
+        Sanpham GetSanPhamByMetaTitle(string metatitle);
         Chitietsanpham GetChiTietSanPham(int? Id);
         Loaisanpham GetLoaiSanPham(int Id);
         
@@ -29,6 +30,7 @@ namespace ASP.NET_CORE_Final_2019.Services
 
         // Update One
         void updateSanPham(Sanpham _Sanpham);
+        void updateMetatitle(int? Id, string metatitle);
         void updateLoaiSanPham(Loaisanpham _Loaisanpham);
         void updateChiTietSanPham(Chitietsanpham _Chitietsanpham);
 
@@ -36,5 +38,8 @@ namespace ASP.NET_CORE_Final_2019.Services
         void removeSanPham(int Id);
         void removeLoaiSanPham(int Id);
         void removeChiTietSanPham(int Id);
+
+        Loaisanpham getLoaiSanPhamByMetatitle(string metatitle);
+
     }
 }

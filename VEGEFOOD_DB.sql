@@ -14,7 +14,8 @@ DiaChi nvarchar(200)
 create table LOAISANPHAM
 (
 Id int Identity(1,1) primary key,
-Ten nvarchar(50)
+Ten nvarchar(50),
+metatitle nvarchar(50)
 )
 --NhaCungCap
 create table NHACUNGCAP
@@ -32,7 +33,8 @@ IdLoaiSanPham int,
 Ten nvarchar(50),
 IdNhaCungCap int,
 TrangThai nvarchar(50),
-HinhAnh nvarchar(200)
+HinhAnh nvarchar(200),
+metatitle nvarchar(50)
 )
 --Chi Tiet San Pham
 create table CHITIETSANPHAM

@@ -29,6 +29,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();
             ViewBag.ListSanPhamBanChayNhat = _Sanpham.GetSanPhamBanChayNhat();
             ViewBag.List8SanPham = _Sanpham.Get8SanPhams();
+            ViewBag.ListLoaiSanPham = _Sanpham.GetLoaiSanPhams;
             return View();
         }
 
