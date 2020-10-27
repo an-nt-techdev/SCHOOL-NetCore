@@ -6,13 +6,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section metasocials{
-    <meta property="og:url" content="https://localhost:44340/Shop/" />
-    <meta property="og:type" content="" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" content="http://khoaraucu.somee.com/images/" />
+    <meta property="og:url" content="http://khoaraucu.sommee.com/" />
+    <meta property="og:title" content="@ViewBag.SanPham.Ten - @ViewBag.Chitietsanpham.Gia VND" />
+    <meta property="og:description" content="Cửa Hàng Rau Sạch Khoa Rau Củ chuyên Cung cấp Các Loại rau củ và nước ép nguyên chất" />
+    <meta property="og:image" content="@ViewBag.SanPham.HinhAnh" />
 }
-
+@{
+    string currentUrl = Context.Request.Scheme + "://" + Context.Request.Host + Context.Request.Path;
+    string enc = System.Net.WebUtility.UrlEncode(currentUrl);
+}
 <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -29,9 +31,16 @@
         <div class="row">
             <div class="col-lg-6 mb-5 ftco-animate">
                 <a href="images/product-1.jpg" class="image-popup"><img src="@ViewBag.SanPham.HinhAnh" class="img-fluid" alt="Colorlib Template"></a>
+
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                 <h3>@ViewBag.SanPham.Ten</h3>
+                <iframe src="https://www.facebook.com/plugins/share_button.php?href=@enc&layout=button&size=large&width=87&height=28&appId,width=626,height=436"
+                                width="87"
+                                height="28"
+                                style="border:none;
+                                overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media">
+                        </iframe>
                 <div class="d-flex">
                     <div class="pricing">
                         <p>Loại:    @ViewBag.Loai.Ten </p>
