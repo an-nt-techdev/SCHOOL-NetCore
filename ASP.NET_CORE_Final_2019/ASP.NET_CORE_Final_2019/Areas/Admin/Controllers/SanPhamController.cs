@@ -46,7 +46,17 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _SanPham.HinhAnh = "/Images/" + _SanPham.HinhAnh;
+                _SanPham.metatitle = FriendlyURLHelper.GetFriendlyTitle(_SanPham.Ten);
+
                 IFSanpham.addSanPham(_SanPham);
+                Sanpham a = IFSanpham.GetSanPhamByMetaTitle(_SanPham.metatitle);
+                Chitietsanpham newone = new Chitietsanpham();
+                newone.IdSanPham = a.Id;
+                newone.Gia = 0;
+                newone.GiaKhuyenMai = 0;
+                newone.SoLuongNhap = 0;
+                newone.SoLuongTieuThu = 0;
+                IFSanpham.addChiTietSanPham(newone);
                 return RedirectToAction("Index");
             }
             return View(_SanPham);

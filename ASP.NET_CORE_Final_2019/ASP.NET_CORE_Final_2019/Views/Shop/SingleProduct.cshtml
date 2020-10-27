@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section metasocials{
-    <meta property="og:url" content="https://localhost:44340/" />
+    <meta property="og:url" content="https://localhost:44340/Shop/" />
     <meta property="og:type" content="" />
     <meta property="og:title" content="" />
     <meta property="og:description" content="" />
@@ -140,14 +140,14 @@
                         Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
                         <div class="col-md-6 col-lg-3 ftco-animate">
                             <div class="product">
-                                <a href="/Shop/Product/@item.Id" class="img-prod">
+                                <a href="/Shop/@ViewBag.CateTitle/@item.metatitle" class="img-prod">
                                     <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
                                     @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
                                     <span class="status">Khuyến mãi @km%</span>
                                     <div class="overlay"></div>
                                 </a>
                                 <div class="text py-3 pb-4 px-3 text-center">
-                                    <h3><a href="/Shop/Product/@item.Id">@item.Ten</a></h3>
+                                    <h3><a href="/Shop/@ViewBag.CateTitle/@item.metatitle">@item.Ten</a></h3>
                                     <div class="d-flex">
                                         <div class="pricing">
                                             @{
@@ -166,7 +166,7 @@
                                     </div>
                                     <div class="bottom-area d-flex px-3">
                                         <div class="m-auto d-flex">
-                                            <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                            <a href="/Shop/@ViewBag.CateTitle/@item.metatitle" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                                 <span><i class="ion-ios-menu"></i></span>
                                             </a>
                                             <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">

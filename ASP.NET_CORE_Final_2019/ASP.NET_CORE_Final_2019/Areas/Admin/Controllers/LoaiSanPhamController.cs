@@ -34,6 +34,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                _LoaiSanPham.metatitle = FriendlyURLHelper.GetFriendlyTitle(_LoaiSanPham.Ten);
                 ILoaiSanPham.Add(_LoaiSanPham);
                 return RedirectToAction("Index");
             }
@@ -77,6 +78,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(Loaisanpham _LoaiSanPham)
         {
+            _LoaiSanPham.metatitle = FriendlyURLHelper.GetFriendlyTitle(_LoaiSanPham.Ten);
             ILoaiSanPham.Update(_LoaiSanPham);
             return RedirectToAction("Index");
         }

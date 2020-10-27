@@ -34,6 +34,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             dh.TrangThai = 0;
             dh.EmailKhachHang = "not";
             dh.PhuongThucThanhToan = "None";
+            dh.Description = "null";
             _Donhang.addDonHang(dh);
 
             // ADD CHI TIET DON HANG
