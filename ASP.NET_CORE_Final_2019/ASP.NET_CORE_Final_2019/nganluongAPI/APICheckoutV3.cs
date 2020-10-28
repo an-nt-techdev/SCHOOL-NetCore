@@ -568,7 +568,13 @@ namespace ASP.NET_CORE_Final_2019.API_NganLuong
                 get { return _Buyer_mobile; }
                 set { _Buyer_mobile = value; }
             }
-        }
+            private String _Total_item = String.Empty;
+            public String Total_item
+            {
+                get { return _Total_item; }
+                set { _Total_item = value; }
+            }
+    }
     public class ResponseInfo
     {
         private String _error_code = string.Empty;

@@ -187,31 +187,50 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                         }
                     else if (sum.PhuongThucThanhToan == "Ngân Lượng")
                     {
-                        var nganluongAPI = new APICheckoutV3(_configuration);
-                        RequestInfo a = new RequestInfo();
+                    Double summ = 0;
+                    IEnumerable<Chitietdonhang> a = _DonhangAdmin.GetChitietdonhang((int)HttpContext.Session.GetInt32("Id"));
+                    string payment_method = "ATM_ONLINE";
+                        string str_bankcode = "EXB";
 
-                        Debug.WriteLine(a.Funtion + "wtf");
-                        a.cur_code = "test";
-                        a.Discount_amount = "2000";
-                        a.Merchant_id = "49640";
-                        a.Receiver_email = "tbkhoa1999@gmail.com";
-                        a.Merchant_password = "1baf437b74b40967b799732ca82b6c1c";
-                        a.Order_code = "test22";
-                        a.Total_amount = "2000000";
-                        a.Payment_method = "ATM_ONLINE";
-                        a.bank_code = "EBVIVNVX";
-                        a.Buyer_fullname = sum.khachhang.Ten;
-                        a.Buyer_email = sum.khachhang.Email;
-                        a.Buyer_mobile = sum.khachhang.Sdt;
+                        
+                        RequestInfo info = new RequestInfo();
+                        foreach (var item in a)
+                        {
+                            summ = summ + ((double)(item.Gia) * (double)(item.SoLuong));
+                        }
+                        info.Merchant_id = _configuration["NganLuong:mechant_id"];
+                        info.Merchant_password = _configuration["NganLuong:mechant_pass"];
+                        info.Receiver_email = _configuration["NganLuong:seller_email"];
 
-                            //using (var writer = new System.IO.StringWriter())
-                            //{
-                            //    ObjectDumper.Dumper.Dump(a, "Object Dumper", writer);
-                            //     Debug.WriteLine(writer.ToString());
-                            //}
-                            var tmp = nganluongAPI.GetUrlCheckout(a, "ATM_ONLINE");
-                        return null;
-                    }
+
+
+                        info.cur_code = "vnd";
+                        info.bank_code = str_bankcode;
+
+                        info.Order_code = HttpContext.Session.GetInt32("Id").ToString();
+                        info.Total_amount = summ.ToString();
+                        info.order_description = "Đây Là Đơn Hàng Từ "+ sum.khachhang.Ten+" có email là "+sum.khachhang.Email;
+                        info.return_url = _configuration["NganLuong:returnURL"];
+                        info.cancel_url = _configuration["NganLuong:cancelURL"];
+
+                        info.Buyer_fullname = sum.khachhang.Ten;
+                        info.Buyer_email = sum.khachhang.Email;
+                        info.Buyer_mobile = sum.khachhang.Sdt;
+                        info.Total_item = a.Count().ToString();
+
+                        APICheckoutV3 objNLChecout = new APICheckoutV3(_configuration);
+                        ResponseInfo result = objNLChecout.GetUrlCheckout(info, payment_method);
+
+                        if (result.Error_code == "00")
+                        {
+                            return Redirect(result.Checkout_url);
+                        }
+                        else
+                        {
+                            Debug.WriteLine(result.Description);
+                        }
+                        return RedirectToAction("Fail");
+                        }
                     else
                         {
                             return RedirectToAction("Fail");
@@ -228,7 +247,14 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         public async Task<IActionResult> Success([FromQuery(Name = "paymentId" )] string paymentId, [FromQuery(Name = "PayerID" )] string payerId )
         {
 			var PayPalAPI = new PayPalAPI(_configuration);
-            var result = await PayPalAPI.executedPayment(paymentId, payerId);
+            try
+            {
+                var result = await PayPalAPI.executedPayment(paymentId, payerId);
+            }
+            catch
+            {
+                return View();
+            }
             _Donhang.UpdateDescription(HttpContext.Session.GetInt32("Id"), "Đã Thanh toán");
             return View();
 		}
@@ -237,6 +263,12 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         public IActionResult Fail()
         {
             return View();
+        }
+
+        [Route("Checkout/AllSuccess")]
+        public IActionResult allSuccess()
+        {
+            return View("../Checkout/Success");
         }
     }
 }
