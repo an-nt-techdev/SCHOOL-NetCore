@@ -16,6 +16,7 @@ using PayPal.v1.Payments;
 using System.Net.Http;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using ASP.NET_CORE_Final_2019.API_NganLuong;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
 {
@@ -183,12 +184,39 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                         }
                         string URL = await PayPalAPI.getRedirectURLtoPayPal(summ, "USD", itemList);
                         return Redirect(URL);
+                        }
+                    else if (sum.PhuongThucThanhToan == "Ngân Lượng")
+                    {
+                        var nganluongAPI = new APICheckoutV3(_configuration);
+                        RequestInfo a = new RequestInfo();
+
+                        Debug.WriteLine(a.Funtion + "wtf");
+                        a.cur_code = "test";
+                        a.Discount_amount = "2000";
+                        a.Merchant_id = "49640";
+                        a.Receiver_email = "tbkhoa1999@gmail.com";
+                        a.Merchant_password = "1baf437b74b40967b799732ca82b6c1c";
+                        a.Order_code = "test22";
+                        a.Total_amount = "2000000";
+                        a.Payment_method = "ATM_ONLINE";
+                        a.bank_code = "EBVIVNVX";
+                        a.Buyer_fullname = sum.khachhang.Ten;
+                        a.Buyer_email = sum.khachhang.Email;
+                        a.Buyer_mobile = sum.khachhang.Sdt;
+
+                            //using (var writer = new System.IO.StringWriter())
+                            //{
+                            //    ObjectDumper.Dumper.Dump(a, "Object Dumper", writer);
+                            //     Debug.WriteLine(writer.ToString());
+                            //}
+                            var tmp = nganluongAPI.GetUrlCheckout(a, "ATM_ONLINE");
+                        return null;
                     }
                     else
-                    {
-                        return RedirectToAction("Fail");
+                        {
+                            return RedirectToAction("Fail");
+                        }
                     }
-                }
                 else // Code != Code : Success : False
                 {
                     return RedirectToAction("Fail");
