@@ -46,7 +46,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [Route("CheckCode")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CheckCode(CheckoutSum sum)
+        public IActionResult CheckCode(CheckoutSum sum,String bankcode)
         {
             //test send SMS code
             using (var client = new HttpClient())
@@ -68,12 +68,13 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 HttpContent responseContent = response.Content;
                 Console.WriteLine(responseContent.ReadAsStringAsync().Result);
             }
+            ViewBag.bankcode = bankcode;
             return View(sum);
         }
 
         [Route("VerifyAndCheckout")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> VerifyAndCheckout(CheckoutSum sum, String code)
+        public async Task<IActionResult> VerifyAndCheckout(CheckoutSum sum, String code, String bankcode)
         {
             //---------------------- Mở ra khi  Hoàn Tất Hết
             var clientt = new HttpClient();
@@ -101,7 +102,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 
             //    dynamic blogPost = blogPosts[0];
             //    string isTrue = blogPost.success;
-            string isTrue = "True";
+            string isTrue = "True"; // dong lai khi hoan tat
                 // -- End Mở ra
                 if (isTrue == "True") // Code = Code : Success : True
                 {
@@ -184,19 +185,49 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                         }
                         string URL = await PayPalAPI.getRedirectURLtoPayPal(summ, "USD", itemList);
                         return Redirect(URL);
-                        }
-                    else if (sum.PhuongThucThanhToan == "Ngân Lượng")
+                     }
+                    else if (sum.PhuongThucThanhToan == "Ví Ngân Lượng" || sum.PhuongThucThanhToan=="Thẻ VISA" || sum.PhuongThucThanhToan=="Thẻ ATM")
                     {
-                    Double summ = 0;
-                    IEnumerable<Chitietdonhang> a = _DonhangAdmin.GetChitietdonhang((int)HttpContext.Session.GetInt32("Id"));
-                    string payment_method = "ATM_ONLINE";
-                        string str_bankcode = "EXB";
+                        Double summ = 0;
+                        string payment_method = "";
+                        string str_bankcode = bankcode;
+                        IEnumerable<Chitietdonhang> a = _DonhangAdmin.GetChitietdonhang((int)HttpContext.Session.GetInt32("Id"));
+                        if(sum.PhuongThucThanhToan=="Ví Ngân Lượng")
+                        {
+                            payment_method = "nl";
+                        }
+                        else if(sum.PhuongThucThanhToan =="Thẻ VISA")
+                        {
+                            payment_method = "VISA";
+                        }
+                        else if(sum.PhuongThucThanhToan=="Thẻ ATM")
+                        {
+                            payment_method = "ATM_ONLINE";
+                        }
+                        else
+                        {
+                            payment_method = "ATM_ONLINE";
+                        }
 
                         
                         RequestInfo info = new RequestInfo();
                         foreach (var item in a)
                         {
-                            summ = summ + ((double)(item.Gia) * (double)(item.SoLuong));
+
+                            //Decimal soluong = 0;
+                            //string des = "";
+                            //Sanpham sp = _Sanpham.GetSanPham(item.IdSanPham);
+                            //if (sp.IdLoaiSanPham == 4)
+                            //{
+                            //    soluong = (Decimal)item.SoLuong;
+                            //    des = "unit: 1 cup";
+                            //}
+                            //else
+                            //{
+                            //    soluong = (Decimal)item.SoLuong / 100;
+                            //    des = "Unit: 100 gam";
+                            //}
+                            summ = summ + ((double)item.Gia);
                         }
                         info.Merchant_id = _configuration["NganLuong:mechant_id"];
                         info.Merchant_password = _configuration["NganLuong:mechant_pass"];
