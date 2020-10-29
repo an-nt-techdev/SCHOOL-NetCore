@@ -448,29 +448,40 @@
                 <span>Điền email của bạn để nhận những thông báo và thông tin khuyến mãi mới nhất của chúng tôi thường xuyên</span>
             </div>
             <div class="col-md-6 d-flex align-items-center">
-                <form asp-action="Index" class="subscribe-form">
-                    <div class="form-group d-flex">
-                        <input asp-for="ChuDe" type="hidden" value="Đăng ký nhận thông báo" />
-                        <input asp-for="Ten" type="hidden" value="Khách hàng" />
-                        <input asp-for="NoiDung" type="hidden" value="Noti" />
-                        <input asp-for="Email" type="text" class="form-control" placeholder="Địa chỉ email">
-                        <input type="submit" value="Đăng ký" class="submit px-3">
-                    </div>
-                </form>
-                @*@using (Html.BeginForm("Index", "Home", FormMethod.Post))
-                {
-                    <div class="form-group d-flex">
-                        <input asp-for="ChuDe" type="hidden" value="Đăng ký nhận thông báo" />
-                        <input asp-for="Ten" type="hidden" value="Khách hàng" />
-                        <input asp-for="NoiDung" type="hidden" value="Noti" />
-                        <input asp-for="Email" type="text" class="form-control" placeholder="Địa chỉ email">
-                        <input type="submit" value="Đăng ký" class="submit px-3">
-                    </div>
-                    if (ViewBag.message != null)
-                    {
-                        <span>@ViewBag.message</span>
-                    }
-                }*@
+                @*<form asp-action="Index" class="subscribe-form">
+                <div class="form-group d-flex">
+                    <input asp-for="ChuDe" type="hidden" value="Đăng ký nhận thông báo" />
+                    <input asp-for="Ten" type="hidden" value="Khách hàng" />
+                    <input asp-for="NoiDung" type="hidden" value="Noti" />
+                    <input asp-for="Email" type="text" class="form-control" placeholder="Địa chỉ email">
+                    <input type="submit" value="Đăng ký" class="submit px-3">
+                </div>
+                </form>*@
+                <!-- Begin Mailchimp Signup Form -->
+                <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+                <style type="text/css">
+                                    #mc_embed_signup {
+                                        background: #fff;
+                                        clear: left;
+                                        font: 14px Helvetica,Arial,sans-serif;
+                                        width: 100%;
+                                    }
+                                    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+                    We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+                </style>
+                <div id="mc_embed_signup">
+                    <form action="https://somee.us2.list-manage.com/subscribe/post?u=67a8ab0db98c8f832d6d51e91&amp;id=c97747ff97" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                        <div id="mc_embed_signup_scroll">
+                            <label for="mce-EMAIL">Subscribe</label>
+                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_67a8ab0db98c8f832d6d51e91_c97747ff97" tabindex="-1" value=""></div>
+                            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--End mc_embed_signup-->
             </div>
         </div>
     </div>

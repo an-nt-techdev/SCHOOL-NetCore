@@ -39,54 +39,55 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             ViewBag.ListLoaiSanPham = _Sanpham.GetLoaiSanPhams;
             return View();
         }
+        #region dangky mailchimp post form
+        //[Route("Home")]
+        //[HttpPost]
+        //public IActionResult Index(Models.Contact _Contact)
+        //{
+        //    try
+        //    {
+        //        var message = new MimeMessage();
+        //        message.From.Add(new MailboxAddress("Bá Khoa", "tbkhoa1999.com"));
+        //        message.To.Add(new MailboxAddress(_Contact.Ten, _Contact.Email));
+        //        message.Subject = "Thông báo từ khách hàng có Email: " + _Contact.Email;
+        //        message.Body = new TextPart("plain")
+        //        {
+        //            Text = _Contact.ChuDe + " | ĐK nhận Email: " + _Contact.Email + " | Nội dung: " + _Contact.NoiDung
+        //        };
+        //        using (var client = new SmtpClient())
+        //        {
+        //            client.Connect("smtp.gmail.com", 587, false);
+        //            client.Authenticate("tbkhoa1999@gmail.com", "Iamonmyway1999@10101999");
+        //            client.Send(message);
+        //            client.Disconnect(true);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.Clear();
+        //        ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
+        //    }
+        //    //Mailchimp
+        //    var listId = ListId;
+        //    // Use the Status property if updating an existing member
+        //    var member = new Member { EmailAddress = _Contact.Email, StatusIfNew = Status.Subscribed };
+        //    member.MergeFields.Add("FNAME", "New");
+        //    member.MergeFields.Add("LNAME", "Subcriber");
+        //    this._mailChimpManager.Members.AddOrUpdateAsync(listId, member);
+        //    //End mail chimp
+        //    ViewBag.message = "Cảm Ơn Bạn Đã Đăng Ký";
+        //    getSession();
 
-        [Route("Home")]
-        [HttpPost]
-        public IActionResult Index(Models.Contact _Contact)
-        {
-            try
-            {
-                var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("Bá Khoa", "tbkhoa1999.com"));
-                message.To.Add(new MailboxAddress(_Contact.Ten, _Contact.Email));
-                message.Subject = "Thông báo từ khách hàng có Email: " + _Contact.Email;
-                message.Body = new TextPart("plain")
-                {
-                    Text = _Contact.ChuDe + " | ĐK nhận Email: " + _Contact.Email + " | Nội dung: " + _Contact.NoiDung
-                };
-                using (var client = new SmtpClient())
-                {
-                    client.Connect("smtp.gmail.com", 587, false);
-                    client.Authenticate("tbkhoa1999@gmail.com", "Iamonmyway1999@10101999");
-                    client.Send(message);
-                    client.Disconnect(true);
-                }
-            }
-            catch (Exception ex)
-            {
-                ModelState.Clear();
-                ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
-            }
-            //Mailchimp
-            var listId = ListId;
-            // Use the Status property if updating an existing member
-            var member = new Member { EmailAddress = _Contact.Email, StatusIfNew = Status.Subscribed };
-            member.MergeFields.Add("FNAME", "New");
-            member.MergeFields.Add("LNAME", "Subcriber");
-            this._mailChimpManager.Members.AddOrUpdateAsync(listId, member);
-            //End mail chimp
-            ViewBag.message = "Cảm Ơn Bạn Đã Đăng Ký";
-            getSession();
+        //    ViewBag.ctdh = _Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id"));
 
-            ViewBag.ctdh = _Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id"));
-
-            ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
-            ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();
-            ViewBag.ListSanPhamBanChayNhat = _Sanpham.GetSanPhamBanChayNhat();
-            ViewBag.List8SanPham = _Sanpham.Get8SanPhams();
-            ViewBag.ListLoaiSanPham = _Sanpham.GetLoaiSanPhams;
-            return View();
-        }
+        //    ViewBag.ListChiTietSanPham = _Sanpham.GetChiTietSanPhams;
+        //    ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();
+        //    ViewBag.ListSanPhamBanChayNhat = _Sanpham.GetSanPhamBanChayNhat();
+        //    ViewBag.List8SanPham = _Sanpham.Get8SanPhams();
+        //    ViewBag.ListLoaiSanPham = _Sanpham.GetLoaiSanPhams;
+        //    return View();
+        //}
+        #endregion
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
