@@ -1,0 +1,4 @@
+User-agent:*
+Disallow:/admin/
+Allow:/
+Sitemap: http://khoaraucu.somee.com/sitemap_index.xml
