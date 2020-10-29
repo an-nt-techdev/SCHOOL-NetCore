@@ -1,22 +1,13 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
-    <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-            <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="/Home">Trang chủ</a></span></p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <section class="ftco-section ftco-cart">
     <div class="container">
         <div class="row">
             <div class="col-md-12 ftco-animate">
                 <div class="cart-list">
                     <h2>Thanh Toán Thất Bại! Vui Lòng Thử Lại Sau Hoặc Liện Hệ Admin</h2>
+                    <h4 style="text-decoration-color:orangered">@ViewBag.message</h4>
                     <p class="breadcrumbs"><span class="mr-2"><a href="/Home">Trờ Về Giỏ Hàng</a></span></p>
                 </div>
             </div>

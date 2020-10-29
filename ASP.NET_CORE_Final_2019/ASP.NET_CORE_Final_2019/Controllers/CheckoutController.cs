@@ -259,9 +259,9 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                         else
                         {
                             Debug.WriteLine(result.Description);
+                            return RedirectToAction("Fail","Checkout", new { message = result.Description });
                         }
-                        return RedirectToAction("Fail");
-                        }
+                    }
                     else
                         {
                             return RedirectToAction("Fail");
@@ -291,8 +291,9 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 		}
 
         [Route("Checkout/Fail")]
-        public IActionResult Fail()
+        public IActionResult Fail(string message)
         {
+            ViewBag.message = message;
             return View();
         }
 
