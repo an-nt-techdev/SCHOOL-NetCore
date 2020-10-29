@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using ASP.NET_CORE_Final_2019.Areas.Services;
 using ASP.NET_CORE_Final_2019.Models;
@@ -35,6 +36,16 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         {
             IKhachHang.UpdateKhachHang(_KhachHang);
             return RedirectToAction("Index");
+        }
+        public IActionResult ExportCSV()
+        {
+            var builder = new StringBuilder();
+            IEnumerable<Khachhang> listemail = IKhachHang.GetKhachhangs;
+            foreach(var item in listemail)
+            {
+                builder.AppendLine($"{item.Email}");
+            }
+            return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "DanhSachEmailKhachHang.csv");
         }
     }
 }

@@ -457,6 +457,20 @@
                         <input type="submit" value="Đăng ký" class="submit px-3">
                     </div>
                 </form>
+                @*@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                {
+                    <div class="form-group d-flex">
+                        <input asp-for="ChuDe" type="hidden" value="Đăng ký nhận thông báo" />
+                        <input asp-for="Ten" type="hidden" value="Khách hàng" />
+                        <input asp-for="NoiDung" type="hidden" value="Noti" />
+                        <input asp-for="Email" type="text" class="form-control" placeholder="Địa chỉ email">
+                        <input type="submit" value="Đăng ký" class="submit px-3">
+                    </div>
+                    if (ViewBag.message != null)
+                    {
+                        <span>@ViewBag.message</span>
+                    }
+                }*@
             </div>
         </div>
     </div>

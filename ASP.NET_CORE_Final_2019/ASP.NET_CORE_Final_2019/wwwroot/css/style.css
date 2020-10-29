@@ -2717,6 +2717,7 @@ input[type="button"].btn-block {
     background-color: transparent; }
 
 .dropdown-menu.show {
+    margin-top:1px;
   display: block; }
 
 .dropdown-header {

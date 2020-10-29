@@ -9,11 +9,18 @@ using ASP.NET_CORE_Final_2019.Services;
 using Microsoft.AspNetCore.Http;
 using MimeKit;
 using MailKit.Net.Smtp;
+using MailChimp.Net;
+using MailChimp.Net.Interfaces;
+using MailChimp.Net.Models;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
 {
     public class HomeController : ChaController
     {
+        private const string ApiKey = "ddcaea32f069ddd219b0672062ec7953-us2";
+        private const string ListId = "c97747ff97";
+        private IMailChimpManager _mailChimpManager = new MailChimpManager(ApiKey);
         public HomeController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
         {}
 
@@ -35,7 +42,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 
         [Route("Home")]
         [HttpPost]
-        public IActionResult Index(Contact _Contact)
+        public IActionResult Index(Models.Contact _Contact)
         {
             try
             {
@@ -60,7 +67,15 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 ModelState.Clear();
                 ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
             }
-
+            //Mailchimp
+            var listId = ListId;
+            // Use the Status property if updating an existing member
+            var member = new Member { EmailAddress = _Contact.Email, StatusIfNew = Status.Subscribed };
+            member.MergeFields.Add("FNAME", "New");
+            member.MergeFields.Add("LNAME", "Subcriber");
+            this._mailChimpManager.Members.AddOrUpdateAsync(listId, member);
+            //End mail chimp
+            ViewBag.message = "Cảm Ơn Bạn Đã Đăng Ký";
             getSession();
 
             ViewBag.ctdh = _Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id"));
@@ -69,14 +84,14 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             ViewBag.ListSanPhamMoiNhat = _Sanpham.GetSanPhamMoiNhat();
             ViewBag.ListSanPhamBanChayNhat = _Sanpham.GetSanPhamBanChayNhat();
             ViewBag.List8SanPham = _Sanpham.Get8SanPhams();
-
+            ViewBag.ListLoaiSanPham = _Sanpham.GetLoaiSanPhams;
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
