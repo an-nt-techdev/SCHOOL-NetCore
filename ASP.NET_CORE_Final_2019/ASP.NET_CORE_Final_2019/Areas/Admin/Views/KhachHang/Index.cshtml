@@ -14,7 +14,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title" style="background-image:url('/images/p9.jpg')">Danh Sách Khách Hàng</h4>
-                        <a asp-controller="KhachHang" asp-action="ExportCSV">Export CSV</a>
+                        <a asp-controller="KhachHang" asp-action="ExportCSV">Export CSV  <span><i class="fa fa-file"></i> </span></a> Hoặc
+
+                        <a asp-controller="KhachHang" asp-action="ExportXlsx" style="color:red">Export Excel <span><i class="fa fa-file-excel-o"></span></i></a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
